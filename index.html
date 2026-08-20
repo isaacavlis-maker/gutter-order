@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* ==================== ELEGANT METALLIC SILVER SCREEN STYLES ==================== */
+        /* ==================== SCREEN STYLES ==================== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -49,15 +49,12 @@
             gap: 12px;
             font-size: 18px;
             font-weight: 800;
-            letter-spacing: -0.5px;
             color: #f8fafc;
-            text-shadow: 0 0 10px rgba(226, 232, 240, 0.4);
         }
 
         .navbar-brand i {
             color: #e2e8f0;
             font-size: 22px;
-            filter: drop-shadow(0 0 8px #cbd5e1);
         }
 
         .nav-actions {
@@ -76,8 +73,6 @@
             cursor: pointer;
             border: none;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
         }
 
         .btn-success {
@@ -86,23 +81,10 @@
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
-        }
-
         .btn-outline {
             background: rgba(30, 41, 59, 0.6);
             color: #e2e8f0;
             border: 1px solid rgba(148, 163, 184, 0.4);
-            backdrop-filter: blur(4px);
-        }
-
-        .btn-outline:hover {
-            background: rgba(51, 65, 85, 0.8);
-            border-color: #cbd5e1;
-            color: #ffffff;
-            box-shadow: 0 0 12px rgba(203, 213, 225, 0.3);
         }
 
         /* Tabs Navigation */
@@ -118,7 +100,6 @@
         .tab-buttons {
             display: flex;
             background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(8px);
             padding: 4px;
             border-radius: 10px;
             gap: 6px;
@@ -136,14 +117,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
         }
 
         .tab-btn.active {
             background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
             color: #0f172a;
             border: 1px solid #cbd5e1;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(203, 213, 225, 0.3);
         }
 
         /* Container Layout */
@@ -166,11 +145,10 @@
             background: rgba(255, 255, 255, 0.98);
             color: #0f172a;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 1px rgba(148, 163, 184, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
             padding: 24px;
             border: 1px solid #cbd5e1;
             margin-bottom: 24px;
-            position: relative;
         }
 
         .doc-title-header {
@@ -186,7 +164,6 @@
             font-size: 22px;
             font-weight: 800;
             color: #0f172a;
-            letter-spacing: -0.5px;
             text-transform: uppercase;
         }
 
@@ -243,7 +220,6 @@
             font-weight: 700;
             color: #475569;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .form-control {
@@ -254,13 +230,7 @@
             font-weight: 600;
             color: #0f172a;
             outline: none;
-            transition: border-color 0.2s;
             background-color: #ffffff;
-        }
-
-        .form-control:focus {
-            border-color: #475569;
-            box-shadow: 0 0 0 2px rgba(71, 85, 105, 0.2);
         }
 
         .page-block-header {
@@ -274,11 +244,10 @@
             font-weight: 700;
             font-size: 12px;
             margin-bottom: 8px;
-            box-shadow: 0 2px 8px rgba(30, 41, 59, 0.2);
             border: 1px solid #64748b;
         }
 
-        /* Tables Styling - METALLIC SILVER HEADER */
+        /* Tables Styling */
         .gutter-table-wrapper {
             overflow-x: auto;
             margin-bottom: 16px;
@@ -345,18 +314,12 @@
             outline: none;
             -webkit-appearance: none;
             -moz-appearance: textfield;
-            transition: background 0.2s;
         }
 
         .cell-input::-webkit-outer-spin-button,
         .cell-input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
-        }
-
-        .cell-input:focus {
-            background-color: #f1f5f9;
-            box-shadow: inset 0 0 0 2px #475569;
         }
 
         .cell-auto-white {
@@ -409,11 +372,6 @@
             font-weight: 700 !important;
         }
 
-        .wo-row input::placeholder {
-            color: #94a3b8 !important;
-            font-weight: 500 !important;
-        }
-
         .bottom-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -449,10 +407,6 @@
             font-size: 12px;
             resize: none;
             outline: none;
-        }
-
-        .textarea-control:focus {
-            border-color: #475569;
         }
 
         .signatures-wrapper {
@@ -491,8 +445,6 @@
             font-size: 13px;
             font-weight: 700;
             color: #475569;
-            letter-spacing: 0.5px;
-            opacity: 0.9;
         }
 
         .print-blank-line {
@@ -566,7 +518,6 @@
             width: 90%;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #0f172a;
         }
 
@@ -600,18 +551,12 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: all 0.2s;
         }
 
         .btn-modal-color {
             background: linear-gradient(135deg, #64748b 0%, #475569 100%);
             color: #ffffff;
             border-color: #64748b;
-            box-shadow: 0 4px 12px rgba(71, 85, 105, 0.3);
-        }
-
-        .btn-modal-color:hover {
-            box-shadow: 0 6px 16px rgba(71, 85, 105, 0.5);
         }
 
         .btn-modal-bw {
@@ -620,19 +565,15 @@
             border-color: #0f172a;
         }
 
-        .btn-modal-bw:hover {
-            background: #000000;
-        }
-
-        /* ==================== CONFIGURAÇÕES DE IMPRESSÃO DEFINITIVAS ==================== */
+        /* ==================== CONFIGURAÇÕES EQUILIBRADAS DE IMPRESSÃO ==================== */
         @page page-portrait {
             size: letter portrait;
-            margin: 0.25in;
+            margin: 0.3in;
         }
 
         @page page-landscape {
             size: letter landscape;
-            margin: 0.25in;
+            margin: 0.15in; /* Margem da folha bem aproveitada para nao encolher o texto */
         }
 
         @media print {
@@ -654,7 +595,7 @@
                 color: #0f172a !important;
                 padding: 0 !important;
                 margin: 0 !important;
-                font-size: 8.5pt !important;
+                font-size: 9pt !important;
                 width: 100% !important;
             }
 
@@ -681,22 +622,11 @@
                 background: #ffffff !important;
             }
 
-            ::-webkit-input-placeholder { color: transparent !important; opacity: 0 !important; }
-            :-moz-placeholder { color: transparent !important; opacity: 0 !important; }
-            ::-moz-placeholder { color: transparent !important; opacity: 0 !important; }
-            :-ms-input-placeholder { color: transparent !important; opacity: 0 !important; }
-            ::placeholder { color: transparent !important; opacity: 0 !important; }
-
-            /* PÁGINA 1 DA IMPRESSÃO / PDF: TAB 2 (REQUISITION SHEET IN PORTRAIT) */
+            /* TAB 2 - PORTRAIT */
             #tab2 {
                 page: page-portrait !important;
-                page-break-before: avoid !important;
                 page-break-after: always !important;
                 break-after: page !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
             }
 
             .sheet-summary-container {
@@ -704,125 +634,37 @@
                 flex-direction: column !important;
                 justify-content: space-between !important;
                 height: 9.8in !important;
-                max-height: 10in !important;
-                page-break-inside: avoid !important;
             }
 
-            #tab2 .doc-title-header {
-                border-bottom: 2px solid #0f172a !important;
-                padding-bottom: 4px !important;
-                margin-bottom: 6px !important;
-            }
+            #tab2 .doc-title-header h1 { font-size: 18pt !important; }
+            #tab2 .form-header-grid-summary { padding: 8px 12px !important; margin-bottom: 10px !important; }
+            #tab2 .sheet-summary-table td { padding: 8px 6px !important; font-size: 9.5pt !important; height: 28px !important; }
+            #tab2 .sheet-summary-table th { padding: 8px 6px !important; font-size: 9.5pt !important; }
 
-            #tab2 .doc-title-header h1 {
-                font-size: 18pt !important;
-                color: #0f172a !important;
-            }
-
-            #tab2 .form-header-grid-summary {
-                background-color: #f8fafc !important;
-                border: 1.5px solid #0f172a !important;
-                padding: 8px 12px !important;
-                gap: 8px !important;
-                font-size: 11pt !important;
-                margin-bottom: 8px !important;
-            }
-
-            #tab2 .form-header-grid-summary div {
-                font-size: 11pt !important;
-                color: #0f172a !important;
-                font-weight: 700 !important;
-            }
-
-            #tab2 .form-header-grid-summary span {
-                font-size: 14pt !important;
-                font-weight: 900 !important;
-                color: #0f172a !important;
-            }
-
-            #tab2 .sheet-summary-table {
-                table-layout: fixed !important;
-                width: 100% !important;
-                margin-top: 8px !important;
-            }
-
-            #tab2 .sheet-summary-table td {
-                padding: 8px 6px !important;
-                font-size: 9.5pt !important;
-                border: 1px solid #0f172a !important;
-                height: 28px !important;
-            }
-
-            #tab2 .sheet-summary-table th {
-                padding: 8px 6px !important;
-                font-size: 9.5pt !important;
-                border: 1px solid #0f172a !important;
-            }
-
-            /* PÁGINA 2 DA IMPRESSÃO / PDF: TAB 1 (GUTTER LIST IN LANDSCAPE - AJUSTE ULTRA RIGOROSO DE ENCAIXE) */
+            /* TAB 1 - LANDSCAPE (TAMANHO NORMAL E NATIVO) */
             #tab1 {
                 page: page-landscape !important;
                 page-break-before: always !important;
                 break-before: page !important;
-                page-break-after: avoid !important;
-                break-after: avoid !important;
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                box-sizing: border-box !important;
             }
 
             .tab1-page-block {
                 padding: 0 !important;
                 border: none !important;
                 box-shadow: none !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                margin: 0 !important;
-                display: block !important;
             }
 
-            #tab1 .doc-title-header {
-                padding-bottom: 1px !important;
-                margin-bottom: 2px !important;
-                border-bottom: 2px solid #0f172a !important;
-            }
+            #tab1 .doc-title-header { padding-bottom: 2px !important; margin-bottom: 4px !important; }
+            #tab1 .doc-title-header h1 { font-size: 16pt !important; }
+            #tab1 .form-header-grid { padding: 6px 8px !important; gap: 6px !important; margin-bottom: 6px !important; }
+            #tab1 .form-group label { font-size: 8pt !important; }
+            #tab1 .page-block-header { padding: 4px 8px !important; margin-bottom: 4px !important; font-size: 9pt !important; }
 
-            #tab1 .doc-title-header h1 {
-                font-size: 14pt !important;
-            }
-
-            #tab1 .form-header-grid {
-                padding: 3px 5px !important;
-                gap: 3px !important;
-                margin-bottom: 3px !important;
-                border: 1.5px solid #0f172a !important;
-            }
-
-            #tab1 .form-group label {
-                font-size: 7pt !important;
-                font-weight: 800 !important;
-            }
-
-            #tab1 .page-block-header {
-                padding: 2px 5px !important;
-                margin-bottom: 2px !important;
-                font-size: 8pt !important;
-                background-color: #475569 !important;
-            }
-
-            #tab1 .gutter-table-wrapper {
-                margin-bottom: 2px !important;
-                width: 100% !important;
-                overflow: hidden !important;
-            }
-
-            #tab1 .gutter-table {
-                table-layout: fixed !important;
-                width: 100% !important;
-            }
-
+            #tab1 .gutter-table-wrapper { margin-bottom: 4px !important; }
+            #tab1 .gutter-table { table-layout: fixed !important; width: 100% !important; }
+            
             #tab1 .gutter-table th.col-item { width: 18% !important; }
             #tab1 .gutter-table th:not(.col-item):not(.col-summary):not(.col-return) { width: 5% !important; }
             #tab1 .gutter-table th.col-summary:nth-last-child(3) { width: 8% !important; }
@@ -830,124 +672,25 @@
             #tab1 .gutter-table th.col-summary:nth-last-child(1) { width: 10% !important; }
             #tab1 .gutter-table th.col-return { width: 10% !important; }
 
-            #tab1 .gutter-table th {
-                padding: 1px 1px !important;
-                font-size: 7pt !important;
-                background-color: #475569 !important;
-                color: #ffffff !important;
-                border: 1px solid #0f172a !important;
-                white-space: normal !important;
-                word-wrap: break-word !important;
-            }
+            #tab1 .gutter-table th { padding: 4px 2px !important; font-size: 8pt !important; }
+            #tab1 .gutter-table td { height: 26px !important; font-size: 9pt !important; }
+            #tab1 .cell-input { font-size: 9pt !important; }
 
-            #tab1 .gutter-table td {
-                height: 21px !important; /* Altura exata para caber a tabela inteira + rodapé na mesma folha */
-                font-size: 8pt !important;
-                border: 1px solid #0f172a !important;
-                padding: 0 !important;
-            }
+            #tab1 .bottom-grid { margin-top: 6px !important; gap: 8px !important; }
+            #tab1 .info-card { padding: 4px 8px !important; }
+            #tab1 .info-card-title { font-size: 8pt !important; margin-bottom: 2px !important; }
+            #tab1 .textarea-control { height: 32px !important; font-size: 8.5pt !important; }
 
-            #tab1 .cell-input {
-                font-size: 8pt !important;
-                padding: 0 !important;
-            }
+            #tab1 .signatures-wrapper { margin-top: 6px !important; gap: 20px !important; }
+            #tab1 .sig-line { height: 16px !important; }
+            #tab1 .sig-label { font-size: 8pt !important; }
+            #tab1 .brand-credit { margin-top: 4px !important; font-size: 8.5pt !important; }
 
-            #tab1 .bottom-grid {
-                margin-top: 2px !important;
-                gap: 4px !important;
-                page-break-inside: avoid !important;
-            }
+            .form-control, .cell-input, .textarea-control { border: none !important; background: transparent !important; color: #0f172a !important; }
+            select, .full-cell-select { appearance: none !important; background: transparent !important; border: none !important; }
 
-            #tab1 .info-card {
-                padding: 2px 4px !important;
-                border: 1px solid #0f172a !important;
-            }
-
-            #tab1 .info-card-title {
-                margin-bottom: 1px !important;
-                font-size: 7pt !important;
-            }
-
-            #tab1 .textarea-control {
-                height: 22px !important;
-                padding: 1px !important;
-                font-size: 7.5pt !important;
-            }
-
-            #tab1 .signatures-wrapper {
-                margin-top: 2px !important;
-                padding-top: 1px !important;
-                gap: 15px !important;
-                page-break-inside: avoid !important;
-            }
-
-            #tab1 .sig-line {
-                height: 12px !important;
-                border-bottom: 1.5px solid #0f172a !important;
-            }
-
-            #tab1 .sig-label {
-                font-size: 7pt !important;
-                margin-top: 1px !important;
-            }
-
-            #tab1 .brand-credit {
-                margin-top: 1px !important;
-                font-size: 7.5pt !important;
-                color: #475569 !important;
-                page-break-before: avoid !important;
-            }
-
-            .form-control, .cell-input, .textarea-control {
-                border: none !important;
-                background: transparent !important;
-                padding: 0px !important;
-                color: #0f172a !important;
-            }
-
-            select, .full-cell-select {
-                appearance: none !important;
-                -webkit-appearance: none !important;
-                -moz-appearance: none !important;
-                background: transparent !important;
-                border: none !important;
-                padding: 0 !important;
-            }
-
-            .cell-auto-white {
-                font-weight: 700;
-                background-color: #ffffff !important;
-                color: #0f172a;
-            }
-
-            .gutter-table tr:nth-child(odd) .cell-readonly,
-            .gutter-table tr:nth-child(odd) .cell-given {
-                background-color: #ffffff !important;
-                color: #0f172a !important;
-            }
-
-            .gutter-table tr:nth-child(even) .cell-readonly,
-            .gutter-table tr:nth-child(even) .cell-given {
-                background-color: #f8fafc !important;
-                color: #0f172a !important;
-            }
-
-            .cell-return {
-                background-color: #ffffff !important;
-                color: #0f766e !important;
-            }
-
-            body.print-mode-bw .brand-credit {
-                color: #000000 !important;
-            }
-
-            .empty-date-hide {
-                display: none !important;
-            }
-
-            .print-blank-line-show {
-                display: inline-block !important;
-            }
+            .empty-date-hide { display: none !important; }
+            .print-blank-line-show { display: inline-block !important; }
         }
     </style>
 
@@ -1044,7 +787,7 @@
                             <div>Return Date: <span id="s2_return">---</span></div>
                         </div>
 
-                        <!-- SUMMARY TABLE INCLUDES RETURN COLUMN -->
+                        <!-- SUMMARY TABLE -->
                         <table class="sheet-summary-table">
                             <thead>
                                 <tr>
@@ -1056,12 +799,11 @@
                                 </tr>
                             </thead>
                             <tbody id="sheet2-rows">
-                                <!-- Dynamic items from Tab 1 -->
+                                <!-- Dynamic items -->
                             </tbody>
                         </table>
                     </div>
 
-                    <!-- BOTTOM CONTENT PERFECTLY FITTED -->
                     <div>
                         <div class="bottom-grid" style="margin-top: 18px;">
                             <div class="info-card">
@@ -1220,7 +962,6 @@
                         <textarea id="observations" class="textarea-control" placeholder="Enter job observations..." oninput="syncAll()"></textarea>
                     </div>
                     
-                    <!-- RETURN INFORMATION CARD -->
                     <div class="info-card" style="background-color: #f0fdf4; border-color: #16a34a;">
                         <div class="info-card-title" style="color: #15803d;">
                             <i class="fa-solid fa-boxes-packing"></i> Return Information
@@ -1266,11 +1007,9 @@
 
     <!-- JavaScript Logic -->
     <script>
-        /* ==================== EDITABLE LISTS ==================== */
         const INSTALLERS = ['Dimas', 'Joao', 'Fabio', 'Yaniel'];
         const COLORS = ['White', 'Brown', 'Bronze', 'Black', 'Linen'];
 
-        // Item definitions
         const items = [
             { id: 'gutter_coil', name: 'Gutter Coil' },
             { id: 'downspout', name: '3x4x10 Downspout' },
@@ -1327,7 +1066,6 @@
             tbody1.innerHTML = '';
             tbody2.innerHTML = '';
 
-            // 1. WORK ORDER / SYSTEM NUMBER ROW FOR PAGE 1
             const trWo1 = document.createElement('tr');
             trWo1.className = 'wo-row';
             let wo1Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
@@ -1340,7 +1078,6 @@
             trWo1.innerHTML = wo1Html;
             tbody1.appendChild(trWo1);
 
-            // 2. WORK ORDER / SYSTEM NUMBER ROW FOR PAGE 2
             const trWo2 = document.createElement('tr');
             trWo2.className = 'wo-row';
             let wo2Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
@@ -1353,7 +1090,6 @@
             trWo2.innerHTML = wo2Html;
             tbody2.appendChild(trWo2);
 
-            // 3. MATERIAL ITEMS ROWS
             items.forEach((item, itemIdx) => {
                 const tr1 = document.createElement('tr');
                 
@@ -1428,13 +1164,7 @@
                         nextSys = 9;
                     }
 
-                    let targetId = '';
-                    if (nextSys === 'return') {
-                        targetId = `${items[nextIdx].id}_return`;
-                    } else {
-                        targetId = `${items[nextIdx].id}_s${nextSys}`;
-                    }
-
+                    let targetId = (nextSys === 'return') ? `${items[nextIdx].id}_return` : `${items[nextIdx].id}_s${nextSys}`;
                     const targetInput = document.getElementById(targetId);
                     if (targetInput) {
                         targetInput.focus();
@@ -1461,8 +1191,7 @@
                     }
                 } else if (key === 'ArrowRight') {
                     if (sys === 9 && !hasPage2) {
-                        targetId = `${items[itemIdx].id}_return`;
-                        const targetInput = document.getElementById(targetId);
+                        const targetInput = document.getElementById(`${items[itemIdx].id}_return`);
                         if (targetInput) {
                             targetInput.focus();
                             if (typeof targetInput.select === 'function') targetInput.select();
@@ -1474,26 +1203,15 @@
                     nextSys = sys - 1;
                 }
 
-                if (nextSys > 9 && page === 1 && !hasPage2) {
-                    activatePage2();
-                }
-
+                if (nextSys > 9 && page === 1 && !hasPage2) activatePage2();
                 if (nextSys < 1) nextSys = 1;
                 if (nextSys > 18) nextSys = 18;
 
-                let targetId = '';
-                if (nextIdx === -1) {
-                    targetId = `sys_wo_s${nextSys}`;
-                } else {
-                    targetId = `${items[nextIdx].id}_s${nextSys}`;
-                }
-
+                let targetId = (nextIdx === -1) ? `sys_wo_s${nextSys}` : `${items[nextIdx].id}_s${nextSys}`;
                 const targetInput = document.getElementById(targetId);
                 if (targetInput) {
                     targetInput.focus();
-                    if (typeof targetInput.select === 'function') {
-                        targetInput.select();
-                    }
+                    if (typeof targetInput.select === 'function') targetInput.select();
                 }
             }
         }
@@ -1517,9 +1235,7 @@
 
         function onExtraManualInput(itemId) {
             const extraEl = document.getElementById(`${itemId}_extra`);
-            if (extraEl) {
-                extraEl.dataset.custom = 'true';
-            }
+            if (extraEl) extraEl.dataset.custom = 'true';
             calculateRow(itemId);
         }
 
@@ -1529,30 +1245,10 @@
 
             const maxSys = hasPage2 ? 18 : 9;
 
-            if (itemId === 'elbow_a') {
-                for (let sys = 1; sys <= maxSys; sys++) {
-                    const val = parseNum(document.getElementById(`elbow_a_s${sys}`)?.value);
-                    total += val;
-                    if (sys >= 10) p2Subtotal += val;
-                }
-            } else if (itemId === 'hangers') {
-                for (let sys = 1; sys <= maxSys; sys++) {
-                    const val = parseNum(document.getElementById(`hangers_s${sys}`)?.value);
-                    total += val;
-                    if (sys >= 10) p2Subtotal += val;
-                }
-            } else if (itemId === 'caulk') {
-                for (let sys = 1; sys <= maxSys; sys++) {
-                    const val = parseNum(document.getElementById(`caulk_s${sys}`)?.value);
-                    total += val;
-                    if (sys >= 10) p2Subtotal += val;
-                }
-            } else {
-                for (let sys = 1; sys <= maxSys; sys++) {
-                    const val = parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
-                    total += val;
-                    if (sys >= 10) p2Subtotal += val;
-                }
+            for (let sys = 1; sys <= maxSys; sys++) {
+                const val = parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
+                total += val;
+                if (sys >= 10) p2Subtotal += val;
             }
 
             document.getElementById(`${itemId}_total`).value = formatVal(total);
@@ -1560,7 +1256,7 @@
             const extraEl = document.getElementById(`${itemId}_extra`);
             let extra = 0;
             
-            // REGRA: Splash Block NUNCA tem extra (Extra = 0)
+            // TRAVA: Splash Block Extra = 0
             if (itemId === 'splash_block') {
                 extra = 0;
                 if (extraEl) extraEl.value = '';
@@ -1591,9 +1287,7 @@
             for (let sys = 1; sys <= maxSys; sys++) {
                 const dsVal = parseNum(document.getElementById(`downspout_s${sys}`)?.value);
                 const currentElbowInput = document.getElementById(`elbow_a_s${sys}`);
-                if (currentElbowInput) {
-                    currentElbowInput.value = formatVal(dsVal * 3);
-                }
+                if (currentElbowInput) currentElbowInput.value = formatVal(dsVal * 3);
             }
             calculateRow('elbow_a');
         }
@@ -1604,9 +1298,7 @@
                 const coilVal = parseNum(document.getElementById(`gutter_coil_s${sys}`)?.value);
                 const hangersVal = Math.ceil(coilVal / 1.4);
                 const currentHangerInput = document.getElementById(`hangers_s${sys}`);
-                if (currentHangerInput) {
-                    currentHangerInput.value = formatVal(hangersVal);
-                }
+                if (currentHangerInput) currentHangerInput.value = formatVal(hangersVal);
             }
             calculateRow('hangers');
         }
@@ -1621,9 +1313,7 @@
                              parseNum(document.getElementById(`bay_miter_s${sys}`)?.value);
                 const caulkVal = Math.ceil(caps / 3);
                 const currentCaulkInput = document.getElementById(`caulk_s${sys}`);
-                if (currentCaulkInput) {
-                    currentCaulkInput.value = formatVal(caulkVal);
-                }
+                if (currentCaulkInput) currentCaulkInput.value = formatVal(caulkVal);
             }
             calculateRow('caulk');
         }
@@ -1645,9 +1335,7 @@
 
             if (textDisplayId) {
                 const textEl = document.getElementById(textDisplayId);
-                if (textEl) {
-                    textEl.innerText = val ? val : '';
-                }
+                if (textEl) textEl.innerText = val ? val : '';
             }
         }
 
@@ -1710,14 +1398,8 @@
             });
         }
 
-        /* PRINT MODAL LOGIC */
-        function openPrintModal() {
-            document.getElementById('printModal').style.display = 'flex';
-        }
-
-        function closePrintModal() {
-            document.getElementById('printModal').style.display = 'none';
-        }
+        function openPrintModal() { document.getElementById('printModal').style.display = 'flex'; }
+        function closePrintModal() { document.getElementById('printModal').style.display = 'none'; }
 
         function executePrint(mode) {
             closePrintModal();
@@ -1728,9 +1410,7 @@
                 document.body.classList.remove('print-mode-bw');
                 document.body.classList.add('print-mode-color');
             }
-            setTimeout(() => {
-                window.print();
-            }, 150);
+            setTimeout(() => { window.print(); }, 150);
         }
 
         function syncAll() {
@@ -1753,32 +1433,5 @@
         initTable();
         syncAll();
     </script>
-
-    <!-- PWA Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                const swCode = `
-                    const CACHE_NAME = 'gutter-order-v1';
-                    self.addEventListener('install', e => {
-                        e.waitUntil(
-                            caches.open(CACHE_NAME).then(cache => {
-                                return cache.addAll(['./', './index.html']);
-                            })
-                        );
-                    });
-                    self.addEventListener('fetch', e => {
-                        e.respondWith(
-                            caches.match(e.request).then(res => res || fetch(e.request))
-                        );
-                    });
-                `;
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                navigator.serviceWorker.register(swUrl).catch(() => {});
-            });
-        }
-    </script>
-
 </body>
 </html>
