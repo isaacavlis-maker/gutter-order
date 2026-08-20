@@ -565,7 +565,7 @@
             border-color: #0f172a;
         }
 
-        /* ==================== CONFIGURAÇÕES EQUILIBRADAS DE IMPRESSÃO ==================== */
+        /* ==================== CONFIGURAÇÕES DE IMPRESSÃO EM 2 FOLHAS SEPARADAS ==================== */
         @page page-portrait {
             size: letter portrait;
             margin: 0.25in;
@@ -573,7 +573,7 @@
 
         @page page-landscape {
             size: letter landscape;
-            margin: 0.25in; /* Margem de segurança de 0.25in em todas as bordas para não estourar nas laterais */
+            margin: 0.25in;
         }
 
         @media print {
@@ -610,6 +610,7 @@
                 display: block !important;
             }
 
+            /* MOSTRA AMBAS AS ABAS NA HORA DE IMPRIMIR */
             .tab-content {
                 display: block !important;
             }
@@ -622,7 +623,7 @@
                 background: #ffffff !important;
             }
 
-            /* TAB 2 - PORTRAIT (FOLHA SEPARADA 1) */
+            /* TAB 2 - REQUISITION SHEET (FOLHA 1 - RETRATO) */
             #tab2 {
                 page: page-portrait !important;
                 page-break-before: avoid !important;
@@ -642,7 +643,7 @@
             #tab2 .sheet-summary-table td { padding: 8px 6px !important; font-size: 9.5pt !important; height: 28px !important; }
             #tab2 .sheet-summary-table th { padding: 8px 6px !important; font-size: 9.5pt !important; }
 
-            /* TAB 1 - LANDSCAPE (FOLHA SEPARADA 2 - AJUSTADO PARA NÃO ESTOURAR LATERAL) */
+            /* TAB 1 - GUTTER LIST (FOLHA 2 - PAISAGEM COM QUEBRA RÍGIDA DE PÁGINA) */
             #tab1 {
                 page: page-landscape !important;
                 page-break-before: always !important;
@@ -1405,6 +1406,7 @@
         function openPrintModal() { document.getElementById('printModal').style.display = 'flex'; }
         function closePrintModal() { document.getElementById('printModal').style.display = 'none'; }
 
+        /* IMPRESSÃO COMPLETA EM 2 FOLHAS INDEPENDENTES */
         function executePrint(mode) {
             closePrintModal();
             if (mode === 'bw') {
@@ -1414,6 +1416,7 @@
                 document.body.classList.remove('print-mode-bw');
                 document.body.classList.add('print-mode-color');
             }
+
             setTimeout(() => { window.print(); }, 150);
         }
 
