@@ -624,15 +624,15 @@
             background: #000000;
         }
 
-        /* ==================== CONFIGURAÇÕES DE IMPRESSÃO PERFEITAS SEM BURACO EM BRANCO ==================== */
+        /* ==================== CONFIGURAÇÕES DE IMPRESSÃO DEFINITIVAS ==================== */
         @page page-portrait {
             size: letter portrait;
-            margin: 0.2in;
+            margin: 0.25in;
         }
 
         @page page-landscape {
             size: letter landscape;
-            margin: 0.2in;
+            margin: 0.25in;
         }
 
         @media print {
@@ -673,33 +673,45 @@
                 display: block !important;
             }
 
+            .sheet-page {
+                padding: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                background: #ffffff !important;
+            }
+
             ::-webkit-input-placeholder { color: transparent !important; opacity: 0 !important; }
             :-moz-placeholder { color: transparent !important; opacity: 0 !important; }
             ::-moz-placeholder { color: transparent !important; opacity: 0 !important; }
             :-ms-input-placeholder { color: transparent !important; opacity: 0 !important; }
             ::placeholder { color: transparent !important; opacity: 0 !important; }
 
-            /* PÁGINA 1: ABA 2 EM RETRATO (PORTRAIT) */
+            /* PÁGINA 1 DA IMPRESSÃO / PDF: TAB 2 (REQUISITION SHEET IN PORTRAIT) */
             #tab2 {
-                order: 1 !important;
                 page: page-portrait !important;
+                page-break-before: avoid !important;
                 page-break-after: always !important;
+                break-after: page !important;
                 page-break-inside: avoid !important;
+                break-inside: avoid !important;
                 width: 100% !important;
+                box-sizing: border-box !important;
             }
 
             .sheet-summary-container {
                 display: flex !important;
                 flex-direction: column !important;
                 justify-content: space-between !important;
-                min-height: 9.8in !important;
+                height: 9.8in !important;
+                max-height: 10in !important;
                 page-break-inside: avoid !important;
             }
 
             #tab2 .doc-title-header {
                 border-bottom: 2px solid #0f172a !important;
                 padding-bottom: 4px !important;
-                margin-bottom: 8px !important;
+                margin-bottom: 6px !important;
             }
 
             #tab2 .doc-title-header h1 {
@@ -735,27 +747,30 @@
             }
 
             #tab2 .sheet-summary-table td {
-                padding: 10px 8px !important;
-                font-size: 10pt !important;
+                padding: 8px 6px !important;
+                font-size: 9.5pt !important;
                 border: 1px solid #0f172a !important;
-                height: 32px !important;
+                height: 28px !important;
             }
 
             #tab2 .sheet-summary-table th {
-                padding: 10px 6px !important;
-                font-size: 10pt !important;
+                padding: 8px 6px !important;
+                font-size: 9.5pt !important;
                 border: 1px solid #0f172a !important;
             }
 
-            /* PÁGINA 2: ABA 1 EM PAISAGEM (LINHAS ALTAS PARA CANETA E SEM BURACO EM BRANCO) */
+            /* PÁGINA 2 DA IMPRESSÃO / PDF: TAB 1 (GUTTER LIST IN LANDSCAPE - AJUSTE ULTRA RIGOROSO DE ENCAIXE) */
             #tab1 {
-                order: 2 !important;
                 page: page-landscape !important;
                 page-break-before: always !important;
+                break-before: page !important;
                 page-break-after: avoid !important;
+                break-after: avoid !important;
                 page-break-inside: avoid !important;
+                break-inside: avoid !important;
                 width: 100% !important;
                 max-width: 100% !important;
+                box-sizing: border-box !important;
             }
 
             .tab1-page-block {
@@ -763,44 +778,44 @@
                 border: none !important;
                 box-shadow: none !important;
                 page-break-inside: avoid !important;
-                page-break-after: avoid !important;
+                break-inside: avoid !important;
                 margin: 0 !important;
-                height: auto !important;
                 display: block !important;
             }
 
             #tab1 .doc-title-header {
-                padding-bottom: 4px !important;
-                margin-bottom: 6px !important;
+                padding-bottom: 1px !important;
+                margin-bottom: 2px !important;
                 border-bottom: 2px solid #0f172a !important;
             }
 
             #tab1 .doc-title-header h1 {
-                font-size: 18pt !important;
+                font-size: 14pt !important;
             }
 
             #tab1 .form-header-grid {
-                padding: 6px 10px !important;
-                gap: 8px !important;
-                margin-bottom: 8px !important;
+                padding: 3px 5px !important;
+                gap: 3px !important;
+                margin-bottom: 3px !important;
                 border: 1.5px solid #0f172a !important;
             }
 
             #tab1 .form-group label {
-                font-size: 8.5pt !important;
+                font-size: 7pt !important;
                 font-weight: 800 !important;
             }
 
             #tab1 .page-block-header {
-                padding: 4px 8px !important;
-                margin-bottom: 4px !important;
-                font-size: 9.5pt !important;
+                padding: 2px 5px !important;
+                margin-bottom: 2px !important;
+                font-size: 8pt !important;
                 background-color: #475569 !important;
             }
 
             #tab1 .gutter-table-wrapper {
-                margin-bottom: 6px !important;
+                margin-bottom: 2px !important;
                 width: 100% !important;
+                overflow: hidden !important;
             }
 
             #tab1 .gutter-table {
@@ -808,74 +823,79 @@
                 width: 100% !important;
             }
 
-            #tab1 .gutter-table th.col-item { width: 19% !important; }
-            #tab1 .gutter-table th:not(.col-item):not(.col-summary):not(.col-return) { width: 4.8% !important; }
+            #tab1 .gutter-table th.col-item { width: 18% !important; }
+            #tab1 .gutter-table th:not(.col-item):not(.col-summary):not(.col-return) { width: 5% !important; }
             #tab1 .gutter-table th.col-summary:nth-last-child(3) { width: 8% !important; }
-            #tab1 .gutter-table th.col-summary:nth-last-child(2) { width: 8.5% !important; }
-            #tab1 .gutter-table th.col-summary:nth-last-child(1) { width: 9.5% !important; }
-            #tab1 .gutter-table th.col-return { width: 9.8% !important; }
+            #tab1 .gutter-table th.col-summary:nth-last-child(2) { width: 9% !important; }
+            #tab1 .gutter-table th.col-summary:nth-last-child(1) { width: 10% !important; }
+            #tab1 .gutter-table th.col-return { width: 10% !important; }
 
             #tab1 .gutter-table th {
-                padding: 4px 2px !important;
-                font-size: 8.5pt !important;
+                padding: 1px 1px !important;
+                font-size: 7pt !important;
                 background-color: #475569 !important;
                 color: #ffffff !important;
                 border: 1px solid #0f172a !important;
+                white-space: normal !important;
+                word-wrap: break-word !important;
             }
 
             #tab1 .gutter-table td {
-                height: 30px !important; /* LINHAS BEM ALTAS E ESPAÇOSAS PARA CANETA */
-                font-size: 9.5pt !important;
+                height: 21px !important; /* Altura exata para caber a tabela inteira + rodapé na mesma folha */
+                font-size: 8pt !important;
                 border: 1px solid #0f172a !important;
                 padding: 0 !important;
             }
 
             #tab1 .cell-input {
-                font-size: 9.5pt !important;
+                font-size: 8pt !important;
                 padding: 0 !important;
             }
 
             #tab1 .bottom-grid {
-                margin-top: 8px !important;
-                gap: 10px !important;
+                margin-top: 2px !important;
+                gap: 4px !important;
+                page-break-inside: avoid !important;
             }
 
             #tab1 .info-card {
-                padding: 6px 8px !important;
+                padding: 2px 4px !important;
                 border: 1px solid #0f172a !important;
             }
 
             #tab1 .info-card-title {
-                margin-bottom: 4px !important;
-                font-size: 9pt !important;
+                margin-bottom: 1px !important;
+                font-size: 7pt !important;
             }
 
             #tab1 .textarea-control {
-                height: 40px !important;
-                padding: 4px !important;
-                font-size: 9.5pt !important;
+                height: 22px !important;
+                padding: 1px !important;
+                font-size: 7.5pt !important;
             }
 
             #tab1 .signatures-wrapper {
-                margin-top: 12px !important;
-                padding-top: 2px !important;
-                gap: 30px !important;
+                margin-top: 2px !important;
+                padding-top: 1px !important;
+                gap: 15px !important;
+                page-break-inside: avoid !important;
             }
 
             #tab1 .sig-line {
-                height: 20px !important;
+                height: 12px !important;
                 border-bottom: 1.5px solid #0f172a !important;
             }
 
             #tab1 .sig-label {
-                font-size: 8.5pt !important;
-                margin-top: 2px !important;
+                font-size: 7pt !important;
+                margin-top: 1px !important;
             }
 
             #tab1 .brand-credit {
-                margin-top: 4px !important;
-                font-size: 10pt !important;
+                margin-top: 1px !important;
+                font-size: 7.5pt !important;
                 color: #475569 !important;
+                page-break-before: avoid !important;
             }
 
             .form-control, .cell-input, .textarea-control {
@@ -992,6 +1012,90 @@
     </div>
 
     <div class="container">
+
+        <!-- ========================================== -->
+        <!-- TAB 2: SUMMARY REQUISITION SHEET           -->
+        <!-- ========================================== -->
+        <div id="tab2" class="tab-content">
+            <div class="sheet-page">
+                <div class="sheet-summary-container">
+                    
+                    <div>
+                        <!-- DOCUMENT HEADER -->
+                        <div class="doc-title-header">
+                            <div>
+                                <h1>Silver Trend Gutter List</h1>
+                                <div style="font-size:12px; font-weight:700; color:#475569; margin-top:2px;">
+                                    MATERIAL REQUISITION & RETURN SHEET
+                                </div>
+                            </div>
+                            <div class="doc-meta-top">
+                                <span id="sheet2-date-display">Date: --/--/----</span>
+                            </div>
+                        </div>
+
+                        <!-- HEADER SUMMARY DISPLAY -->
+                        <div class="form-header-grid-summary">
+                            <div>Installer: <span id="s2_installer">---</span></div>
+                            <div>Color: <span id="s2_color">---</span></div>
+                            <div>Size: <span id="s2_size">---</span></div>
+                            <div>Trailer No: <span id="s2_trailer">---</span></div>
+                            <div>Dispatched: <span id="s2_dispatched">---</span></div>
+                            <div>Return Date: <span id="s2_return">---</span></div>
+                        </div>
+
+                        <!-- SUMMARY TABLE INCLUDES RETURN COLUMN -->
+                        <table class="sheet-summary-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left; width: 35%;">Material Description</th>
+                                    <th style="width: 15%;">Qty Required</th>
+                                    <th style="width: 15%;">Extra (10%)</th>
+                                    <th style="width: 17%;">Qty To Be Given</th>
+                                    <th style="width: 18%; background-color:#0d9488; border-color:#0f766e;">Qty Returned</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sheet2-rows">
+                                <!-- Dynamic items from Tab 1 -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- BOTTOM CONTENT PERFECTLY FITTED -->
+                    <div>
+                        <div class="bottom-grid" style="margin-top: 18px;">
+                            <div class="info-card">
+                                <div class="info-card-title">Observations</div>
+                                <p id="s2_observations" style="font-size: 11.5px; color: #334155; min-height: 40px;">No observations entered.</p>
+                            </div>
+                            <div class="badge-alert">
+                                <i class="fa-solid fa-circle-exclamation"></i> <strong>Notice:</strong> Confirm all materials received before dispatch. Verify and record returned items upon trailer check-in.
+                            </div>
+                        </div>
+
+                        <div class="signatures-wrapper" style="margin-top: 28px;">
+                            <div class="sig-box">
+                                <div class="sig-line"></div>
+                                <div class="sig-label">
+                                    <span>Installer Signature</span>
+                                    <span>Date: ____/____/________</span>
+                                </div>
+                            </div>
+                            <div class="sig-box">
+                                <div class="sig-line"></div>
+                                <div class="sig-label">
+                                    <span>Warehouse Supervisor</span>
+                                    <span>Date: ____/____/________</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="brand-credit">by Isaque</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <!-- ========================================== -->
         <!-- TAB 1: MAIN ENTRY FORM                     -->
@@ -1158,90 +1262,6 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- TAB 2: SUMMARY REQUISITION SHEET           -->
-        <!-- ========================================== -->
-        <div id="tab2" class="tab-content">
-            <div class="sheet-page">
-                <div class="sheet-summary-container">
-                    
-                    <div>
-                        <!-- DOCUMENT HEADER -->
-                        <div class="doc-title-header">
-                            <div>
-                                <h1>Silver Trend Gutter List</h1>
-                                <div style="font-size:12px; font-weight:700; color:#475569; margin-top:2px;">
-                                    MATERIAL REQUISITION & RETURN SHEET
-                                </div>
-                            </div>
-                            <div class="doc-meta-top">
-                                <span id="sheet2-date-display">Date: --/--/----</span>
-                            </div>
-                        </div>
-
-                        <!-- HEADER SUMMARY DISPLAY (DESTACADO E GRANDE) -->
-                        <div class="form-header-grid-summary">
-                            <div>Installer: <span id="s2_installer">---</span></div>
-                            <div>Color: <span id="s2_color">---</span></div>
-                            <div>Size: <span id="s2_size">---</span></div>
-                            <div>Trailer No: <span id="s2_trailer">---</span></div>
-                            <div>Dispatched: <span id="s2_dispatched">---</span></div>
-                            <div>Return Date: <span id="s2_return">---</span></div>
-                        </div>
-
-                        <!-- SUMMARY TABLE INCLUDES RETURN COLUMN -->
-                        <table class="sheet-summary-table">
-                            <thead>
-                                <tr>
-                                    <th style="text-align: left; width: 35%;">Material Description</th>
-                                    <th style="width: 15%;">Qty Required</th>
-                                    <th style="width: 15%;">Extra (10%)</th>
-                                    <th style="width: 17%;">Qty To Be Given</th>
-                                    <th style="width: 18%; background-color:#0d9488; border-color:#0f766e;">Qty Returned</th>
-                                </tr>
-                            </thead>
-                            <tbody id="sheet2-rows">
-                                <!-- Dynamic items from Tab 1 -->
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- BOTTOM CONTENT PERFECTLY FITTED -->
-                    <div>
-                        <div class="bottom-grid" style="margin-top: 18px;">
-                            <div class="info-card">
-                                <div class="info-card-title">Observations</div>
-                                <p id="s2_observations" style="font-size: 11.5px; color: #334155; min-height: 40px;">No observations entered.</p>
-                            </div>
-                            <div class="badge-alert">
-                                <i class="fa-solid fa-circle-exclamation"></i> <strong>Notice:</strong> Confirm all materials received before dispatch. Verify and record returned items upon trailer check-in.
-                            </div>
-                        </div>
-
-                        <div class="signatures-wrapper" style="margin-top: 28px;">
-                            <div class="sig-box">
-                                <div class="sig-line"></div>
-                                <div class="sig-label">
-                                    <span>Installer Signature</span>
-                                    <span>Date: ____/____/________</span>
-                                </div>
-                            </div>
-                            <div class="sig-box">
-                                <div class="sig-line"></div>
-                                <div class="sig-label">
-                                    <span>Warehouse Supervisor</span>
-                                    <span>Date: ____/____/________</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="brand-credit">by Isaque</div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <!-- JavaScript Logic -->
@@ -1363,7 +1383,7 @@
                     <td><input type="text" id="${item.id}_total" class="cell-input cell-readonly" value="" readonly></td>
                     <td><input type="number" min="0" id="${item.id}_extra" class="cell-input cell-readonly" value="" placeholder="" oninput="onExtraManualInput('${item.id}')" onfocus="this.select()"></td>
                     <td><input type="text" id="${item.id}_given" class="cell-input cell-given" value="" readonly></td>
-                    <td><input type="number" min="0" value="" placeholder="" id="${item.id}_return" class="cell-input cell-return" oninput="syncSheet2()"></td>
+                    <td><input type="number" min="0" value="" placeholder="" id="${item.id}_return" class="cell-input cell-return" oninput="syncSheet2()" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, 'return', 1)"></td>
                 `;
 
                 tr1.innerHTML = html1;
@@ -1397,6 +1417,32 @@
                 let nextIdx = itemIdx;
                 let nextSys = sys;
 
+                if (sys === 'return') {
+                    if (key === 'Enter' || key === 'ArrowDown') {
+                        nextIdx = itemIdx + 1;
+                        if (nextIdx >= items.length) nextIdx = 0;
+                    } else if (key === 'ArrowUp') {
+                        nextIdx = itemIdx - 1;
+                        if (nextIdx < 0) nextIdx = items.length - 1;
+                    } else if (key === 'ArrowLeft') {
+                        nextSys = 9;
+                    }
+
+                    let targetId = '';
+                    if (nextSys === 'return') {
+                        targetId = `${items[nextIdx].id}_return`;
+                    } else {
+                        targetId = `${items[nextIdx].id}_s${nextSys}`;
+                    }
+
+                    const targetInput = document.getElementById(targetId);
+                    if (targetInput) {
+                        targetInput.focus();
+                        if (typeof targetInput.select === 'function') targetInput.select();
+                    }
+                    return;
+                }
+
                 if (key === 'Enter' || key === 'ArrowDown') {
                     if (itemIdx === -1) {
                         nextIdx = 0;
@@ -1414,6 +1460,15 @@
                         nextIdx = itemIdx - 1;
                     }
                 } else if (key === 'ArrowRight') {
+                    if (sys === 9 && !hasPage2) {
+                        targetId = `${items[itemIdx].id}_return`;
+                        const targetInput = document.getElementById(targetId);
+                        if (targetInput) {
+                            targetInput.focus();
+                            if (typeof targetInput.select === 'function') targetInput.select();
+                        }
+                        return;
+                    }
                     nextSys = sys + 1;
                 } else if (key === 'ArrowLeft') {
                     nextSys = sys - 1;
@@ -1504,7 +1559,12 @@
 
             const extraEl = document.getElementById(`${itemId}_extra`);
             let extra = 0;
-            if (extraEl && extraEl.dataset.custom === 'true') {
+            
+            // REGRA: Splash Block NUNCA tem extra (Extra = 0)
+            if (itemId === 'splash_block') {
+                extra = 0;
+                if (extraEl) extraEl.value = '';
+            } else if (extraEl && extraEl.dataset.custom === 'true') {
                 extra = parseNum(extraEl.value);
             } else {
                 extra = Math.ceil(total * 0.1);
@@ -1714,7 +1774,7 @@
                     });
                 `;
                 const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.callObjectURL(blob);
+                const swUrl = URL.createObjectURL(blob);
                 navigator.serviceWorker.register(swUrl).catch(() => {});
             });
         }
