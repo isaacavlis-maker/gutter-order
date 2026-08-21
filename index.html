@@ -11,11 +11,7 @@
     
     <style>
         /* ==================== SCREEN STYLES ==================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -26,11 +22,9 @@
             font-size: 13px;
         }
 
-        /* Navigation Bar */
         .navbar {
             background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             color: #ffffff;
             padding: 14px 24px;
             display: flex;
@@ -43,611 +37,125 @@
             z-index: 100;
         }
 
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 18px;
-            font-weight: 800;
-            color: #f8fafc;
-        }
-
-        .navbar-brand i {
-            color: #e2e8f0;
-            font-size: 22px;
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 10px;
-        }
+        .navbar-brand { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 800; color: #f8fafc; }
+        .navbar-brand i { color: #e2e8f0; font-size: 22px; }
+        .nav-actions { display: flex; gap: 10px; }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            border: none;
+            display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
+            border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; border: none;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-        }
+        .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+        .btn-outline { background: rgba(30, 41, 59, 0.6); color: #e2e8f0; border: 1px solid rgba(148, 163, 184, 0.4); }
 
-        .btn-outline {
-            background: rgba(30, 41, 59, 0.6);
-            color: #e2e8f0;
-            border: 1px solid rgba(148, 163, 184, 0.4);
-        }
+        .tabs-wrapper { max-width: 1380px; margin: 20px auto 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .tab-buttons { display: flex; background: rgba(15, 23, 42, 0.6); padding: 4px; border-radius: 10px; gap: 6px; border: 1px solid rgba(148, 163, 184, 0.3); }
+        .tab-btn { padding: 8px 20px; border-radius: 8px; border: none; background: transparent; font-weight: 700; color: #94a3b8; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .tab-btn.active { background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%); color: #0f172a; border: 1px solid #cbd5e1; }
 
-        /* Tabs Navigation */
-        .tabs-wrapper {
-            max-width: 1380px;
-            margin: 20px auto 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .container { max-width: 1380px; margin: 16px auto; padding: 0 20px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-        .tab-buttons {
-            display: flex;
-            background: rgba(15, 23, 42, 0.6);
-            padding: 4px;
-            border-radius: 10px;
-            gap: 6px;
-            border: 1px solid rgba(148, 163, 184, 0.3);
-        }
-
-        .tab-btn {
-            padding: 8px 20px;
-            border-radius: 8px;
-            border: none;
-            background: transparent;
-            font-weight: 700;
-            color: #94a3b8;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
-            color: #0f172a;
-            border: 1px solid #cbd5e1;
-        }
-
-        /* Container Layout */
-        .container {
-            max-width: 1380px;
-            margin: 16px auto;
-            padding: 0 20px;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Sheet Page */
         .sheet-page {
-            background: rgba(255, 255, 255, 0.98);
-            color: #0f172a;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            padding: 24px;
-            border: 1px solid #cbd5e1;
-            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.98); color: #0f172a; border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); padding: 24px; border: 1px solid #cbd5e1; margin-bottom: 24px;
         }
 
-        .doc-title-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 2px solid #0f172a;
-            padding-bottom: 10px;
-            margin-bottom: 16px;
+        .doc-title-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 10px; margin-bottom: 16px; }
+        .doc-title-header h1 { font-size: 22px; font-weight: 800; color: #0f172a; text-transform: uppercase; }
+        .doc-title-header .doc-meta-top { font-size: 11px; color: #64748b; font-weight: 600; text-align: right; }
+
+        .form-header-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; background-color: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #cbd5e1; margin-bottom: 16px; }
+        .form-header-grid-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; background-color: #f8fafc; padding: 14px; border-radius: 8px; border: 1.5px solid #64748b; margin-bottom: 16px; font-size: 14px; }
+        .form-header-grid-summary div { font-size: 14px; color: #0f172a; font-weight: 700; }
+        .form-header-grid-summary span { font-size: 16px; font-weight: 900; color: #0f172a; }
+
+        .form-group { display: flex; flex-direction: column; gap: 4px; }
+        .form-group label { font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; }
+        .form-control { padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 12px; font-weight: 600; color: #0f172a; outline: none; background-color: #ffffff; }
+
+        .page-block-header { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #475569 0%, #1e293b 100%); color: #ffffff; padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 12px; margin-bottom: 8px; border: 1px solid #64748b; }
+
+        .gutter-table-wrapper { overflow-x: auto; margin-bottom: 16px; border-radius: 6px; }
+        .gutter-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .gutter-table th { background: linear-gradient(180deg, #64748b 0%, #475569 100%); color: #ffffff; font-weight: 700; padding: 10px 6px; text-align: center; border: 1px solid #64748b; white-space: nowrap; }
+        .gutter-table th.col-item { text-align: left; padding-left: 12px; width: 220px; background: #0f172a; }
+        .gutter-table th.col-summary { background: linear-gradient(180deg, #475569 0%, #334155 100%); }
+        .gutter-table th.col-return { background-color: #0d9488; }
+
+        .gutter-table td { border: 1px solid #cbd5e1; padding: 0; height: 38px; text-align: center; vertical-align: middle; background-color: #ffffff; }
+        .gutter-table td.item-name { font-weight: 600; text-align: left; padding-left: 12px; color: #1e293b; background-color: #f8fafc; }
+
+        .cell-input { width: 100%; height: 100%; padding: 6px 4px; border: none; text-align: center; font-size: 13px; font-weight: 600; background: #ffffff; outline: none; }
+        .cell-auto-white { font-weight: 700; background-color: #ffffff !important; color: #0f172a; }
+
+        .gutter-table tr:nth-child(odd) .cell-readonly, .gutter-table tr:nth-child(odd) .cell-given { font-weight: 700; background-color: #ffffff !important; color: #0f172a !important; }
+        .gutter-table tr:nth-child(even) .cell-readonly, .gutter-table tr:nth-child(even) .cell-given { font-weight: 700; background-color: #f8fafc !important; color: #0f172a !important; }
+        .cell-return { background-color: #ffffff; color: #0f766e; font-weight: 700; }
+
+        .full-cell-select { width: 100%; height: 100%; border: none; background: #ffffff; font-family: inherit; font-size: 12px; font-weight: 600; color: #1e293b; cursor: pointer; outline: none; padding: 6px 8px; }
+        .wo-row td { background-color: #f8fafc !important; }
+        .wo-row input { background-color: #f8fafc !important; color: #0f172a !important; font-weight: 700 !important; }
+
+        .bottom-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 16px; }
+        .info-card { border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; background-color: #ffffff; }
+        .info-card-title { font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+        .textarea-control { width: 100%; height: 65px; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; font-family: inherit; font-size: 12px; resize: none; outline: none; }
+
+        .signatures-wrapper { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding-top: 10px; }
+        .sig-box { display: flex; flex-direction: column; gap: 4px; }
+        .sig-line { border-bottom: 1.5px solid #0f172a; height: 28px; }
+        .sig-label { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; margin-top: 4px; }
+
+        .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
+        .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
+
+        .sheet-summary-container { display: flex; flex-direction: column; justify-content: space-between; min-height: 850px; }
+        .sheet-summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .sheet-summary-table th { background: linear-gradient(180deg, #64748b 0%, #475569 100%); color: #ffffff; padding: 12px 14px; font-size: 13px; border: 1px solid #64748b; text-align: center; }
+        .sheet-summary-table td { padding: 14px 14px; border: 1px solid #cbd5e1; font-size: 13px; text-align: center; font-weight: 600; background-color: #ffffff; }
+
+        .badge-alert { background-color: #fef3c7; color: #92400e; border: 1px solid #f59e0b; padding: 14px; border-radius: 6px; font-size: 11.5px; font-weight: 600; }
+
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(6px); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-card { background: #ffffff; border-radius: 16px; padding: 28px 32px; max-width: 420px; width: 90%; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); text-align: center; color: #0f172a; }
+        .modal-title { font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+        .modal-desc { font-size: 12px; color: #64748b; margin-bottom: 20px; }
+        .modal-options { display: flex; flex-direction: column; gap: 12px; }
+        .btn-modal-opt { padding: 14px 18px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-modal-color { background: linear-gradient(135deg, #64748b 0%, #475569 100%); color: #ffffff; border-color: #64748b; }
+        .btn-modal-bw { background: #0f172a; color: #ffffff; border-color: #0f172a; }
+
+        /* ==================== ESTRUTURA DE IMPRESSÃO UNIFICADA EM 2 FOLHAS ==================== */
+        @page {
+            size: letter landscape;
+            margin: 0.25in;
         }
 
-        .doc-title-header h1 {
-            font-size: 22px;
-            font-weight: 800;
-            color: #0f172a;
-            text-transform: uppercase;
-        }
-
-        .doc-title-header .doc-meta-top {
-            font-size: 11px;
-            color: #64748b;
-            font-weight: 600;
-            text-align: right;
-        }
-
-        .form-header-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px;
-            background-color: #f8fafc;
-            padding: 14px;
-            border-radius: 8px;
-            border: 1px solid #cbd5e1;
-            margin-bottom: 16px;
-        }
-
-        .form-header-grid-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-            background-color: #f8fafc;
-            padding: 14px;
-            border-radius: 8px;
-            border: 1.5px solid #64748b;
-            margin-bottom: 16px;
-            font-size: 14px;
-        }
-
-        .form-header-grid-summary div {
-            font-size: 14px;
-            color: #0f172a;
-            font-weight: 700;
-        }
-
-        .form-header-grid-summary span {
-            font-size: 16px;
-            font-weight: 900;
-            color: #0f172a;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .form-group label {
-            font-size: 10px;
-            font-weight: 700;
-            color: #475569;
-            text-transform: uppercase;
-        }
-
-        .form-control {
-            padding: 6px 8px;
-            border: 1px solid #cbd5e1;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #0f172a;
-            outline: none;
-            background-color: #ffffff;
-        }
-
-        .page-block-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(135deg, #475569 0%, #1e293b 100%);
-            color: #ffffff;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 12px;
-            margin-bottom: 8px;
-            border: 1px solid #64748b;
-        }
-
-        /* Tables Styling */
-        .gutter-table-wrapper {
-            overflow-x: auto;
-            margin-bottom: 16px;
-            border-radius: 6px;
-        }
-
-        .gutter-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-        }
-
-        .gutter-table th {
-            background: linear-gradient(180deg, #64748b 0%, #475569 100%);
-            color: #ffffff;
-            font-weight: 700;
-            padding: 10px 6px;
-            text-align: center;
-            border: 1px solid #64748b;
-            white-space: nowrap;
-        }
-
-        .gutter-table th.col-item {
-            text-align: left;
-            padding-left: 12px;
-            width: 220px;
-            background: #0f172a;
-        }
-
-        .gutter-table th.col-summary {
-            background: linear-gradient(180deg, #475569 0%, #334155 100%);
-        }
-
-        .gutter-table th.col-return {
-            background-color: #0d9488;
-        }
-
-        .gutter-table td {
-            border: 1px solid #cbd5e1;
-            padding: 0;
-            height: 38px;
-            text-align: center;
-            vertical-align: middle;
-            background-color: #ffffff;
-        }
-
-        .gutter-table td.item-name {
-            font-weight: 600;
-            text-align: left;
-            padding-left: 12px;
-            color: #1e293b;
-            background-color: #f8fafc;
-        }
-
-        .cell-input {
-            width: 100%;
-            height: 100%;
-            padding: 6px 4px;
-            border: none;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 600;
-            background: #ffffff;
-            outline: none;
-            -webkit-appearance: none;
-            -moz-appearance: textfield;
-        }
-
-        .cell-input::-webkit-outer-spin-button,
-        .cell-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        .cell-auto-white {
-            font-weight: 700;
-            background-color: #ffffff !important;
-            color: #0f172a;
-        }
-
-        .gutter-table tr:nth-child(odd) .cell-readonly,
-        .gutter-table tr:nth-child(odd) .cell-given {
-            font-weight: 700;
-            background-color: #ffffff !important;
-            color: #0f172a !important;
-        }
-
-        .gutter-table tr:nth-child(even) .cell-readonly,
-        .gutter-table tr:nth-child(even) .cell-given {
-            font-weight: 700;
-            background-color: #f8fafc !important;
-            color: #0f172a !important;
-        }
-
-        .cell-return {
-            background-color: #ffffff;
-            color: #0f766e;
-            font-weight: 700;
-        }
-
-        .full-cell-select {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #ffffff;
-            font-family: inherit;
-            font-size: 12px;
-            font-weight: 600;
-            color: #1e293b;
-            cursor: pointer;
-            outline: none;
-            padding: 6px 8px;
-        }
-
-        .wo-row td {
-            background-color: #f8fafc !important;
-        }
-
-        .wo-row input {
-            background-color: #f8fafc !important;
-            color: #0f172a !important;
-            font-weight: 700 !important;
-        }
-
-        .bottom-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .info-card {
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            padding: 12px;
-            background-color: #ffffff;
-        }
-
-        .info-card-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: #475569;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .textarea-control {
-            width: 100%;
-            height: 65px;
-            border: 1px solid #cbd5e1;
-            border-radius: 4px;
-            padding: 8px;
-            font-family: inherit;
-            font-size: 12px;
-            resize: none;
-            outline: none;
-        }
-
-        .signatures-wrapper {
-            margin-top: 24px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            padding-top: 10px;
-        }
-
-        .sig-box {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .sig-line {
-            border-bottom: 1.5px solid #0f172a;
-            height: 28px;
-        }
-
-        .sig-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 10px;
-            font-weight: 700;
-            color: #475569;
-            text-transform: uppercase;
-            margin-top: 4px;
-        }
-
-        .brand-credit {
-            margin-top: 18px;
-            text-align: right;
-            font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            color: #475569;
-        }
-
-        .print-blank-line {
-            display: none;
-            border-bottom: 1px solid #0f172a;
-            width: 120px;
-            height: 16px;
-            margin-left: 6px;
-        }
-
-        .sheet-summary-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 850px;
-        }
-
-        .sheet-summary-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .sheet-summary-table th {
-            background: linear-gradient(180deg, #64748b 0%, #475569 100%);
-            color: #ffffff;
-            padding: 12px 14px;
-            font-size: 13px;
-            border: 1px solid #64748b;
-            text-align: center;
-        }
-
-        .sheet-summary-table td {
-            padding: 14px 14px;
-            border: 1px solid #cbd5e1;
-            font-size: 13px;
-            text-align: center;
-            font-weight: 600;
-            background-color: #ffffff;
-        }
-
-        .badge-alert {
-            background-color: #fef3c7;
-            color: #92400e;
-            border: 1px solid #f59e0b;
-            padding: 14px;
-            border-radius: 6px;
-            font-size: 11.5px;
-            font-weight: 600;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(6px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 28px 32px;
-            max-width: 420px;
-            width: 90%;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-            text-align: center;
-            color: #0f172a;
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 8px;
-        }
-
-        .modal-desc {
-            font-size: 12px;
-            color: #64748b;
-            margin-bottom: 20px;
-        }
-
-        .modal-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .btn-modal-opt {
-            padding: 14px 18px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            border: 1px solid #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-modal-color {
-            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
-            color: #ffffff;
-            border-color: #64748b;
-        }
-
-        .btn-modal-bw {
-            background: #0f172a;
-            color: #ffffff;
-            border-color: #0f172a;
-        }
-
-        /* ==================== CONFIGURAÇÕES DE IMPRESSÃO ISOLADA POR ABA ==================== */
         @media print {
-            body.print-mode-color * {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
+            body.print-mode-color * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body.print-mode-bw * { -webkit-print-color-adjust: economy !important; print-color-adjust: economy !important; background-color: transparent !important; color: #000000 !important; border-color: #000000 !important; }
 
-            body.print-mode-bw * {
-                -webkit-print-color-adjust: economy !important;
-                print-color-adjust: economy !important;
-                background-color: transparent !important;
-                color: #000000 !important;
-                border-color: #000000 !important;
-            }
+            html, body { background: #ffffff !important; color: #0f172a !important; padding: 0 !important; margin: 0 !important; font-size: 9pt !important; width: 100% !important; }
+            .navbar, .tabs-wrapper, .btn, .no-print, .modal-overlay { display: none !important; }
+            .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; display: block !important; }
 
-            html, body {
-                background: #ffffff !important;
-                color: #0f172a !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                font-size: 9pt !important;
+            /* FORÇA EXIBIÇÃO DAS DUAS PÁGINAS SEM DUPLEX AUTOMÁTICO */
+            .tab-content { display: block !important; }
+            .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
+
+            /* TAB 1 - FOLHA 1 (PAISAGEM) */
+            #tab1 {
+                page-break-before: avoid !important;
+                page-break-after: always !important;
+                break-after: page !important;
                 width: 100% !important;
             }
 
-            .navbar, .tabs-wrapper, .btn, .no-print, .modal-overlay {
-                display: none !important;
-            }
-
-            .container {
-                max-width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                display: block !important;
-            }
-
-            /* IMPRIME SOMENTE A ABA QUE ESTÁ ATIVA/VISÍVEL PARA IMPEDIR FRENTE E VERSO */
-            .tab-content {
-                display: none !important;
-            }
-
-            .tab-content.print-active {
-                display: block !important;
-            }
-
-            .sheet-page {
-                padding: 0 !important;
-                border: none !important;
-                box-shadow: none !important;
-                margin: 0 !important;
-                background: #ffffff !important;
-            }
-
-            /* TAB 2 - PORTRAIT */
-            #tab2.print-active {
-                display: block !important;
-            }
-
-            .sheet-summary-container {
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: space-between !important;
-                height: 9.8in !important;
-            }
-
-            #tab2 .doc-title-header h1 { font-size: 18pt !important; }
-            #tab2 .form-header-grid-summary { padding: 8px 12px !important; margin-bottom: 10px !important; }
-            #tab2 .sheet-summary-table td { padding: 8px 6px !important; font-size: 9.5pt !important; height: 28px !important; }
-            #tab2 .sheet-summary-table th { padding: 8px 6px !important; font-size: 9.5pt !important; }
-
-            /* TAB 1 - LANDSCAPE */
-            #tab1.print-active {
-                display: block !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
-            }
-
-            .tab1-page-block {
-                padding: 0 !important;
-                border: none !important;
-                box-shadow: none !important;
-                width: 100% !important;
-            }
-
+            .tab1-page-block { padding: 0 !important; border: none !important; box-shadow: none !important; width: 100% !important; }
             #tab1 .doc-title-header { padding-bottom: 2px !important; margin-bottom: 4px !important; }
             #tab1 .doc-title-header h1 { font-size: 16pt !important; }
             #tab1 .form-header-grid { padding: 6px 8px !important; gap: 6px !important; margin-bottom: 6px !important; width: 100% !important; }
@@ -678,6 +186,21 @@
             #tab1 .sig-label { font-size: 8pt !important; }
             #tab1 .brand-credit { margin-top: 4px !important; font-size: 8.5pt !important; }
 
+            /* TAB 2 - FOLHA 2 (SEPARADA NA SEGUNDA PÁGINA) */
+            #tab2 {
+                page-break-before: always !important;
+                break-before: page !important;
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+                width: 100% !important;
+            }
+
+            .sheet-summary-container { display: flex !important; flex-direction: column !important; justify-content: space-between !important; height: 6.8in !important; }
+            #tab2 .doc-title-header h1 { font-size: 16pt !important; }
+            #tab2 .form-header-grid-summary { padding: 6px 10px !important; margin-bottom: 8px !important; }
+            #tab2 .sheet-summary-table td { padding: 4px 6px !important; font-size: 8.5pt !important; height: 22px !important; }
+            #tab2 .sheet-summary-table th { padding: 6px 6px !important; font-size: 8.5pt !important; }
+
             .form-control, .cell-input, .textarea-control { border: none !important; background: transparent !important; color: #0f172a !important; }
             select, .full-cell-select { appearance: none !important; background: transparent !important; border: none !important; }
 
@@ -689,21 +212,17 @@
     <!-- PWA Settings -->
     <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU2lsdmVyIFRyZW5kIEd1dHRlciBPcmRlciBTeXN0ZW0iLCJzaG9ydF9uYW1lIjoiR3V0dGVyT3JkZXIiLCJzdGFydF91cmwiOiIuL2luZGV4Lmh0bWwiLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGYxNzJhIiwidGhlbWVfY29sb3IiOiIjNDc1NTY5In0=">
     <meta name="theme-color" content="#0f172a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="GutterOrder">
-
 </head>
 <body class="print-mode-color">
 
     <!-- PRINT COLOR SELECTION MODAL -->
     <div id="printModal" class="modal-overlay">
         <div class="modal-card">
-            <div class="modal-title"><i class="fa-solid fa-print" style="color:#475569;"></i> Choose Print Mode</div>
-            <div class="modal-desc">Select how you want to print your Gutter List sheets:</div>
+            <div class="modal-title"><i class="fa-solid fa-print" style="color:#475569;"></i> Print Order Sheets</div>
+            <div class="modal-desc">Click below to print both sheets on 2 separate pages:</div>
             <div class="modal-options">
                 <button class="btn-modal-opt btn-modal-color" onclick="executePrint('color')">
-                    <i class="fa-solid fa-palette"></i> Print Both Sheets (2 Separate Pages)
+                    <i class="fa-solid fa-palette"></i> Print Both Sheets
                 </button>
                 <button class="btn-modal-opt btn-modal-bw" onclick="executePrint('bw')">
                     <i class="fa-solid fa-circle-half-stroke"></i> Print in Black & White
@@ -741,35 +260,98 @@
                 <i class="fa-solid fa-file-invoice"></i> Tab 2: Requisition Sheet (Summary)
             </button>
         </div>
-        <span style="font-size: 11px; color: #64748b; font-weight: 500;">
-            <i class="fa-solid fa-keyboard"></i> Use Enter or Mouse to navigate. Pressing Enter on Sys 9 adds Sys 10-18 page.
-        </span>
     </div>
 
     <div class="container">
 
-        <!-- ========================================== -->
-        <!-- TAB 2: SUMMARY REQUISITION SHEET           -->
-        <!-- ========================================== -->
+        <!-- TAB 1: MAIN ENTRY FORM -->
+        <div id="tab1" class="tab-content active">
+            <div class="sheet-page tab1-page-block">
+                <div class="doc-title-header">
+                    <div><h1>Silver Trend Gutter List</h1></div>
+                    <div class="doc-meta-top">
+                        <span id="top-date-display">Date: <span id="p1_date_val">--/--/----</span><span id="p1_date_line" class="print-blank-line"></span></span>
+                    </div>
+                </div>
+
+                <div class="form-header-grid">
+                    <div class="form-group"><label>Installer</label><select id="installer" class="form-control" onchange="syncAll()"></select></div>
+                    <div class="form-group"><label>Color</label><select id="color" class="form-control" onchange="syncAll()"></select></div>
+                    <div class="form-group"><label>Size</label><select id="size" class="form-control" onchange="syncAll()"><option value="6&quot;">6"</option><option value="5&quot;">5"</option><option value="7&quot;">7"</option></select></div>
+                    <div class="form-group"><label>Date</label><span id="doc_date_wrapper"><input type="date" id="doc_date" class="form-control" onchange="syncAll()"></span><span id="doc_date_blank_line" class="print-blank-line" style="width:100%;"></span></div>
+                    <div class="form-group"><label>Trailer No.</label><input type="text" id="trailer" class="form-control" placeholder="Trailer #" oninput="syncAll()"></div>
+                    <div class="form-group"><label>Dispatched ST Date</label><span id="dispatched_date_wrapper"><input type="date" id="dispatched_date" class="form-control" onchange="syncAll()"></span><span id="dispatched_date_blank_line" class="print-blank-line" style="width:100%;"></span></div>
+                </div>
+
+                <div class="page-block-header"><span>Systems 1 to 9</span><span style="font-size:10px; font-weight:normal;">Page 1</span></div>
+                
+                <div class="gutter-table-wrapper">
+                    <table class="gutter-table" id="table-page-1">
+                        <thead>
+                            <tr>
+                                <th class="col-item">Item Description</th>
+                                <th>Sys 1</th><th>Sys 2</th><th>Sys 3</th><th>Sys 4</th><th>Sys 5</th><th>Sys 6</th><th>Sys 7</th><th>Sys 8</th><th>Sys 9</th>
+                                <th class="col-summary">Total</th><th class="col-summary">Extra (10%)</th><th class="col-summary">Given</th><th class="col-return">Return</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gutter-rows-p1"></tbody>
+                    </table>
+                </div>
+
+                <div id="page2-container" style="display: none; margin-top: 24px;">
+                    <div class="page-block-header" style="background:#0f766e;"><span>Systems 10 to 18 (Page 2 - Preview Subtotal)</span><span style="font-size:10px; font-weight:normal;">Page 2</span></div>
+                    <div class="gutter-table-wrapper">
+                        <table class="gutter-table" id="table-page-2">
+                            <thead>
+                                <tr>
+                                    <th class="col-item">Item Description</th>
+                                    <th>Sys 10</th><th>Sys 11</th><th>Sys 12</th><th>Sys 13</th><th>Sys 14</th><th>Sys 15</th><th>Sys 16</th><th>Sys 17</th><th>Sys 18</th>
+                                    <th class="col-summary">Subtotal (P2)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="gutter-rows-p2"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bottom-grid">
+                    <div class="info-card">
+                        <div class="info-card-title"><i class="fa-solid fa-comment-dots"></i> Observations</div>
+                        <textarea id="observations" class="textarea-control" placeholder="Enter job observations..." oninput="syncAll()"></textarea>
+                    </div>
+                    <div class="info-card" style="background-color: #f0fdf4; border-color: #16a34a;">
+                        <div class="info-card-title" style="color: #15803d;"><i class="fa-solid fa-boxes-packing"></i> Return Information</div>
+                        <div style="font-size: 11px; color: #166534; display:flex; flex-direction:column; gap:6px;">
+                            <div style="display:flex; align-items:center;">
+                                <strong>Return Date:</strong> 
+                                <span id="return_date_wrapper" style="margin-left:4px;"><input type="date" id="return_date" class="form-control" style="padding:2px 4px; font-size:11px;" onchange="syncAll()"></span>
+                                <span id="return_date_blank_line" class="print-blank-line"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="signatures-wrapper">
+                    <div class="sig-box"><div class="sig-line"></div><div class="sig-label"><span>Pick Up Signature</span><span>Date: ____/____/________</span></div></div>
+                    <div class="sig-box"><div class="sig-line"></div><div class="sig-label"><span>Return Signature</span><span>Date: ____/____/________</span></div></div>
+                </div>
+                <div class="brand-credit">by Isaque</div>
+            </div>
+        </div>
+
+        <!-- TAB 2: SUMMARY REQUISITION SHEET -->
         <div id="tab2" class="tab-content">
             <div class="sheet-page">
                 <div class="sheet-summary-container">
-                    
                     <div>
-                        <!-- DOCUMENT HEADER -->
                         <div class="doc-title-header">
                             <div>
                                 <h1>Silver Trend Gutter List</h1>
-                                <div style="font-size:12px; font-weight:700; color:#475569; margin-top:2px;">
-                                    MATERIAL REQUISITION & RETURN SHEET
-                                </div>
+                                <div style="font-size:12px; font-weight:700; color:#475569; margin-top:2px;">MATERIAL REQUISITION & RETURN SHEET</div>
                             </div>
-                            <div class="doc-meta-top">
-                                <span id="sheet2-date-display">Date: --/--/----</span>
-                            </div>
+                            <div class="doc-meta-top"><span id="sheet2-date-display">Date: --/--/----</span></div>
                         </div>
 
-                        <!-- HEADER SUMMARY DISPLAY -->
                         <div class="form-header-grid-summary">
                             <div>Installer: <span id="s2_installer">---</span></div>
                             <div>Color: <span id="s2_color">---</span></div>
@@ -779,7 +361,6 @@
                             <div>Return Date: <span id="s2_return">---</span></div>
                         </div>
 
-                        <!-- SUMMARY TABLE -->
                         <table class="sheet-summary-table">
                             <thead>
                                 <tr>
@@ -790,214 +371,33 @@
                                     <th style="width: 18%; background-color:#0d9488; border-color:#0f766e;">Qty Returned</th>
                                 </tr>
                             </thead>
-                            <tbody id="sheet2-rows">
-                                <!-- Dynamic items -->
-                            </tbody>
+                            <tbody id="sheet2-rows"></tbody>
                         </table>
                     </div>
 
                     <div>
-                        <div class="bottom-grid" style="margin-top: 18px;">
+                        <div class="bottom-grid" style="margin-top: 14px;">
                             <div class="info-card">
                                 <div class="info-card-title">Observations</div>
-                                <p id="s2_observations" style="font-size: 11.5px; color: #334155; min-height: 40px;">No observations entered.</p>
+                                <p id="s2_observations" style="font-size: 11.5px; color: #334155; min-height: 35px;">No observations entered.</p>
                             </div>
                             <div class="badge-alert">
-                                <i class="fa-solid fa-circle-exclamation"></i> <strong>Notice:</strong> Confirm all materials received before dispatch. Verify and record returned items upon trailer check-in.
+                                <i class="fa-solid fa-circle-exclamation"></i> <strong>Notice:</strong> Confirm all materials received before dispatch.
                             </div>
                         </div>
 
-                        <div class="signatures-wrapper" style="margin-top: 28px;">
-                            <div class="sig-box">
-                                <div class="sig-line"></div>
-                                <div class="sig-label">
-                                    <span>Installer Signature</span>
-                                    <span>Date: ____/____/________</span>
-                                </div>
-                            </div>
-                            <div class="sig-box">
-                                <div class="sig-line"></div>
-                                <div class="sig-label">
-                                    <span>Warehouse Supervisor</span>
-                                    <span>Date: ____/____/________</span>
-                                </div>
-                            </div>
+                        <div class="signatures-wrapper" style="margin-top: 18px;">
+                            <div class="sig-box"><div class="sig-line"></div><div class="sig-label"><span>Installer Signature</span><span>Date: ____/____/________</span></div></div>
+                            <div class="sig-box"><div class="sig-line"></div><div class="sig-label"><span>Warehouse Supervisor</span><span>Date: ____/____/________</span></div></div>
                         </div>
-
                         <div class="brand-credit">by Isaque</div>
                     </div>
-
                 </div>
-            </div>
-        </div>
-
-        <!-- ========================================== -->
-        <!-- TAB 1: MAIN ENTRY FORM                     -->
-        <!-- ========================================== -->
-        <div id="tab1" class="tab-content active">
-            <div class="sheet-page tab1-page-block">
-                
-                <!-- DOCUMENT HEADER -->
-                <div class="doc-title-header">
-                    <div>
-                        <h1>Silver Trend Gutter List</h1>
-                    </div>
-                    <div class="doc-meta-top">
-                        <span id="top-date-display">Date: <span id="p1_date_val">--/--/----</span><span id="p1_date_line" class="print-blank-line"></span></span>
-                    </div>
-                </div>
-
-                <!-- HEADER METADATA -->
-                <div class="form-header-grid">
-                    <div class="form-group">
-                        <label>Installer</label>
-                        <select id="installer" class="form-control" onchange="syncAll()"></select>
-                    </div>
-                    <div class="form-group">
-                        <label>Color</label>
-                        <select id="color" class="form-control" onchange="syncAll()"></select>
-                    </div>
-                    <div class="form-group">
-                        <label>Size</label>
-                        <select id="size" class="form-control" onchange="syncAll()">
-                            <option value="6&quot;">6"</option>
-                            <option value="5&quot;">5"</option>
-                            <option value="7&quot;">7"</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Date</label>
-                        <span id="doc_date_wrapper">
-                            <input type="date" id="doc_date" class="form-control" onchange="syncAll()">
-                        </span>
-                        <span id="doc_date_blank_line" class="print-blank-line" style="width:100%;"></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Trailer No.</label>
-                        <input type="text" id="trailer" class="form-control" placeholder="Trailer #" oninput="syncAll()">
-                    </div>
-                    <div class="form-group">
-                        <label>Dispatched ST Date</label>
-                        <span id="dispatched_date_wrapper">
-                            <input type="date" id="dispatched_date" class="form-control" onchange="syncAll()">
-                        </span>
-                        <span id="dispatched_date_blank_line" class="print-blank-line" style="width:100%;"></span>
-                    </div>
-                </div>
-
-                <!-- PAGE 1 MATRIX TABLE -->
-                <div class="page-block-header">
-                    <span>Systems 1 to 9</span>
-                    <span style="font-size:10px; font-weight:normal;">Page 1</span>
-                </div>
-                
-                <div class="gutter-table-wrapper">
-                    <table class="gutter-table" id="table-page-1">
-                        <thead>
-                            <tr>
-                                <th class="col-item">Item Description</th>
-                                <th>Sys 1</th>
-                                <th>Sys 2</th>
-                                <th>Sys 3</th>
-                                <th>Sys 4</th>
-                                <th>Sys 5</th>
-                                <th>Sys 6</th>
-                                <th>Sys 7</th>
-                                <th>Sys 8</th>
-                                <th>Sys 9</th>
-                                <th class="col-summary">Total</th>
-                                <th class="col-summary">Extra (10%)</th>
-                                <th class="col-summary">Given</th>
-                                <th class="col-return">Return</th>
-                            </tr>
-                        </thead>
-                        <tbody id="gutter-rows-p1">
-                            <!-- Rows generated dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- DYNAMIC PAGE 2 MATRIX CONTAINER -->
-                <div id="page2-container" style="display: none; margin-top: 24px;">
-                    <div class="page-block-header" style="background:#0f766e;">
-                        <span>Systems 10 to 18 (Page 2 - Preview Subtotal)</span>
-                        <span style="font-size:10px; font-weight:normal;">Page 2</span>
-                    </div>
-                    <div class="gutter-table-wrapper">
-                        <table class="gutter-table" id="table-page-2">
-                            <thead>
-                                <tr>
-                                    <th class="col-item">Item Description</th>
-                                    <th>Sys 10</th>
-                                    <th>Sys 11</th>
-                                    <th>Sys 12</th>
-                                    <th>Sys 13</th>
-                                    <th>Sys 14</th>
-                                    <th>Sys 15</th>
-                                    <th>Sys 16</th>
-                                    <th>Sys 17</th>
-                                    <th>Sys 18</th>
-                                    <th class="col-summary">Subtotal (P2)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="gutter-rows-p2">
-                                <!-- Generated if Page 2 activated -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- BOTTOM INFO & SIGNATURES -->
-                <div class="bottom-grid">
-                    <div class="info-card">
-                        <div class="info-card-title"><i class="fa-solid fa-comment-dots"></i> Observations</div>
-                        <textarea id="observations" class="textarea-control" placeholder="Enter job observations..." oninput="syncAll()"></textarea>
-                    </div>
-                    
-                    <div class="info-card" style="background-color: #f0fdf4; border-color: #16a34a;">
-                        <div class="info-card-title" style="color: #15803d;">
-                            <i class="fa-solid fa-boxes-packing"></i> Return Information
-                        </div>
-                        <div style="font-size: 11px; color: #166534; display:flex; flex-direction:column; gap:6px;">
-                            <div style="display:flex; align-items:center;">
-                                <strong>Return Date:</strong> 
-                                <span id="return_date_wrapper" style="margin-left:4px;">
-                                    <input type="date" id="return_date" class="form-control" style="padding:2px 4px; font-size:11px;" onchange="syncAll()">
-                                </span>
-                                <span id="return_date_blank_line" class="print-blank-line"></span>
-                            </div>
-                            <div style="font-size:10px; color:#15803d;">
-                                * Fill out the <strong>Return</strong> column for unused materials returned after job completion.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="signatures-wrapper">
-                    <div class="sig-box">
-                        <div class="sig-line"></div>
-                        <div class="sig-label">
-                            <span>Pick Up Signature</span>
-                            <span>Date: ____/____/________</span>
-                        </div>
-                    </div>
-                    <div class="sig-box">
-                        <div class="sig-line"></div>
-                        <div class="sig-label">
-                            <span>Return Signature</span>
-                            <span>Date: ____/____/________</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="brand-credit">by Isaque</div>
-
             </div>
         </div>
 
     </div>
 
-    <!-- JavaScript Logic -->
     <script>
         const INSTALLERS = ['Dimas', 'Joao', 'Fabio', 'Yaniel'];
         const COLORS = ['White', 'Brown', 'Bronze', 'Black', 'Linen'];
@@ -1021,90 +421,41 @@
 
         let hasPage2 = false;
 
-        function formatVal(val) {
-            const num = parseFloat(val);
-            if (isNaN(num) || num === 0) return '';
-            return num;
-        }
-
-        function parseNum(val) {
-            const num = parseFloat(val);
-            return isNaN(num) ? 0 : num;
-        }
+        function formatVal(val) { const num = parseFloat(val); return (isNaN(num) || num === 0) ? '' : num; }
+        function parseNum(val) { const num = parseFloat(val); return isNaN(num) ? 0 : num; }
 
         function setupDropdowns() {
             const installerSelect = document.getElementById('installer');
             installerSelect.innerHTML = '';
-            INSTALLERS.forEach(name => {
-                const opt = document.createElement('option');
-                opt.value = name;
-                opt.textContent = name;
-                installerSelect.appendChild(opt);
-            });
+            INSTALLERS.forEach(name => { const opt = document.createElement('option'); opt.value = name; opt.textContent = name; installerSelect.appendChild(opt); });
 
             const colorSelect = document.getElementById('color');
             colorSelect.innerHTML = '';
-            COLORS.forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = c;
-                opt.textContent = c;
-                colorSelect.appendChild(opt);
-            });
+            COLORS.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.textContent = c; colorSelect.appendChild(opt); });
         }
 
         function initTable() {
             const tbody1 = document.getElementById('gutter-rows-p1');
             const tbody2 = document.getElementById('gutter-rows-p2');
-            tbody1.innerHTML = '';
-            tbody2.innerHTML = '';
+            tbody1.innerHTML = ''; tbody2.innerHTML = '';
 
             const trWo1 = document.createElement('tr');
             trWo1.className = 'wo-row';
             let wo1Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
             for (let sys = 1; sys <= 9; sys++) {
-                wo1Html += `<td>
-                    <input type="text" placeholder="#" id="sys_wo_s${sys}" class="cell-input" style="font-weight:700; color:#0f172a;" oninput="syncAll()" onfocus="this.select()" onkeydown="handleKeyDown(event, -1, ${sys}, 1)">
-                </td>`;
+                wo1Html += `<td><input type="text" placeholder="#" id="sys_wo_s${sys}" class="cell-input" style="font-weight:700; color:#0f172a;" oninput="syncAll()" onfocus="this.select()" onkeydown="handleKeyDown(event, -1, ${sys}, 1)"></td>`;
             }
             wo1Html += `<td colspan="4" style="background-color:#f8fafc; font-size:10px; color:#64748b; font-weight:600;">Work Order Numbers</td>`;
             trWo1.innerHTML = wo1Html;
             tbody1.appendChild(trWo1);
 
-            const trWo2 = document.createElement('tr');
-            trWo2.className = 'wo-row';
-            let wo2Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
-            for (let sys = 10; sys <= 18; sys++) {
-                wo2Html += `<td>
-                    <input type="text" placeholder="#" id="sys_wo_s${sys}" class="cell-input" style="font-weight:700; color:#0f172a;" oninput="syncAll()" onfocus="this.select()" onkeydown="handleKeyDown(event, -1, ${sys}, 2)">
-                </td>`;
-            }
-            wo2Html += `<td style="background-color:#f8fafc; font-size:10px; color:#64748b; font-weight:600;">WO #</td>`;
-            trWo2.innerHTML = wo2Html;
-            tbody2.appendChild(trWo2);
-
             items.forEach((item, itemIdx) => {
                 const tr1 = document.createElement('tr');
-                
-                let colItemHtml = '';
-                if (item.hasDropdown) {
-                    colItemHtml = `<td style="padding:0; background-color:#ffffff;">
-                        <select id="${item.id}_spec" class="full-cell-select" onchange="syncAll()">
-                            ${item.options.map(o => `<option value="${o}">${o}</option>`).join('')}
-                        </select>
-                    </td>`;
-                } else {
-                    colItemHtml = `<td class="item-name">${item.name}</td>`;
-                }
-
+                let colItemHtml = item.hasDropdown ? `<td style="padding:0; background-color:#ffffff;"><select id="${item.id}_spec" class="full-cell-select" onchange="syncAll()">${item.options.map(o => `<option value="${o}">${o}</option>`).join('')}</select></td>` : `<td class="item-name">${item.name}</td>`;
                 let html1 = colItemHtml;
 
                 for (let sys = 1; sys <= 9; sys++) {
-                    const isAuto = item.auto ? 'readonly class="cell-input cell-auto-white"' : 'class="cell-input"';
-                    html1 += `<td>
-                        <input type="number" min="0" value="" placeholder="" id="${item.id}_s${sys}" ${isAuto} 
-                            data-item-idx="${itemIdx}" data-sys="${sys}" data-page="1"
-                            oninput="calculateRow('${item.id}')" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, ${sys}, 1)">
-                    </td>`;
+                    html1 += `<td><input type="number" min="0" value="" id="${item.id}_s${sys}" class="cell-input" data-item-idx="${itemIdx}" data-sys="${sys}" data-page="1" oninput="calculateRow('${item.id}')" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, ${sys}, 1)"></td>`;
                 }
 
                 html1 += `
@@ -1116,112 +467,57 @@
 
                 tr1.innerHTML = html1;
                 tbody1.appendChild(tr1);
-
-                const tr2 = document.createElement('tr');
-                let html2 = colItemHtml;
-
-                for (let sys = 10; sys <= 18; sys++) {
-                    const isAuto = item.auto ? 'readonly class="cell-input cell-auto-white"' : 'class="cell-input"';
-                    html2 += `<td>
-                        <input type="number" min="0" value="" placeholder="" id="${item.id}_s${sys}" ${isAuto} 
-                            data-item-idx="${itemIdx}" data-sys="${sys}" data-page="2"
-                            oninput="calculateRow('${item.id}')" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, ${sys}, 2)">
-                    </td>`;
-                }
-
-                html2 += `<td><input type="text" id="${item.id}_subtotal_p2" class="cell-input cell-readonly" value="" readonly></td>`;
-
-                tr2.innerHTML = html2;
-                tbody2.appendChild(tr2);
             });
         }
 
         function handleKeyDown(event, itemIdx, sys, page) {
             const key = event.key;
-            
             if (['Enter', 'ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(key)) {
                 event.preventDefault();
-
                 let nextIdx = itemIdx;
                 let nextSys = sys;
 
                 if (sys === 'return') {
-                    if (key === 'Enter' || key === 'ArrowDown') {
-                        nextIdx = itemIdx + 1;
-                        if (nextIdx >= items.length) nextIdx = 0;
-                    } else if (key === 'ArrowUp') {
-                        nextIdx = itemIdx - 1;
-                        if (nextIdx < 0) nextIdx = items.length - 1;
-                    } else if (key === 'ArrowLeft') {
-                        nextSys = 9;
-                    }
+                    if (key === 'Enter' || key === 'ArrowDown') { nextIdx = itemIdx + 1; if (nextIdx >= items.length) nextIdx = 0; }
+                    else if (key === 'ArrowUp') { nextIdx = itemIdx - 1; if (nextIdx < 0) nextIdx = items.length - 1; }
+                    else if (key === 'ArrowLeft') { nextSys = 9; }
 
                     let targetId = (nextSys === 'return') ? `${items[nextIdx].id}_return` : `${items[nextIdx].id}_s${nextSys}`;
                     const targetInput = document.getElementById(targetId);
-                    if (targetInput) {
-                        targetInput.focus();
-                        if (typeof targetInput.select === 'function') targetInput.select();
-                    }
+                    if (targetInput) { targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
                     return;
                 }
 
                 if (key === 'Enter' || key === 'ArrowDown') {
-                    if (itemIdx === -1) {
-                        nextIdx = 0;
-                    } else {
-                        nextIdx = itemIdx + 1;
-                        if (nextIdx >= items.length) {
-                            nextIdx = 0;
-                            nextSys = sys + 1;
-                        }
-                    }
+                    if (itemIdx === -1) { nextIdx = 0; }
+                    else { nextIdx = itemIdx + 1; if (nextIdx >= items.length) { nextIdx = 0; nextSys = sys + 1; } }
                 } else if (key === 'ArrowUp') {
-                    if (itemIdx === 0) {
-                        nextIdx = -1;
-                    } else if (itemIdx > 0) {
-                        nextIdx = itemIdx - 1;
-                    }
+                    if (itemIdx === 0) { nextIdx = -1; }
+                    else if (itemIdx > 0) { nextIdx = itemIdx - 1; }
                 } else if (key === 'ArrowRight') {
-                    if (sys === 9 && !hasPage2) {
+                    if (sys === 9) {
                         const targetInput = document.getElementById(`${items[itemIdx].id}_return`);
-                        if (targetInput) {
-                            targetInput.focus();
-                            if (typeof targetInput.select === 'function') targetInput.select();
-                        }
+                        if (targetInput) { targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
                         return;
                     }
                     nextSys = sys + 1;
-                } else if (key === 'ArrowLeft') {
-                    nextSys = sys - 1;
-                }
+                } else if (key === 'ArrowLeft') { nextSys = sys - 1; }
 
-                if (nextSys > 9 && page === 1 && !hasPage2) activatePage2();
                 if (nextSys < 1) nextSys = 1;
-                if (nextSys > 18) nextSys = 18;
+                if (nextSys > 9) nextSys = 9;
 
                 let targetId = (nextIdx === -1) ? `sys_wo_s${nextSys}` : `${items[nextIdx].id}_s${nextSys}`;
                 const targetInput = document.getElementById(targetId);
-                if (targetInput) {
-                    targetInput.focus();
-                    if (typeof targetInput.select === 'function') targetInput.select();
-                }
+                if (targetInput) { targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
             }
-        }
-
-        function activatePage2() {
-            hasPage2 = true;
-            document.getElementById('page2-container').style.display = 'block';
-            syncAll();
         }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-
             document.getElementById(tabId).classList.add('active');
             if(tabId === 'tab1') document.getElementById('btn-tab1').classList.add('active');
             if(tabId === 'tab2') document.getElementById('btn-tab2').classList.add('active');
-
             syncAll();
         }
 
@@ -1233,22 +529,14 @@
 
         function calculateRow(itemId) {
             let total = 0;
-            let p2Subtotal = 0;
-
-            const maxSys = hasPage2 ? 18 : 9;
-
-            for (let sys = 1; sys <= maxSys; sys++) {
-                const val = parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
-                total += val;
-                if (sys >= 10) p2Subtotal += val;
+            for (let sys = 1; sys <= 9; sys++) {
+                total += parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
             }
 
             document.getElementById(`${itemId}_total`).value = formatVal(total);
-
             const extraEl = document.getElementById(`${itemId}_extra`);
             let extra = 0;
             
-            // TRAVA: Splash Block Extra = 0
             if (itemId === 'splash_block') {
                 extra = 0;
                 if (extraEl) extraEl.value = '';
@@ -1261,22 +549,16 @@
 
             const given = total + extra;
             document.getElementById(`${itemId}_given`).value = formatVal(given);
-            
-            const p2SubEl = document.getElementById(`${itemId}_subtotal_p2`);
-            if (p2SubEl) p2SubEl.value = formatVal(p2Subtotal);
 
             if (itemId === 'gutter_coil') calculateHangers();
             if (itemId === 'downspout') calculateElbows();
-            if (['left_cap', 'right_cap', 'out_miter', 'in_miter', 'bay_miter'].includes(itemId)) {
-                calculateCaulk();
-            }
+            if (['left_cap', 'right_cap', 'out_miter', 'in_miter', 'bay_miter'].includes(itemId)) { calculateCaulk(); }
 
             syncSheet2();
         }
 
         function calculateElbows() {
-            const maxSys = hasPage2 ? 18 : 9;
-            for (let sys = 1; sys <= maxSys; sys++) {
+            for (let sys = 1; sys <= 9; sys++) {
                 const dsVal = parseNum(document.getElementById(`downspout_s${sys}`)?.value);
                 const currentElbowInput = document.getElementById(`elbow_a_s${sys}`);
                 if (currentElbowInput) currentElbowInput.value = formatVal(dsVal * 3);
@@ -1285,8 +567,7 @@
         }
 
         function calculateHangers() {
-            const maxSys = hasPage2 ? 18 : 9;
-            for (let sys = 1; sys <= maxSys; sys++) {
+            for (let sys = 1; sys <= 9; sys++) {
                 const coilVal = parseNum(document.getElementById(`gutter_coil_s${sys}`)?.value);
                 const hangersVal = Math.ceil(coilVal / 1.4);
                 const currentHangerInput = document.getElementById(`hangers_s${sys}`);
@@ -1296,8 +577,7 @@
         }
 
         function calculateCaulk() {
-            const maxSys = hasPage2 ? 18 : 9;
-            for (let sys = 1; sys <= maxSys; sys++) {
+            for (let sys = 1; sys <= 9; sys++) {
                 const caps = parseNum(document.getElementById(`left_cap_s${sys}`)?.value) +
                              parseNum(document.getElementById(`right_cap_s${sys}`)?.value) +
                              parseNum(document.getElementById(`out_miter_s${sys}`)?.value) +
@@ -1316,15 +596,9 @@
             const lineEl = document.getElementById(lineId);
             
             if (wrapperEl && lineEl) {
-                if (!val) {
-                    wrapperEl.classList.add('empty-date-hide');
-                    lineEl.classList.add('print-blank-line-show');
-                } else {
-                    wrapperEl.classList.remove('empty-date-hide');
-                    lineEl.classList.remove('print-blank-line-show');
-                }
+                if (!val) { wrapperEl.classList.add('empty-date-hide'); lineEl.classList.add('print-blank-line-show'); }
+                else { wrapperEl.classList.remove('empty-date-hide'); lineEl.classList.remove('print-blank-line-show'); }
             }
-
             if (textDisplayId) {
                 const textEl = document.getElementById(textDisplayId);
                 if (textEl) textEl.innerText = val ? val : '';
@@ -1351,10 +625,7 @@
                 if (p1DateValEl) p1DateValEl.style.display = 'none';
                 if (p1DateLineEl) p1DateLineEl.classList.add('print-blank-line-show');
             } else {
-                if (p1DateValEl) {
-                    p1DateValEl.style.display = 'inline';
-                    p1DateValEl.innerText = p1DateVal;
-                }
+                if (p1DateValEl) { p1DateValEl.style.display = 'inline'; p1DateValEl.innerText = p1DateVal; }
                 if (p1DateLineEl) p1DateLineEl.classList.remove('print-blank-line-show');
             }
 
@@ -1374,9 +645,7 @@
                 const returned = document.getElementById(`${item.id}_return`)?.value || '';
 
                 let displayName = item.name;
-                if (item.hasDropdown) {
-                    displayName = document.getElementById(`${item.id}_spec`)?.value || item.name;
-                }
+                if (item.hasDropdown) { displayName = document.getElementById(`${item.id}_spec`)?.value || item.name; }
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -1393,28 +662,7 @@
         function openPrintModal() { document.getElementById('printModal').style.display = 'flex'; }
         function closePrintModal() { document.getElementById('printModal').style.display = 'none'; }
 
-        /* IMPRESSÃO SEQUENCIAL INDIVIDUALIZADA (IMPEDE O DUPLEX DO WINDOWS) */
-        function printSingleTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('print-active'));
-            const target = document.getElementById(tabId);
-            if (target) target.classList.add('print-active');
-
-            let styleTag = document.getElementById('dynamic-print-orientation');
-            if (!styleTag) {
-                styleTag = document.createElement('style');
-                styleTag.id = 'dynamic-print-orientation';
-                document.head.appendChild(styleTag);
-            }
-
-            if (tabId === 'tab1') {
-                styleTag.innerHTML = `@page { size: letter landscape; margin: 0.25in; }`;
-            } else {
-                styleTag.innerHTML = `@page { size: letter portrait; margin: 0.25in; }`;
-            }
-
-            window.print();
-        }
-
+        /* IMPRESSÃO DIRETA DE 1 CLIQUE DAS DUAS PÁGINAS SEPARADAS */
         function executePrint(mode) {
             closePrintModal();
             if (mode === 'bw') {
@@ -1425,27 +673,16 @@
                 document.body.classList.add('print-mode-color');
             }
 
-            // Dispara a impressão da Tab 2 (Portrait) primeiro
-            printSingleTab('tab2');
-
-            // Dispara a impressão da Tab 1 (Landscape) em um job de impressão totalmente separado
-            setTimeout(() => {
-                printSingleTab('tab1');
-            }, 600);
+            setTimeout(() => { window.print(); }, 150);
         }
 
-        function syncAll() {
-            items.forEach(item => calculateRow(item.id));
-            syncSheet2();
-        }
+        function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); }
 
         function resetForm() {
             if(confirm('Are you sure you want to clear all data in the form?')) {
                 document.querySelectorAll('input[type="number"]').forEach(input => { input.value = ''; delete input.dataset.custom; });
                 document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
                 document.getElementById('observations').value = '';
-                hasPage2 = false;
-                document.getElementById('page2-container').style.display = 'none';
                 syncAll();
             }
         }
