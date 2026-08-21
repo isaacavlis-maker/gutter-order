@@ -77,14 +77,17 @@
         .form-group label { font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; }
         .form-control { padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 12px; font-weight: 600; color: #0f172a; outline: none; background-color: #ffffff; }
 
-        .page-block-header { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #475569 0%, #1e293b 100%); color: #ffffff; padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 12px; margin-bottom: 8px; border: 1px solid #64748b; }
+        /* CABEÇALHO DA TABELA - PRATA MUITO CLARO / CINZA CLARINHO */
+        .page-block-header { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); color: #0f172a; padding: 6px 12px; border-radius: 6px; font-weight: 800; font-size: 12px; margin-bottom: 8px; border: 1px solid #cbd5e1; }
 
         .gutter-table-wrapper { overflow-x: auto; margin-bottom: 16px; border-radius: 6px; }
         .gutter-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-        .gutter-table th { background: linear-gradient(180deg, #64748b 0%, #475569 100%); color: #ffffff; font-weight: 700; padding: 10px 6px; text-align: center; border: 1px solid #64748b; white-space: nowrap; }
-        .gutter-table th.col-item { text-align: left; padding-left: 12px; width: 220px; background: #0f172a; }
-        .gutter-table th.col-summary { background: linear-gradient(180deg, #475569 0%, #334155 100%); }
-        .gutter-table th.col-return { background-color: #0d9488; }
+        
+        /* CABEÇALHOS DAS COLUNAS DA TABELA - PRATA MUITO CLARO */
+        .gutter-table th { background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); color: #0f172a; font-weight: 800; padding: 10px 6px; text-align: center; border: 1px solid #cbd5e1; white-space: nowrap; }
+        .gutter-table th.col-item { text-align: left; padding-left: 12px; width: 220px; background: #e2e8f0; color: #0f172a; }
+        .gutter-table th.col-summary { background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%); color: #0f172a; }
+        .gutter-table th.col-return { background-color: #ccfbf1; color: #0f766e; }
 
         .gutter-table td { border: 1px solid #cbd5e1; padding: 0; height: 38px; text-align: center; vertical-align: middle; background-color: #ffffff; }
         .gutter-table td.item-name { font-weight: 600; text-align: left; padding-left: 12px; color: #1e293b; background-color: #f8fafc; }
@@ -115,10 +118,11 @@
 
         .sheet-summary-container { display: flex; flex-direction: column; justify-content: space-between; min-height: 850px; }
         .sheet-summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .sheet-summary-table th { background: linear-gradient(180deg, #64748b 0%, #475569 100%); color: #ffffff; padding: 12px 14px; font-size: 13px; border: 1px solid #64748b; text-align: center; }
+        .sheet-summary-table th { background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); color: #0f172a; padding: 12px 14px; font-size: 13px; border: 1px solid #cbd5e1; text-align: center; font-weight: 800; }
         .sheet-summary-table td { padding: 14px 14px; border: 1px solid #cbd5e1; font-size: 13px; text-align: center; font-weight: 600; background-color: #ffffff; }
 
-        .badge-alert { background-color: #fef3c7; color: #92400e; border: 1px solid #f59e0b; padding: 14px; border-radius: 6px; font-size: 11.5px; font-weight: 600; }
+        /* CAIXA DE ALERTA - CINZA BEM CLARINHO (ANTIGA LARANJA) */
+        .badge-alert { background-color: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 14px; border-radius: 6px; font-size: 11.5px; font-weight: 600; }
 
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(6px); z-index: 1000; justify-content: center; align-items: center; }
         .modal-card { background: #ffffff; border-radius: 16px; padding: 28px 32px; max-width: 420px; width: 90%; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); text-align: center; color: #0f172a; }
@@ -305,7 +309,7 @@
                 </div>
 
                 <div id="page2-container" style="display: none; margin-top: 24px;">
-                    <div class="page-block-header" style="background:#0f766e;"><span>Systems 10 to 18 (Page 2 - Preview Subtotal)</span><span style="font-size:10px; font-weight:normal;">Page 2</span></div>
+                    <div class="page-block-header" style="background:#0f766e; color:#ffffff;"><span>Systems 10 to 18 (Page 2 - Preview Subtotal)</span><span style="font-size:10px; font-weight:normal;">Page 2</span></div>
                     <div class="gutter-table-wrapper">
                         <table class="gutter-table" id="table-page-2">
                             <thead>
@@ -374,7 +378,7 @@
                                     <th style="width: 15%;">Qty Required</th>
                                     <th style="width: 15%;">Extra (10%)</th>
                                     <th style="width: 17%;">Qty To Be Given</th>
-                                    <th style="width: 18%; background-color:#0d9488; border-color:#0f766e;">Qty Returned</th>
+                                    <th style="width: 18%; background-color:#ccfbf1; color:#0f766e; border-color:#cbd5e1;">Qty Returned</th>
                                 </tr>
                             </thead>
                             <tbody id="sheet2-rows"></tbody>
@@ -683,23 +687,14 @@
 
         function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); }
 
-        /* LIMPA FORMULÁRIO COMPLETO (INCLUINDO CABEÇALHO) */
         function resetForm() {
             if(confirm('Are you sure you want to clear all data in the form?')) {
-                // Limpa números e dados customizados
                 document.querySelectorAll('input[type="number"]').forEach(input => { input.value = ''; delete input.dataset.custom; });
-                
-                // Limpa todos os textos, datas e seleções do cabeçalho
                 document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
                 document.querySelectorAll('input[type="date"]').forEach(input => input.value = '');
-                
-                // Reseta os seletores para o padrão inicial
                 setupDropdowns();
                 document.getElementById('size').selectedIndex = 0;
-                
-                // Limpa observações
                 document.getElementById('observations').value = '';
-                
                 syncAll();
             }
         }
