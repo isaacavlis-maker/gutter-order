@@ -683,11 +683,23 @@
 
         function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); }
 
+        /* LIMPA FORMULÁRIO COMPLETO (INCLUINDO CABEÇALHO) */
         function resetForm() {
             if(confirm('Are you sure you want to clear all data in the form?')) {
+                // Limpa números e dados customizados
                 document.querySelectorAll('input[type="number"]').forEach(input => { input.value = ''; delete input.dataset.custom; });
+                
+                // Limpa todos os textos, datas e seleções do cabeçalho
                 document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+                document.querySelectorAll('input[type="date"]').forEach(input => input.value = '');
+                
+                // Reseta os seletores para o padrão inicial
+                setupDropdowns();
+                document.getElementById('size').selectedIndex = 0;
+                
+                // Limpa observações
                 document.getElementById('observations').value = '';
+                
                 syncAll();
             }
         }
