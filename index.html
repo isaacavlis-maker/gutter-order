@@ -77,13 +77,11 @@
         .form-group label { font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; }
         .form-control { padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 12px; font-weight: 600; color: #0f172a; outline: none; background-color: #ffffff; }
 
-        /* CABEÇALHO DA TABELA - PRATA MUITO CLARO / CINZA CLARINHO */
         .page-block-header { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); color: #0f172a; padding: 6px 12px; border-radius: 6px; font-weight: 800; font-size: 12px; margin-bottom: 8px; border: 1px solid #cbd5e1; }
 
         .gutter-table-wrapper { overflow-x: auto; margin-bottom: 16px; border-radius: 6px; }
         .gutter-table { width: 100%; border-collapse: collapse; font-size: 12px; }
         
-        /* CABEÇALHOS DAS COLUNAS DA TABELA - PRATA MUITO CLARO */
         .gutter-table th { background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); color: #0f172a; font-weight: 800; padding: 10px 6px; text-align: center; border: 1px solid #cbd5e1; white-space: nowrap; }
         .gutter-table th.col-item { text-align: left; padding-left: 12px; width: 220px; background: #e2e8f0; color: #0f172a; }
         .gutter-table th.col-summary { background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%); color: #0f172a; }
@@ -121,7 +119,6 @@
         .sheet-summary-table th { background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); color: #0f172a; padding: 12px 14px; font-size: 13px; border: 1px solid #cbd5e1; text-align: center; font-weight: 800; }
         .sheet-summary-table td { padding: 14px 14px; border: 1px solid #cbd5e1; font-size: 13px; text-align: center; font-weight: 600; background-color: #ffffff; }
 
-        /* CAIXA DE ALERTA - CINZA BEM CLARINHO (ANTIGA LARANJA) */
         .badge-alert { background-color: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 14px; border-radius: 6px; font-size: 11.5px; font-weight: 600; }
 
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(6px); z-index: 1000; justify-content: center; align-items: center; }
@@ -287,7 +284,7 @@
                 <div class="form-header-grid">
                     <div class="form-group"><label>Installer</label><select id="installer" class="form-control" onchange="syncAll()"></select></div>
                     <div class="form-group"><label>Color</label><select id="color" class="form-control" onchange="syncAll()"></select></div>
-                    <div class="form-group"><label>Size</label><select id="size" class="form-control" onchange="syncAll()"><option value="6&quot;">6"</option><option value="5&quot;">5"</option><option value="7&quot;">7"</option></select></div>
+                    <div class="form-group"><label>Size</label><select id="size" class="form-control" onchange="syncAll()"><option value="">-- Select --</option><option value="6&quot;">6"</option><option value="5&quot;">5"</option><option value="7&quot;">7"</option></select></div>
                     <div class="form-group"><label>Date</label><span id="doc_date_wrapper"><input type="date" id="doc_date" class="form-control" onchange="syncAll()"></span><span id="doc_date_blank_line" class="print-blank-line" style="width:100%;"></span></div>
                     <div class="form-group"><label>Trailer No.</label><input type="text" id="trailer" class="form-control" placeholder="Trailer #" oninput="syncAll()"></div>
                     <div class="form-group"><label>Dispatched ST Date</label><span id="dispatched_date_wrapper"><input type="date" id="dispatched_date" class="form-control" onchange="syncAll()"></span><span id="dispatched_date_blank_line" class="print-blank-line" style="width:100%;"></span></div>
@@ -434,14 +431,20 @@
         function formatVal(val) { const num = parseFloat(val); return (isNaN(num) || num === 0) ? '' : num; }
         function parseNum(val) { const num = parseFloat(val); return isNaN(num) ? 0 : num; }
 
-        function setupDropdowns() {
+        function setupDropdowns(empty = false) {
             const installerSelect = document.getElementById('installer');
-            installerSelect.innerHTML = '';
-            INSTALLERS.forEach(name => { const opt = document.createElement('option'); opt.value = name; opt.textContent = name; installerSelect.appendChild(opt); });
+            installerSelect.innerHTML = empty ? '<option value="">-- Select --</option>' : '<option value="">-- Select --</option>';
+            if (!empty) {
+                INSTALLERS.forEach(name => { const opt = document.createElement('option'); opt.value = name; opt.textContent = name; installerSelect.appendChild(opt); });
+            } else {
+                INSTALLERS.forEach(name => { const opt = document.createElement('option'); opt.value = name; opt.textContent = name; installerSelect.appendChild(opt); });
+                installerSelect.value = '';
+            }
 
             const colorSelect = document.getElementById('color');
-            colorSelect.innerHTML = '';
+            colorSelect.innerHTML = '<option value="">-- Select --</option>';
             COLORS.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.textContent = c; colorSelect.appendChild(opt); });
+            if (empty) colorSelect.value = '';
         }
 
         function initTable() {
@@ -687,19 +690,22 @@
 
         function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); }
 
+        /* LIMPA FORMULÁRIO COMPLETO (E FORÇA SELETORES FICAREM VAZIOS) */
         function resetForm() {
             if(confirm('Are you sure you want to clear all data in the form?')) {
                 document.querySelectorAll('input[type="number"]').forEach(input => { input.value = ''; delete input.dataset.custom; });
                 document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
                 document.querySelectorAll('input[type="date"]').forEach(input => input.value = '');
-                setupDropdowns();
-                document.getElementById('size').selectedIndex = 0;
+                
+                setupDropdowns(true);
+                document.getElementById('size').value = '';
                 document.getElementById('observations').value = '';
+                
                 syncAll();
             }
         }
 
-        setupDropdowns();
+        setupDropdowns(true);
         initTable();
         syncAll();
     </script>
