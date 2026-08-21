@@ -565,17 +565,7 @@
             border-color: #0f172a;
         }
 
-        /* ==================== CONFIGURAÇÕES DE IMPRESSÃO EM 2 FOLHAS SEPARADAS ==================== */
-        @page page-portrait {
-            size: letter portrait;
-            margin: 0.25in;
-        }
-
-        @page page-landscape {
-            size: letter landscape;
-            margin: 0.25in;
-        }
-
+        /* ==================== CONFIGURAÇÕES DE IMPRESSÃO ISOLADA POR ABA ==================== */
         @media print {
             body.print-mode-color * {
                 -webkit-print-color-adjust: exact !important;
@@ -610,8 +600,12 @@
                 display: block !important;
             }
 
-            /* MOSTRA AMBAS AS ABAS NA HORA DE IMPRIMIR */
+            /* IMPRIME SOMENTE A ABA QUE ESTÁ ATIVA/VISÍVEL PARA IMPEDIR FRENTE E VERSO */
             .tab-content {
+                display: none !important;
+            }
+
+            .tab-content.print-active {
                 display: block !important;
             }
 
@@ -623,12 +617,9 @@
                 background: #ffffff !important;
             }
 
-            /* TAB 2 - REQUISITION SHEET (FOLHA 1 - RETRATO) */
-            #tab2 {
-                page: page-portrait !important;
-                page-break-before: avoid !important;
-                page-break-after: always !important;
-                break-after: page !important;
+            /* TAB 2 - PORTRAIT */
+            #tab2.print-active {
+                display: block !important;
             }
 
             .sheet-summary-container {
@@ -643,13 +634,9 @@
             #tab2 .sheet-summary-table td { padding: 8px 6px !important; font-size: 9.5pt !important; height: 28px !important; }
             #tab2 .sheet-summary-table th { padding: 8px 6px !important; font-size: 9.5pt !important; }
 
-            /* TAB 1 - GUTTER LIST (FOLHA 2 - PAISAGEM COM QUEBRA RÍGIDA DE PÁGINA) */
-            #tab1 {
-                page: page-landscape !important;
-                page-break-before: always !important;
-                break-before: page !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
+            /* TAB 1 - LANDSCAPE */
+            #tab1.print-active {
+                display: block !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
             }
@@ -716,7 +703,7 @@
             <div class="modal-desc">Select how you want to print your Gutter List sheets:</div>
             <div class="modal-options">
                 <button class="btn-modal-opt btn-modal-color" onclick="executePrint('color')">
-                    <i class="fa-solid fa-palette"></i> Print in Color
+                    <i class="fa-solid fa-palette"></i> Print Both Sheets (2 Separate Pages)
                 </button>
                 <button class="btn-modal-opt btn-modal-bw" onclick="executePrint('bw')">
                     <i class="fa-solid fa-circle-half-stroke"></i> Print in Black & White
@@ -1406,7 +1393,28 @@
         function openPrintModal() { document.getElementById('printModal').style.display = 'flex'; }
         function closePrintModal() { document.getElementById('printModal').style.display = 'none'; }
 
-        /* IMPRESSÃO COMPLETA EM 2 FOLHAS INDEPENDENTES */
+        /* IMPRESSÃO SEQUENCIAL INDIVIDUALIZADA (IMPEDE O DUPLEX DO WINDOWS) */
+        function printSingleTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('print-active'));
+            const target = document.getElementById(tabId);
+            if (target) target.classList.add('print-active');
+
+            let styleTag = document.getElementById('dynamic-print-orientation');
+            if (!styleTag) {
+                styleTag = document.createElement('style');
+                styleTag.id = 'dynamic-print-orientation';
+                document.head.appendChild(styleTag);
+            }
+
+            if (tabId === 'tab1') {
+                styleTag.innerHTML = `@page { size: letter landscape; margin: 0.25in; }`;
+            } else {
+                styleTag.innerHTML = `@page { size: letter portrait; margin: 0.25in; }`;
+            }
+
+            window.print();
+        }
+
         function executePrint(mode) {
             closePrintModal();
             if (mode === 'bw') {
@@ -1417,7 +1425,13 @@
                 document.body.classList.add('print-mode-color');
             }
 
-            setTimeout(() => { window.print(); }, 150);
+            // Dispara a impressão da Tab 2 (Portrait) primeiro
+            printSingleTab('tab2');
+
+            // Dispara a impressão da Tab 1 (Landscape) em um job de impressão totalmente separado
+            setTimeout(() => {
+                printSingleTab('tab1');
+            }, 600);
         }
 
         function syncAll() {
