@@ -101,32 +101,32 @@
         .wo-row td { background-color: #f8fafc !important; }
         .wo-row input { background-color: #f8fafc !important; color: #0f172a !important; font-weight: 700 !important; }
 
-        .bottom-grid { display: grid; grid-template-columns: 2fr 1.2fr; gap: 16px; margin-top: 16px; }
+        .bottom-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 16px; }
         .info-card { border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; background-color: #ffffff; }
         .info-card-title { font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
         .textarea-control { width: 100%; height: 65px; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; font-family: inherit; font-size: 12px; resize: none; outline: none; }
 
-        /* QUADRADINHO CINZA CLARO DIREITA - TABELA 2X2 */
-        .grid-box-lightgrey-right {
+        /* QUADRADINHO CINZA CLARO TAB 2 (TABELA 2X2) */
+        .grid-box-lightgrey-tab2 {
             background-color: #f8fafc;
             border: 1px solid #cbd5e1;
             border-radius: 6px;
             padding: 8px;
         }
 
-        .gutter-info-table {
+        .summary-info-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .gutter-info-table td {
+        .summary-info-table td {
             border: 1px solid #cbd5e1;
-            padding: 6px;
+            padding: 6px 8px;
             background-color: #ffffff;
             vertical-align: middle;
         }
 
-        .gutter-info-table label {
+        .summary-info-table label {
             font-size: 9px;
             font-weight: 700;
             color: #475569;
@@ -135,10 +135,9 @@
             margin-bottom: 2px;
         }
 
-        /* Linha em branco para escrita manual */
         .handwriting-line {
             width: 100%;
-            height: 24px;
+            height: 22px;
             border-bottom: 1.5px solid #0f172a;
             margin-top: 2px;
         }
@@ -220,9 +219,9 @@
             #tab1 .cell-input { font-size: 9pt !important; }
 
             #tab1 .bottom-grid { margin-top: 6px !important; gap: 8px !important; width: 100% !important; }
-            #tab1 .info-card, #tab1 .grid-box-lightgrey-right { padding: 4px 8px !important; }
+            #tab1 .info-card { padding: 4px 8px !important; }
             #tab1 .info-card-title { font-size: 8pt !important; margin-bottom: 2px !important; }
-            #tab1 .textarea-control { height: 42px !important; font-size: 8.5pt !important; }
+            #tab1 .textarea-control { height: 32px !important; font-size: 8.5pt !important; }
 
             #tab1 .signatures-wrapper { margin-top: 6px !important; gap: 20px !important; width: 100% !important; }
             #tab1 .sig-line { height: 16px !important; }
@@ -308,7 +307,7 @@
 
     <div class="container">
 
-        <!-- TAB 1: MAIN ENTRY FORM -->
+        <!-- TAB 1: MAIN ENTRY FORM (TOTALMENTE ORIGINAL) -->
         <div id="tab1" class="tab-content active">
             <div class="sheet-page tab1-page-block">
                 <div class="doc-title-header">
@@ -358,40 +357,20 @@
                     </div>
                 </div>
 
-                <!-- BOTTOM GRID: ESQUERDA = OBSERVATIONS | DIREITA = TABELA CINZA CLARO COM ESPAÇO PARA ESCRITA MANUAR DA DATA -->
                 <div class="bottom-grid">
                     <div class="info-card">
                         <div class="info-card-title"><i class="fa-solid fa-comment-dots"></i> Observations</div>
                         <textarea id="observations" class="textarea-control" placeholder="Enter job observations..." oninput="syncAll()"></textarea>
                     </div>
-
-                    <div class="grid-box-lightgrey-right">
-                        <table class="gutter-info-table">
-                            <tr>
-                                <td style="width: 50%;">
-                                    <label>Gutter Number</label>
-                                    <input type="text" id="gutter_number" class="form-control" style="width: 100%; border: none; font-size: 11px;" placeholder="Gutter #" oninput="syncAll()">
-                                </td>
-                                <td style="width: 50%;">
-                                    <label>Date Type</label>
-                                    <select id="st_date_type" class="form-control" style="width: 100%; border: none; font-size: 11px; font-weight: 700;" onchange="syncAll()">
-                                        <option value="ST DATE" selected>ST DATE</option>
-                                        <option value="MF DATE">MF DATE</option>
-                                        <option value="FLC DATE">FLC DATE</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>Dispatched</label>
-                                    <input type="text" id="tab1_dispatched_info" class="form-control" style="width: 100%; border: none; font-size: 11px;" placeholder="Details..." oninput="syncAll()">
-                                </td>
-                                <td>
-                                    <label>Date (Handwritten)</label>
-                                    <div class="handwriting-line"></div>
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="info-card" style="background-color: #f0fdf4; border-color: #16a34a;">
+                        <div class="info-card-title" style="color: #15803d;"><i class="fa-solid fa-boxes-packing"></i> Return Information</div>
+                        <div style="font-size: 11px; color: #166534; display:flex; flex-direction:column; gap:6px;">
+                            <div style="display:flex; align-items:center;">
+                                <strong>Return Date:</strong> 
+                                <span id="return_date_wrapper" style="margin-left:4px;"><input type="date" id="return_date" class="form-control" style="padding:2px 4px; font-size:11px;" onchange="syncAll()"></span>
+                                <span id="return_date_blank_line" class="print-blank-line"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -403,7 +382,7 @@
             </div>
         </div>
 
-        <!-- TAB 2: SUMMARY REQUISITION SHEET -->
+        <!-- TAB 2: SUMMARY REQUISITION SHEET (COM O PAINEL CINZA CLARO 2X2) -->
         <div id="tab2" class="tab-content">
             <div class="sheet-page">
                 <div class="sheet-summary-container">
@@ -440,14 +419,46 @@
                     </div>
 
                     <div>
-                        <div class="bottom-grid" style="margin-top: 18px;">
+                        <div class="bottom-grid" style="margin-top: 18px; grid-template-columns: 1fr 1fr;">
+                            <!-- MANTÉM CAMPO OBS MENSAGENS DA TAB 1 -->
                             <div class="info-card">
-                                <div class="info-card-title">Observations & Details</div>
-                                <p id="s2_observations" style="font-size: 11.5px; color: #334155; min-height: 40px;">No details entered.</p>
+                                <div class="info-card-title">Observations</div>
+                                <p id="s2_observations" style="font-size: 11.5px; color: #334155; min-height: 40px;">No observations entered.</p>
                             </div>
-                            <div class="badge-alert">
-                                <i class="fa-solid fa-circle-exclamation"></i> <strong>Notice:</strong> Confirm all materials received before dispatch.
+
+                            <!-- QUADRADINHO CINZA CLARO 2X2 AQUI NA TAB 2 -->
+                            <div class="grid-box-lightgrey-tab2">
+                                <table class="summary-info-table">
+                                    <tr>
+                                        <td style="width: 50%;">
+                                            <label>Gutter Number</label>
+                                            <input type="text" id="s2_gutter_number" class="form-control" style="width: 100%; border: none; font-size: 11px;" placeholder="Gutter #">
+                                        </td>
+                                        <td style="width: 50%;">
+                                            <label>Date Type</label>
+                                            <select id="s2_st_date_type" class="form-control" style="width: 100%; border: none; font-size: 11px; font-weight: 700;">
+                                                <option value="ST DATE" selected>ST DATE</option>
+                                                <option value="MF DATE">MF DATE</option>
+                                                <option value="FLC DATE">FLC DATE</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Dispatched Info</label>
+                                            <input type="text" id="s2_dispatched_info" class="form-control" style="width: 100%; border: none; font-size: 11px;" placeholder="Details...">
+                                        </td>
+                                        <td>
+                                            <label>Date (Handwritten)</label>
+                                            <div class="handwriting-line"></div>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
+                        </div>
+
+                        <div class="badge-alert" style="margin-top: 12px;">
+                            <i class="fa-solid fa-circle-exclamation"></i> <strong>Notice:</strong> Confirm all materials received before dispatch.
                         </div>
 
                         <div class="signatures-wrapper" style="margin-top: 28px;">
@@ -678,6 +689,10 @@
             document.getElementById('s2_trailer').innerText = document.getElementById('trailer').value || '---';
             document.getElementById('s2_dispatched').innerText = document.getElementById('dispatched_date').value || '---';
             
+            const retDateVal = document.getElementById('return_date').value;
+            document.getElementById('s2_return').innerText = retDateVal || '---';
+            
+            setupDatePrintFormatting('return_date', 'return_date_wrapper', 'return_date_blank_line');
             setupDatePrintFormatting('doc_date', 'doc_date_wrapper', 'doc_date_blank_line', 'p1_date_val');
             
             const p1DateVal = document.getElementById('doc_date').value;
@@ -697,17 +712,7 @@
             document.getElementById('sheet2-date-display').innerText = 'Date: ' + dateVal;
 
             const obsVal = document.getElementById('observations')?.value || '';
-            const gutterNum = document.getElementById('gutter_number')?.value || '';
-            const stType = document.getElementById('st_date_type')?.value || 'ST DATE';
-            const dispInfo = document.getElementById('tab1_dispatched_info')?.value || '';
-
-            let detailsText = '';
-            if (obsVal) detailsText += `Obs: ${obsVal}\n`;
-            if (gutterNum) detailsText += `Gutter #: ${gutterNum} | `;
-            if (dispInfo) detailsText += `Dispatched: ${dispInfo} | `;
-            detailsText += `${stType}: ____/____/________`;
-
-            document.getElementById('s2_observations').innerText = detailsText;
+            document.getElementById('s2_observations').innerText = obsVal || 'No observations entered.';
 
             const tbody2 = document.getElementById('sheet2-rows');
             tbody2.innerHTML = '';
@@ -751,17 +756,44 @@
 
         function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); }
 
-        /* LIMPA FORMULÁRIO COMPLETO */
+        /* LIMPA FORMULÁRIO COMPLETO E GARANTE QUE TODOS OS CAMPOS FICAM DIGITÁVEIS */
         function resetForm() {
             if(confirm('Are you sure you want to clear all data in the form?')) {
-                document.querySelectorAll('input[type="number"]').forEach(input => { input.value = ''; delete input.dataset.custom; });
-                document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
-                document.querySelectorAll('input[type="date"]').forEach(input => input.value = '');
+                // Limpa campos numéricos e limpa os marcadores manuais
+                document.querySelectorAll('input[type="number"]').forEach(input => { 
+                    input.value = ''; 
+                    delete input.dataset.custom; 
+                    input.readOnly = false;
+                    input.disabled = false;
+                });
+
+                // Limpa campos de texto e garante edição ativa
+                document.querySelectorAll('input[type="text"]').forEach(input => { 
+                    input.value = ''; 
+                    input.readOnly = false;
+                    input.disabled = false;
+                });
+
+                // Limpa campos de data
+                document.querySelectorAll('input[type="date"]').forEach(input => { 
+                    input.value = ''; 
+                    input.disabled = false;
+                });
+
+                // Limpa observações
+                const obs = document.getElementById('observations');
+                if (obs) { obs.value = ''; obs.disabled = false; }
+
+                // Reseta dropdowns da Tab 2
+                const s2Gutter = document.getElementById('s2_gutter_number');
+                const s2Disp = document.getElementById('s2_dispatched_info');
+                const s2Type = document.getElementById('s2_st_date_type');
+                if (s2Gutter) s2Gutter.value = '';
+                if (s2Disp) s2Disp.value = '';
+                if (s2Type) s2Type.value = 'ST DATE';
                 
                 setupDropdowns(true);
                 document.getElementById('size').value = '';
-                document.getElementById('st_date_type').value = 'ST DATE';
-                document.getElementById('observations').value = '';
                 
                 syncAll();
             }
