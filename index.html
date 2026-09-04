@@ -1,13 +1,110 @@
+📌 GOOGLE KEEP / GOOGLE NOTES — MANUAL TÉCNICO COMPLETO (FULL)
+
+====================================================================
+PROJETO: Silver Trend Gutter Order System
+AUTOR: Isaque
+VERSÃO: 1.1.0 Final (Desktop Windows .exe & Mobile PWA iPhone/Android)
+====================================================================
+
+--------------------------------------------------------------------
+ETAPA 1: PASSO A PASSO PARA USAR EM QUALQUER COMPUTADOR / PENDRIVE
+--------------------------------------------------------------------
+1. Abra a pasta do projeto no seu computador:
+   C:\Users\Administrador\Desktop\silver-trend-app\dist\
+
+2. Copie o arquivo gerado:
+   silver-trend-gutter-system 1.0.0.exe
+
+3. Cole o arquivo direto no seu Pendrive / Flash Drive.
+
+4. Para rodar em qualquer computador com Windows:
+   - Dê 2 cliques no arquivo .exe direto do pendrive.
+   - O sistema abrirá instantaneamente sem precisar instalar nada.
+
+--------------------------------------------------------------------
+ETAPA 2: PASSO A PASSO PARA USAR NO IPHONE / IPAD / ANDROID
+--------------------------------------------------------------------
+1. Abra o navegador Safari (no iPhone) ou Chrome (no Android).
+2. Acesse o seu link publicado no GitHub Pages:
+   https://seu-usuario.github.io/gutter-order/
+
+3. No iPhone (Safari):
+   - Toque no botão Compartilhar (quadrado com seta para cima na barra inferior).
+   - Role as opções para baixo e selecione "Adicionar à Tela de Início".
+   - Toque em "Adicionar" no canto superior direito.
+
+4. O ícone do Silver Trend aparecerá na tela inicial como app nativo.
+
+--------------------------------------------------------------------
+ETAPA 3: GUIA DE MANUTENÇÃO (COMO EDITAR NOMES, CORES E MATERIAIS)
+--------------------------------------------------------------------
+Todas as edições de lista são feitas diretamente no bloco <script> em index.html:
+
+A. ADICIONAR OU ALTERAR INSTALADORES E CORES:
+   Localize as constantes:
+   const INSTALLERS = ['Dimas', 'Joao', 'Fabio', 'Yaniel'];
+   const COLORS = ['White', 'Brown', 'Bronze', 'Black', 'Linen'];
+
+   • Para incluir novos itens, adicione entre aspas e separado por vírgula.
+     Exemplo: const INSTALLERS = ['Dimas', 'Joao', 'Fabio', 'Yaniel', 'Carlos'];
+
+B. ADICIONAR OU ALTERAR MATERIAIS:
+   Localize o array items:
+   const items = [
+       { id: 'gutter_coil', name: 'Gutter Coil' },
+       { id: 'downspout', name: '3x4x10 Downspout' },
+       { id: 'offset', name: 'OFFSET', hasDropdown: true, options: ["OFFSET 2'", "OFFSET 4'"] }
+   ];
+
+   • Item Comum: { id: 'codigo_unico', name: 'Nome de Exibição' }
+   • Item com Dropdown: { id: 'codigo_unico', name: 'Nome', hasDropdown: true, options: ["Opção 1", "Opção 2"] }
+   • Para Remover: Apague a linha inteira do material desejado.
+
+--------------------------------------------------------------------
+ETAPA 4: PASSO A PASSO PARA RECOMPILAR O APP DESKTOP (.EXE)
+--------------------------------------------------------------------
+Sempre que fizer alterações no arquivo index.html:
+
+1. Feche o programa antigo se estiver rodando no Windows.
+2. Abra o PowerShell na pasta do projeto:
+   cd C:\Users\Administrador\Desktop\silver-trend-app
+
+3. Feche qualquer processo pendente (opcional):
+   taskkill /F /IM "silver-trend-gutter-system.exe"
+
+4. Libere as permissões de script do Windows:
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+5. Execute o comando de compilação:
+   npm run dist
+
+6. O arquivo .exe atualizado estará em:
+   silver-trend-app\dist\silver-trend-gutter-system 1.0.0.exe
+
+--------------------------------------------------------------------
+ETAPA 5: PASSO A PASSO PARA ATUALIZAR O APP NO CELULAR (GITHUB)
+--------------------------------------------------------------------
+1. No terminal do VS Code ou PowerShell na pasta do projeto:
+   git add .
+   git commit -m "Atualização do formulário Silver Trend"
+   git push origin main
+
+2. O app no celular será atualizado automaticamente em até 2 minutos!
+
+====================================================================
+ETAPA 6: CÓDIGO FONTE FINAL COMPLETO (index.html)
+====================================================================
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silver Trend Gutter List System</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap)" rel="stylesheet">
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css)">
     
     <style>
         /* ==================== SCREEN STYLES ==================== */
@@ -105,7 +202,7 @@
         .info-card { border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; background-color: #ffffff; }
         .info-card-title { font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
 
-        /* NOVO QUADRADINHO CINZA CLARO DA TAB 1 */
+        /* PAINEL CINZA CLARO DA TAB 1 */
         .grid-box-lightgrey {
             background-color: #f8fafc;
             border: 1px solid #cbd5e1;
@@ -348,7 +445,7 @@
                     </div>
                 </div>
 
-                <!-- BOTTOM GRID COM NOVO QUADRADINHO CINZA CLARO (2 LINHAS X 2 COLUNAS) -->
+                <!-- PAINEL CINZA CLARO DA TAB 1 (2 LINHAS X 2 COLUNAS) -->
                 <div class="bottom-grid">
                     <div class="grid-box-lightgrey">
                         <table class="gutter-info-table">
