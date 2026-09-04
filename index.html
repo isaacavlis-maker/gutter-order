@@ -1,110 +1,13 @@
-📌 GOOGLE KEEP / GOOGLE NOTES — MANUAL TÉCNICO COMPLETO (FULL)
-
-====================================================================
-PROJETO: Silver Trend Gutter Order System
-AUTOR: Isaque
-VERSÃO: 1.1.0 Final (Desktop Windows .exe & Mobile PWA iPhone/Android)
-====================================================================
-
---------------------------------------------------------------------
-ETAPA 1: PASSO A PASSO PARA USAR EM QUALQUER COMPUTADOR / PENDRIVE
---------------------------------------------------------------------
-1. Abra a pasta do projeto no seu computador:
-   C:\Users\Administrador\Desktop\silver-trend-app\dist\
-
-2. Copie o arquivo gerado:
-   silver-trend-gutter-system 1.0.0.exe
-
-3. Cole o arquivo direto no seu Pendrive / Flash Drive.
-
-4. Para rodar em qualquer computador com Windows:
-   - Dê 2 cliques no arquivo .exe direto do pendrive.
-   - O sistema abrirá instantaneamente sem precisar instalar nada.
-
---------------------------------------------------------------------
-ETAPA 2: PASSO A PASSO PARA USAR NO IPHONE / IPAD / ANDROID
---------------------------------------------------------------------
-1. Abra o navegador Safari (no iPhone) ou Chrome (no Android).
-2. Acesse o seu link publicado no GitHub Pages:
-   https://seu-usuario.github.io/gutter-order/
-
-3. No iPhone (Safari):
-   - Toque no botão Compartilhar (quadrado com seta para cima na barra inferior).
-   - Role as opções para baixo e selecione "Adicionar à Tela de Início".
-   - Toque em "Adicionar" no canto superior direito.
-
-4. O ícone do Silver Trend aparecerá na tela inicial como app nativo.
-
---------------------------------------------------------------------
-ETAPA 3: GUIA DE MANUTENÇÃO (COMO EDITAR NOMES, CORES E MATERIAIS)
---------------------------------------------------------------------
-Todas as edições de lista são feitas diretamente no bloco <script> em index.html:
-
-A. ADICIONAR OU ALTERAR INSTALADORES E CORES:
-   Localize as constantes:
-   const INSTALLERS = ['Dimas', 'Joao', 'Fabio', 'Yaniel'];
-   const COLORS = ['White', 'Brown', 'Bronze', 'Black', 'Linen'];
-
-   • Para incluir novos itens, adicione entre aspas e separado por vírgula.
-     Exemplo: const INSTALLERS = ['Dimas', 'Joao', 'Fabio', 'Yaniel', 'Carlos'];
-
-B. ADICIONAR OU ALTERAR MATERIAIS:
-   Localize o array items:
-   const items = [
-       { id: 'gutter_coil', name: 'Gutter Coil' },
-       { id: 'downspout', name: '3x4x10 Downspout' },
-       { id: 'offset', name: 'OFFSET', hasDropdown: true, options: ["OFFSET 2'", "OFFSET 4'"] }
-   ];
-
-   • Item Comum: { id: 'codigo_unico', name: 'Nome de Exibição' }
-   • Item com Dropdown: { id: 'codigo_unico', name: 'Nome', hasDropdown: true, options: ["Opção 1", "Opção 2"] }
-   • Para Remover: Apague a linha inteira do material desejado.
-
---------------------------------------------------------------------
-ETAPA 4: PASSO A PASSO PARA RECOMPILAR O APP DESKTOP (.EXE)
---------------------------------------------------------------------
-Sempre que fizer alterações no arquivo index.html:
-
-1. Feche o programa antigo se estiver rodando no Windows.
-2. Abra o PowerShell na pasta do projeto:
-   cd C:\Users\Administrador\Desktop\silver-trend-app
-
-3. Feche qualquer processo pendente (opcional):
-   taskkill /F /IM "silver-trend-gutter-system.exe"
-
-4. Libere as permissões de script do Windows:
-   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-
-5. Execute o comando de compilação:
-   npm run dist
-
-6. O arquivo .exe atualizado estará em:
-   silver-trend-app\dist\silver-trend-gutter-system 1.0.0.exe
-
---------------------------------------------------------------------
-ETAPA 5: PASSO A PASSO PARA ATUALIZAR O APP NO CELULAR (GITHUB)
---------------------------------------------------------------------
-1. No terminal do VS Code ou PowerShell na pasta do projeto:
-   git add .
-   git commit -m "Atualização do formulário Silver Trend"
-   git push origin main
-
-2. O app no celular será atualizado automaticamente em até 2 minutos!
-
-====================================================================
-ETAPA 6: CÓDIGO FONTE FINAL COMPLETO (index.html)
-====================================================================
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silver Trend Gutter List System</title>
-    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-    <link href="[https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap)" rel="stylesheet">
-    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css)">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         /* ==================== SCREEN STYLES ==================== */
@@ -198,12 +101,13 @@ ETAPA 6: CÓDIGO FONTE FINAL COMPLETO (index.html)
         .wo-row td { background-color: #f8fafc !important; }
         .wo-row input { background-color: #f8fafc !important; color: #0f172a !important; font-weight: 700 !important; }
 
-        .bottom-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 16px; }
+        .bottom-grid { display: grid; grid-template-columns: 2fr 1.2fr; gap: 16px; margin-top: 16px; }
         .info-card { border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; background-color: #ffffff; }
         .info-card-title { font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+        .textarea-control { width: 100%; height: 65px; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; font-family: inherit; font-size: 12px; resize: none; outline: none; }
 
-        /* PAINEL CINZA CLARO DA TAB 1 */
-        .grid-box-lightgrey {
+        /* QUADRADINHO CINZA CLARO DIREITA - TABELA 2X2 */
+        .grid-box-lightgrey-right {
             background-color: #f8fafc;
             border: 1px solid #cbd5e1;
             border-radius: 6px;
@@ -217,18 +121,26 @@ ETAPA 6: CÓDIGO FONTE FINAL COMPLETO (index.html)
 
         .gutter-info-table td {
             border: 1px solid #cbd5e1;
-            padding: 6px 8px;
+            padding: 6px;
             background-color: #ffffff;
             vertical-align: middle;
         }
 
         .gutter-info-table label {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             color: #475569;
             text-transform: uppercase;
             display: block;
             margin-bottom: 2px;
+        }
+
+        /* Linha em branco para escrita manual */
+        .handwriting-line {
+            width: 100%;
+            height: 24px;
+            border-bottom: 1.5px solid #0f172a;
+            margin-top: 2px;
         }
 
         .signatures-wrapper { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding-top: 10px; }
@@ -308,8 +220,9 @@ ETAPA 6: CÓDIGO FONTE FINAL COMPLETO (index.html)
             #tab1 .cell-input { font-size: 9pt !important; }
 
             #tab1 .bottom-grid { margin-top: 6px !important; gap: 8px !important; width: 100% !important; }
-            #tab1 .info-card, #tab1 .grid-box-lightgrey { padding: 4px 8px !important; }
+            #tab1 .info-card, #tab1 .grid-box-lightgrey-right { padding: 4px 8px !important; }
             #tab1 .info-card-title { font-size: 8pt !important; margin-bottom: 2px !important; }
+            #tab1 .textarea-control { height: 42px !important; font-size: 8.5pt !important; }
 
             #tab1 .signatures-wrapper { margin-top: 6px !important; gap: 20px !important; width: 100% !important; }
             #tab1 .sig-line { height: 16px !important; }
@@ -445,46 +358,40 @@ ETAPA 6: CÓDIGO FONTE FINAL COMPLETO (index.html)
                     </div>
                 </div>
 
-                <!-- PAINEL CINZA CLARO DA TAB 1 (2 LINHAS X 2 COLUNAS) -->
+                <!-- BOTTOM GRID: ESQUERDA = OBSERVATIONS | DIREITA = TABELA CINZA CLARO COM ESPAÇO PARA ESCRITA MANUAR DA DATA -->
                 <div class="bottom-grid">
-                    <div class="grid-box-lightgrey">
+                    <div class="info-card">
+                        <div class="info-card-title"><i class="fa-solid fa-comment-dots"></i> Observations</div>
+                        <textarea id="observations" class="textarea-control" placeholder="Enter job observations..." oninput="syncAll()"></textarea>
+                    </div>
+
+                    <div class="grid-box-lightgrey-right">
                         <table class="gutter-info-table">
                             <tr>
                                 <td style="width: 50%;">
                                     <label>Gutter Number</label>
-                                    <input type="text" id="gutter_number" class="form-control" style="width: 100%; border: none;" placeholder="Enter Gutter #" oninput="syncAll()">
+                                    <input type="text" id="gutter_number" class="form-control" style="width: 100%; border: none; font-size: 11px;" placeholder="Gutter #" oninput="syncAll()">
                                 </td>
                                 <td style="width: 50%;">
-                                    <label>ST Date Type</label>
-                                    <select id="st_date_type" class="form-control" style="width: 100%; border: none;" onchange="syncAll()">
-                                        <option value="FLC DATE">FLC DATE</option>
+                                    <label>Date Type</label>
+                                    <select id="st_date_type" class="form-control" style="width: 100%; border: none; font-size: 11px; font-weight: 700;" onchange="syncAll()">
                                         <option value="ST DATE" selected>ST DATE</option>
                                         <option value="MF DATE">MF DATE</option>
+                                        <option value="FLC DATE">FLC DATE</option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>Dispatched</label>
-                                    <input type="text" id="tab1_dispatched_info" class="form-control" style="width: 100%; border: none;" placeholder="Dispatched Details..." oninput="syncAll()">
+                                    <input type="text" id="tab1_dispatched_info" class="form-control" style="width: 100%; border: none; font-size: 11px;" placeholder="Details..." oninput="syncAll()">
                                 </td>
                                 <td>
-                                    <label>ST Date Value</label>
-                                    <input type="date" id="tab1_st_date_val" class="form-control" style="width: 100%; border: none;" onchange="syncAll()">
+                                    <label>Date (Handwritten)</label>
+                                    <div class="handwriting-line"></div>
                                 </td>
                             </tr>
                         </table>
-                    </div>
-
-                    <div class="info-card" style="background-color: #f0fdf4; border-color: #16a34a;">
-                        <div class="info-card-title" style="color: #15803d;"><i class="fa-solid fa-boxes-packing"></i> Return Information</div>
-                        <div style="font-size: 11px; color: #166534; display:flex; flex-direction:column; gap:6px;">
-                            <div style="display:flex; align-items:center;">
-                                <strong>Return Date:</strong> 
-                                <span id="return_date_wrapper" style="margin-left:4px;"><input type="date" id="return_date" class="form-control" style="padding:2px 4px; font-size:11px;" onchange="syncAll()"></span>
-                                <span id="return_date_blank_line" class="print-blank-line"></span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -535,7 +442,7 @@ ETAPA 6: CÓDIGO FONTE FINAL COMPLETO (index.html)
                     <div>
                         <div class="bottom-grid" style="margin-top: 18px;">
                             <div class="info-card">
-                                <div class="info-card-title">Gutter & Dispatch Info</div>
+                                <div class="info-card-title">Observations & Details</div>
                                 <p id="s2_observations" style="font-size: 11.5px; color: #334155; min-height: 40px;">No details entered.</p>
                             </div>
                             <div class="badge-alert">
@@ -771,10 +678,6 @@ ETAPA 6: CÓDIGO FONTE FINAL COMPLETO (index.html)
             document.getElementById('s2_trailer').innerText = document.getElementById('trailer').value || '---';
             document.getElementById('s2_dispatched').innerText = document.getElementById('dispatched_date').value || '---';
             
-            const retDateVal = document.getElementById('return_date').value;
-            document.getElementById('s2_return').innerText = retDateVal || '---';
-            
-            setupDatePrintFormatting('return_date', 'return_date_wrapper', 'return_date_blank_line');
             setupDatePrintFormatting('doc_date', 'doc_date_wrapper', 'doc_date_blank_line', 'p1_date_val');
             
             const p1DateVal = document.getElementById('doc_date').value;
@@ -793,17 +696,18 @@ ETAPA 6: CÓDIGO FONTE FINAL COMPLETO (index.html)
             const dateVal = document.getElementById('doc_date').value || '--/--/----';
             document.getElementById('sheet2-date-display').innerText = 'Date: ' + dateVal;
 
+            const obsVal = document.getElementById('observations')?.value || '';
             const gutterNum = document.getElementById('gutter_number')?.value || '';
             const stType = document.getElementById('st_date_type')?.value || 'ST DATE';
             const dispInfo = document.getElementById('tab1_dispatched_info')?.value || '';
-            const stVal = document.getElementById('tab1_st_date_val')?.value || '';
 
             let detailsText = '';
+            if (obsVal) detailsText += `Obs: ${obsVal}\n`;
             if (gutterNum) detailsText += `Gutter #: ${gutterNum} | `;
             if (dispInfo) detailsText += `Dispatched: ${dispInfo} | `;
-            if (stVal) detailsText += `${stType}: ${stVal}`;
+            detailsText += `${stType}: ____/____/________`;
 
-            document.getElementById('s2_observations').innerText = detailsText || 'No details entered.';
+            document.getElementById('s2_observations').innerText = detailsText;
 
             const tbody2 = document.getElementById('sheet2-rows');
             tbody2.innerHTML = '';
@@ -857,6 +761,7 @@ ETAPA 6: CÓDIGO FONTE FINAL COMPLETO (index.html)
                 setupDropdowns(true);
                 document.getElementById('size').value = '';
                 document.getElementById('st_date_type').value = 'ST DATE';
+                document.getElementById('observations').value = '';
                 
                 syncAll();
             }
