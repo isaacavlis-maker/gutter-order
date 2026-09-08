@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silver Trend Gutter List System</title>
+    <title>Gutter Order System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -39,6 +39,26 @@
 
         .navbar-brand { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 800; color: #f8fafc; }
         .navbar-brand i { color: #e2e8f0; font-size: 22px; }
+
+        /* SELETOR DE EMPRESA NO TOPO */
+        .company-select-nav {
+            background: rgba(30, 41, 59, 0.8);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            border: 1.5px solid #64748b;
+            border-radius: 8px;
+            padding: 6px 12px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .company-select-nav option {
+            background-color: #0f172a;
+            color: #ffffff;
+        }
+
         .nav-actions { display: flex; gap: 10px; }
 
         .btn {
@@ -112,7 +132,6 @@
         .sheet-summary-table th { background: linear-gradient(180deg, #64748b 0%, #475569 100%); color: #ffffff; padding: 10px 12px; font-size: 12px; border: 1px solid #64748b; text-align: center; }
         .sheet-summary-table td { padding: 10px 12px; border: 1px solid #cbd5e1; font-size: 12.5px; text-align: center; font-weight: 600; background-color: #ffffff; color: #0f172a; }
 
-        /* SELETOR DE UNIDADE NO CABEÇALHO TAB 2 */
         .unit-select-header {
             padding: 3px 6px;
             font-size: 11px;
@@ -217,7 +236,6 @@
             #tab2 .sheet-summary-table td { padding: 6px 6px !important; font-size: 9.5pt !important; height: 26px !important; color: #000000 !important; }
             #tab2 .sheet-summary-table th { padding: 6px 6px !important; font-size: 9.5pt !important; }
 
-            /* FORÇA O TEXTO DO SELETOR E DOS CAMPOS A FICAREM VISÍVEIS E PRETOS NA IMPRESSÃO COLORIDA */
             .unit-select-header {
                 border: 1px solid #000000 !important;
                 background-color: #ffffff !important;
@@ -234,7 +252,7 @@
     </style>
 
     <!-- PWA Settings -->
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU2lsdmVyIFRyZW5kIEd1dHRlciBPcmRlciBTeXN0ZW0iLCJzaG9ydF9uYW1lIjoiR3V0dGVyT3JkZXIiLCJzdGFydF91cmwiOiIuL2luZGV4Lmh0bWwiLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGYxNzJhIiwidGhlbWVfY29sb3IiOiIjNDc1NTY5In0=">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiR3V0dGVyIE9yZGVyIFN5c3RlbSIsInNob3J0X25hbWUiOiJHdXR0ZXJPcmRlciIsInN0YXJ0X3VybCI6Ii4vaW5kZXguaHRtbCIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMwZjE3MmEiLCJ0aGVtZV9jb2xvciI6IiM0NzU1NjkifQ==">
     <meta name="theme-color" content="#0f172a">
 </head>
 <body class="print-mode-color">
@@ -262,7 +280,12 @@
     <header class="navbar">
         <div class="navbar-brand">
             <i class="fa-solid fa-sheet-plastic"></i>
-            <span>Silver Trend Gutter Order System</span>
+            <!-- SELETOR DE EMPRESA NO TOPO DA NAVEGAÇÃO -->
+            <select id="app_company_select" class="company-select-nav" onchange="updateCompanyBrand()">
+                <option value="Silver Trend Gutter Order System" selected>Silver Trend Gutter Order System</option>
+                <option value="Mid Florida Gutter Order System">Mid Florida Gutter Order System</option>
+                <option value="FLC Gutter Order System">FLC Gutter Order System</option>
+            </select>
         </div>
         <div class="nav-actions">
             <button class="btn btn-outline" onclick="resetForm()">
@@ -278,7 +301,7 @@
     <div class="tabs-wrapper">
         <div class="tab-buttons">
             <button class="tab-btn active" onclick="switchTab('tab1')" id="btn-tab1">
-                <i class="fa-solid fa-table-cells"></i> Tab 1: Silver Trend Gutter List
+                <i class="fa-solid fa-table-cells"></i> <span id="btn_tab1_label">Silver Trend Gutter List</span>
             </button>
             <button class="tab-btn" onclick="switchTab('tab2')" id="btn-tab2">
                 <i class="fa-solid fa-file-invoice"></i> Tab 2: Requisition Sheet (Summary)
@@ -292,7 +315,7 @@
         <div id="tab1" class="tab-content active">
             <div class="sheet-page tab1-page-block">
                 <div class="doc-title-header">
-                    <div><h1>Silver Trend Gutter List</h1></div>
+                    <div><h1 id="tab1_doc_title">Silver Trend Gutter List</h1></div>
                     <div class="doc-meta-top">
                         <span id="top-date-display">Date: <span id="p1_date_val">--/--/----</span><span id="p1_date_line" class="print-blank-line"></span></span>
                     </div>
@@ -370,7 +393,7 @@
                     <div>
                         <div class="doc-title-header">
                             <div>
-                                <h1>Silver Trend Gutter List</h1>
+                                <h1 id="tab2_doc_title">Silver Trend Gutter List</h1>
                                 <div style="font-size:12px; font-weight:700; color:#475569; margin-top:2px;">MATERIAL REQUISITION & DISPATCH SHEET</div>
                             </div>
                             <div class="doc-meta-top"><span id="sheet2-date-display">Date: --/--/----</span></div>
@@ -394,7 +417,6 @@
                                     <th style="width: 16%;">Qty To Be Given</th>
                                     <th style="width: 22%; background-color:#1e293b; border-color:#0f172a;">
                                         Dispatched Qty
-                                        <!-- OPÇÃO EM BRANCO INICIAL + ALTO CONTRASTE NA IMPRESSÃO -->
                                         <select id="global_dispatched_unit" class="unit-select-header" onchange="syncSheet2()">
                                             <option value="" selected></option>
                                             <option value="ST">ST</option>
@@ -454,6 +476,17 @@
         ];
 
         let hasPage2 = false;
+
+        function updateCompanyBrand() {
+            const companyFull = document.getElementById('app_company_select').value;
+            // Remove a palavra "System" dos títulos impressos
+            const shortBrandName = companyFull.replace(' Order System', '');
+            
+            document.getElementById('tab1_doc_title').innerText = shortBrandName;
+            document.getElementById('tab2_doc_title').innerText = shortBrandName;
+            document.getElementById('btn_tab1_label').innerText = shortBrandName;
+            document.title = companyFull;
+        }
 
         function formatVal(val) { const num = parseFloat(val); return (isNaN(num) || num === 0) ? '' : num; }
         function parseNum(val) { const num = parseFloat(val); return isNaN(num) ? 0 : num; }
@@ -691,7 +724,6 @@
                     <td>${extra}</td>
                     <td style="font-weight:700; background-color:#ffffff; color:#0f172a;">${given}</td>
                     <td style="padding:0;">
-                        <!-- CÉLULA 100% EM BRANCO PARA PREENCHIMENTO MANUAL / DIGITAÇÃO -->
                         <input type="text" id="disp_${item.id}" class="cell-input" style="text-align:center; font-weight:700; color:#000000;">
                     </td>
                 `;
@@ -751,6 +783,7 @@
 
         setupDropdowns(true);
         initTable();
+        updateCompanyBrand();
         syncAll();
     </script>
 </body>
