@@ -106,54 +106,11 @@
         .info-card-title { font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
         .textarea-control { width: 100%; height: 65px; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; font-family: inherit; font-size: 12px; resize: none; outline: none; }
 
-        /* QUADRADINHO CINZA CLARO TAB 2 (TABELA 2X2 EXCLUSIVA DA FOLHA 1 DE IMPRESSÃO) */
-        .grid-box-lightgrey-tab2 {
-            background-color: #f8fafc;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            padding: 8px;
-        }
-
-        .summary-info-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .summary-info-table td {
-            border: 1px solid #cbd5e1;
-            padding: 6px 8px;
-            background-color: #ffffff;
-            vertical-align: middle;
-        }
-
-        .summary-info-table label {
-            font-size: 9px;
-            font-weight: 700;
-            color: #475569;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .handwriting-line {
-            width: 100%;
-            height: 22px;
-            border-bottom: 1.5px solid #0f172a;
-            margin-top: 2px;
-        }
-
-        .signatures-wrapper { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding-top: 10px; }
-        .sig-box { display: flex; flex-direction: column; gap: 4px; }
-        .sig-line { border-bottom: 1.5px solid #0f172a; height: 28px; }
-        .sig-label { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; margin-top: 4px; }
-
-        .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
-        .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
-
+        /* ESTILOS TAB 2 SUMMARY */
         .sheet-summary-container { display: flex; flex-direction: column; justify-content: space-between; min-height: 850px; }
         .sheet-summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .sheet-summary-table th { background: linear-gradient(180deg, #64748b 0%, #475569 100%); color: #ffffff; padding: 12px 14px; font-size: 13px; border: 1px solid #64748b; text-align: center; }
-        .sheet-summary-table td { padding: 14px 14px; border: 1px solid #cbd5e1; font-size: 13px; text-align: center; font-weight: 600; background-color: #ffffff; }
+        .sheet-summary-table th { background: linear-gradient(180deg, #64748b 0%, #475569 100%); color: #ffffff; padding: 10px 12px; font-size: 12px; border: 1px solid #64748b; text-align: center; }
+        .sheet-summary-table td { padding: 10px 12px; border: 1px solid #cbd5e1; font-size: 12.5px; text-align: center; font-weight: 600; background-color: #ffffff; }
 
         .badge-alert { background-color: #fef3c7; color: #92400e; border: 1px solid #f59e0b; padding: 14px; border-radius: 6px; font-size: 11.5px; font-weight: 600; }
 
@@ -166,16 +123,16 @@
         .btn-modal-color { background: linear-gradient(135deg, #64748b 0%, #475569 100%); color: #ffffff; border-color: #64748b; }
         .btn-modal-bw { background: #0f172a; color: #ffffff; border-color: #0f172a; }
 
-        /* ==================== IMPRESSÃO INDIVIDUALIZADA DE ORIENTAÇÃO ==================== */
-        @page page-portrait {
-            size: letter portrait;
-            margin: 0.25in;
-        }
+        .signatures-wrapper { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding-top: 10px; }
+        .sig-box { display: flex; flex-direction: column; gap: 4px; }
+        .sig-line { border-bottom: 1.5px solid #0f172a; height: 28px; }
+        .sig-label { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; margin-top: 4px; }
+        .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
+        .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
 
-        @page page-landscape {
-            size: letter landscape;
-            margin: 0.25in;
-        }
+        /* ==================== IMPRESSÃO INDIVIDUALIZADA DE ORIENTAÇÃO ==================== */
+        @page page-portrait { size: letter portrait; margin: 0.25in; }
+        @page page-landscape { size: letter landscape; margin: 0.25in; }
 
         @media print {
             body.print-mode-color * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
@@ -187,6 +144,15 @@
 
             .tab-content { display: block !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
+
+            /* TAB 2 - RETRATO (FOLHA 1 NA IMPRESSÃO) */
+            #tab2 {
+                page: page-portrait !important;
+                page-break-before: avoid !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                width: 100% !important;
+            }
 
             /* TAB 1 - PAISAGEM (FOLHA 2 NA IMPRESSÃO) */
             #tab1 {
@@ -229,20 +195,11 @@
             #tab1 .sig-label { font-size: 8pt !important; }
             #tab1 .brand-credit { margin-top: 4px !important; font-size: 8.5pt !important; }
 
-            /* TAB 2 - RETRATO (FOLHA 1 NA IMPRESSÃO) */
-            #tab2 {
-                page: page-portrait !important;
-                page-break-before: avoid !important;
-                page-break-after: always !important;
-                break-after: page !important;
-                width: 100% !important;
-            }
-
             .sheet-summary-container { display: flex !important; flex-direction: column !important; justify-content: space-between !important; height: 9.8in !important; }
             #tab2 .doc-title-header h1 { font-size: 18pt !important; }
             #tab2 .form-header-grid-summary { padding: 8px 12px !important; margin-bottom: 10px !important; }
-            #tab2 .sheet-summary-table td { padding: 8px 6px !important; font-size: 9.5pt !important; height: 28px !important; }
-            #tab2 .sheet-summary-table th { padding: 8px 6px !important; font-size: 9.5pt !important; }
+            #tab2 .sheet-summary-table td { padding: 6px 6px !important; font-size: 9pt !important; height: 26px !important; }
+            #tab2 .sheet-summary-table th { padding: 6px 6px !important; font-size: 9pt !important; }
 
             .form-control, .cell-input, .textarea-control { border: none !important; background: transparent !important; color: #0f172a !important; }
             select, .full-cell-select { appearance: none !important; background: transparent !important; border: none !important; }
@@ -382,7 +339,7 @@
             </div>
         </div>
 
-        <!-- TAB 2: SUMMARY REQUISITION SHEET (PRIMEIRA FOLHA IMPRESSA - RETRATO) -->
+        <!-- TAB 2: SUMMARY REQUISITION SHEET (FOLHA 1 NA IMPRESSÃO - RETRATO ORIGINALMENTE LIMPA) -->
         <div id="tab2" class="tab-content">
             <div class="sheet-page">
                 <div class="sheet-summary-container">
@@ -390,7 +347,7 @@
                         <div class="doc-title-header">
                             <div>
                                 <h1>Silver Trend Gutter List</h1>
-                                <div style="font-size:12px; font-weight:700; color:#475569; margin-top:2px;">MATERIAL REQUISITION & RETURN SHEET</div>
+                                <div style="font-size:12px; font-weight:700; color:#475569; margin-top:2px;">MATERIAL REQUISITION & DISPATCH SHEET</div>
                             </div>
                             <div class="doc-meta-top"><span id="sheet2-date-display">Date: --/--/----</span></div>
                         </div>
@@ -407,11 +364,18 @@
                         <table class="sheet-summary-table">
                             <thead>
                                 <tr>
-                                    <th style="text-align: left; width: 35%;">Material Description</th>
+                                    <th style="text-align: left; width: 32%;">Material Description</th>
                                     <th style="width: 15%;">Qty Required</th>
                                     <th style="width: 15%;">Extra (10%)</th>
-                                    <th style="width: 17%;">Qty To Be Given</th>
-                                    <th style="width: 18%; background-color:#0d9488; border-color:#0f766e;">Qty Returned</th>
+                                    <th style="width: 16%;">Qty To Be Given</th>
+                                    <th style="width: 22%; background-color:#1e293b; border-color:#0f172a;">
+                                        Dispatched Qty
+                                        <select id="global_dispatched_unit" class="form-control" style="padding:2px 4px; font-size:10px; margin-left:4px; font-weight:700; display:inline-block; width:auto;" onchange="syncSheet2()">
+                                            <option value="ST">ST</option>
+                                            <option value="MF">MF</option>
+                                            <option value="FLC">FLC</option>
+                                        </select>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody id="sheet2-rows"></tbody>
@@ -419,49 +383,18 @@
                     </div>
 
                     <div>
-                        <div class="bottom-grid" style="margin-top: 18px; grid-template-columns: 1fr 1fr;">
-                            <!-- EXIBE AS OBSERVAÇÕES DIGITADAS NA TAB 1 -->
+                        <div class="bottom-grid" style="margin-top: 18px; grid-template-columns: 2fr 1fr;">
                             <div class="info-card">
                                 <div class="info-card-title">Observations</div>
-                                <p id="s2_observations" style="font-size: 11.5px; color: #334155; min-height: 40px;">No observations entered.</p>
+                                <p id="s2_observations" style="font-size: 11.5px; color: #334155; min-height: 45px;">No observations entered.</p>
                             </div>
 
-                            <!-- QUADRADINHO CINZA CLARO 2X2 AQUI NA TAB 2 COM LINHA PARA ESCRITA MANUAL -->
-                            <div class="grid-box-lightgrey-tab2">
-                                <table class="summary-info-table">
-                                    <tr>
-                                        <td style="width: 50%;">
-                                            <label>Gutter Number</label>
-                                            <input type="text" id="s2_gutter_number" class="form-control" style="width: 100%; border: none; font-size: 11px;" placeholder="Gutter #">
-                                        </td>
-                                        <td style="width: 50%;">
-                                            <label>Date Type</label>
-                                            <select id="s2_st_date_type" class="form-control" style="width: 100%; border: none; font-size: 11px; font-weight: 700;">
-                                                <option value="ST DATE" selected>ST DATE</option>
-                                                <option value="MF DATE">MF DATE</option>
-                                                <option value="FLC DATE">FLC DATE</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label>Dispatched Info</label>
-                                            <input type="text" id="s2_dispatched_info" class="form-control" style="width: 100%; border: none; font-size: 11px;" placeholder="Details...">
-                                        </td>
-                                        <td>
-                                            <label>Date (Handwritten)</label>
-                                            <div class="handwriting-line"></div>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <div class="badge-alert">
+                                <i class="fa-solid fa-circle-exclamation"></i> <strong>Notice:</strong> Confirm all dispatched materials before leaving warehouse.
                             </div>
                         </div>
 
-                        <div class="badge-alert" style="margin-top: 12px;">
-                            <i class="fa-solid fa-circle-exclamation"></i> <strong>Notice:</strong> Confirm all materials received before dispatch.
-                        </div>
-
-                        <div class="signatures-wrapper" style="margin-top: 28px;">
+                        <div class="signatures-wrapper" style="margin-top: 24px;">
                             <div class="sig-box"><div class="sig-line"></div><div class="sig-label"><span>Installer Signature</span><span>Date: ____/____/________</span></div></div>
                             <div class="sig-box"><div class="sig-line"></div><div class="sig-label"><span>Warehouse Supervisor</span><span>Date: ____/____/________</span></div></div>
                         </div>
@@ -714,6 +647,7 @@
             const obsVal = document.getElementById('observations')?.value || '';
             document.getElementById('s2_observations').innerText = obsVal || 'No observations entered.';
 
+            const unit = document.getElementById('global_dispatched_unit')?.value || 'ST';
             const tbody2 = document.getElementById('sheet2-rows');
             tbody2.innerHTML = '';
 
@@ -721,7 +655,6 @@
                 const total = document.getElementById(`${item.id}_total`)?.value || '';
                 const extra = document.getElementById(`${item.id}_extra`)?.value || '';
                 const given = document.getElementById(`${item.id}_given`)?.value || '';
-                const returned = document.getElementById(`${item.id}_return`)?.value || '';
 
                 let displayName = item.name;
                 if (item.hasDropdown) { displayName = document.getElementById(`${item.id}_spec`)?.value || item.name; }
@@ -732,7 +665,9 @@
                     <td>${total}</td>
                     <td>${extra}</td>
                     <td style="font-weight:700; background-color:#ffffff; color:#0f172a;">${given}</td>
-                    <td style="font-weight:700; background-color:#ffffff; color:#0f766e;">${returned}</td>
+                    <td style="padding:0;">
+                        <input type="text" id="disp_${item.id}" class="cell-input" placeholder="${unit} Qty / FULL" style="text-align:center; font-weight:700; color:#0f172a;">
+                    </td>
                 `;
                 tbody2.appendChild(tr);
             });
@@ -779,16 +714,10 @@
 
                 const obs = document.getElementById('observations');
                 if (obs) { obs.value = ''; obs.disabled = false; }
-
-                const s2Gutter = document.getElementById('s2_gutter_number');
-                const s2Disp = document.getElementById('s2_dispatched_info');
-                const s2Type = document.getElementById('s2_st_date_type');
-                if (s2Gutter) { s2Gutter.value = ''; s2Gutter.disabled = false; }
-                if (s2Disp) { s2Disp.value = ''; s2Disp.disabled = false; }
-                if (s2Type) { s2Type.value = 'ST DATE'; s2Type.disabled = false; }
                 
                 setupDropdowns(true);
                 document.getElementById('size').value = '';
+                document.getElementById('global_dispatched_unit').value = 'ST';
                 
                 syncAll();
             }
