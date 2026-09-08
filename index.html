@@ -131,6 +131,12 @@
         .wo-row td { background-color: #f8fafc !important; }
         .wo-row input { background-color: #f8fafc !important; color: #0f172a !important; font-weight: 700 !important; }
 
+        .wo-row input.wo-duplicate {
+            background-color: #fee2e2 !important;
+            color: #dc2626 !important;
+            border: 2px solid #ef4444 !important;
+        }
+
         .bottom-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 16px; }
         .info-card { border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; background-color: #ffffff; }
         .info-card-title { font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
@@ -189,7 +195,6 @@
             .tab-content { display: block !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
 
-            /* FORÇA A TAB 2 A SER IMPRESSA PRIMEIRO (ORDEM = 1) */
             #tab2 {
                 order: 1 !important;
                 page: page-portrait !important;
@@ -199,7 +204,6 @@
                 width: 100% !important;
             }
 
-            /* FORÇA A TAB 1 A SER IMPRESSA EM SEGUNDO (ORDEM = 2) */
             #tab1 {
                 order: 2 !important;
                 page: page-landscape !important;
@@ -464,6 +468,7 @@
         const INSTALLERS = ['Dimas', 'Joao', 'Fabio', 'Yaniel'];
         const COLORS = ['White', 'Brown', 'Bronze', 'Black', 'Linen'];
 
+        // MATRIZ DE MATERIAIS - LINHA ÚNICA DE OFFSET COM OPÇÕES NO DROPDOWN DA CÉLULA
         const items = [
             { id: 'gutter_coil', name: 'Gutter Coil' },
             { id: 'downspout', name: '3x4x10 Downspout' },
@@ -476,12 +481,42 @@
             { id: 'out_miter', name: 'Outside Miter' },
             { id: 'in_miter', name: 'Inside Miter' },
             { id: 'splash_block', name: 'Splash Block' },
-            { id: 'offset', name: 'OFFSET', hasDropdown: true, options: ["OFFSET 2'", "OFFSET 4'"] },
+            { id: 'offset', name: 'OFFSET', hasDropdown: true, options: ["OFFSET 2'", "OFFSET 4'", "OFFSET 2' & 4'"] },
             { id: 'bay_miter', name: 'Bay Miter', hasDropdown: true, options: ["Bay Miter Outside", "Bay Miter Inside"] },
             { id: 'wedge', name: 'WEDGE' }
         ];
 
         let hasPage2 = false;
+
+        // VALIDAÇÃO EM TEMPO REAL SEM AUTOFILL PARA MANTER CAMPOS INDEPENDENTES
+        function checkWorkOrderDuplicateRealtime(inputEl) {
+            const val = inputEl.value.trim().toUpperCase();
+            if (!val) {
+                inputEl.classList.remove('wo-duplicate');
+                return;
+            }
+
+            const maxSys = hasPage2 ? 18 : 9;
+            let isDuplicate = false;
+
+            for (let sys = 1; sys <= maxSys; sys++) {
+                const el = document.getElementById(`sys_wo_s${sys}`);
+                if (el && el !== inputEl && el.value.trim().toUpperCase() === val) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+
+            if (isDuplicate) {
+                inputEl.classList.add('wo-duplicate');
+                alert(`⚠️ WARNING: Work Order Number "${val}" is already entered in another System!\nPlease enter a unique WO number.`);
+                inputEl.value = '';
+                inputEl.classList.remove('wo-duplicate');
+                setTimeout(() => { inputEl.focus(); }, 10);
+            } else {
+                inputEl.classList.remove('wo-duplicate');
+            }
+        }
 
         function updateCompanyBrand() {
             const companyFull = document.getElementById('app_company_select').value;
@@ -526,23 +561,23 @@
             const tbody2 = document.getElementById('gutter-rows-p2');
             tbody1.innerHTML = ''; tbody2.innerHTML = '';
 
-            // PAGE 1: WO ROW
+            // PAGE 1: WO ROW INDEPENDENTE
             const trWo1 = document.createElement('tr');
             trWo1.className = 'wo-row';
             let wo1Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
             for (let sys = 1; sys <= 9; sys++) {
-                wo1Html += `<td><input type="text" placeholder="#" id="sys_wo_s${sys}" class="cell-input" style="font-weight:700; color:#0f172a;" oninput="syncAll()" onfocus="this.select()" onkeydown="handleKeyDown(event, -1, ${sys}, 1)"></td>`;
+                wo1Html += `<td><input type="text" placeholder="#" id="sys_wo_s${sys}" class="cell-input" style="font-weight:700; color:#0f172a;" oninput="checkWorkOrderDuplicateRealtime(this); syncAll();" onfocus="this.select()" onkeydown="handleKeyDown(event, -1, ${sys}, 1)"></td>`;
             }
             wo1Html += `<td colspan="4" style="background-color:#f8fafc; font-size:10px; color:#64748b; font-weight:600;">Work Order Numbers</td>`;
             trWo1.innerHTML = wo1Html;
             tbody1.appendChild(trWo1);
 
-            // PAGE 2: WO ROW (TOTALMENTE EDITÁVEL)
+            // PAGE 2: WO ROW INDEPENDENTE
             const trWo2 = document.createElement('tr');
             trWo2.className = 'wo-row';
             let wo2Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
             for (let sys = 10; sys <= 18; sys++) {
-                wo2Html += `<td><input type="text" placeholder="#" id="sys_wo_s${sys}" class="cell-input" style="font-weight:700; color:#0f172a;" oninput="syncAll()" onfocus="this.select()" onkeydown="handleKeyDown(event, -1, ${sys}, 2)"></td>`;
+                wo2Html += `<td><input type="text" placeholder="#" id="sys_wo_s${sys}" class="cell-input" style="font-weight:700; color:#0f172a;" oninput="checkWorkOrderDuplicateRealtime(this); syncAll();" onfocus="this.select()" onkeydown="handleKeyDown(event, -1, ${sys}, 2)"></td>`;
             }
             wo2Html += `<td style="background-color:#f8fafc; font-size:10px; color:#64748b; font-weight:600;">Subtotal (P2)</td>`;
             trWo2.innerHTML = wo2Html;
@@ -582,7 +617,6 @@
             });
         }
 
-        // NAVEGAÇÃO E POPUP DE EXPANSÃO PARA PAGE 2 (SYS 10 A 18)
         function handleKeyDown(event, itemIdx, sys, page) {
             const key = event.key;
             if (['Enter', 'ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(key)) {
@@ -596,7 +630,7 @@
                             syncAll();
                             setTimeout(() => {
                                 const targetInput = document.getElementById('sys_wo_s10');
-                                if (targetInput) { targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
+                                if (targetInput) { targetInput.disabled = false; targetInput.readOnly = false; targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
                             }, 100);
                             return;
                         }
@@ -614,7 +648,7 @@
 
                     let targetId = (nextSys === 'return') ? `${items[nextIdx].id}_return` : `${items[nextIdx].id}_s${nextSys}`;
                     const targetInput = document.getElementById(targetId);
-                    if (targetInput) { targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
+                    if (targetInput) { targetInput.disabled = false; targetInput.readOnly = false; targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
                     return;
                 }
 
@@ -634,7 +668,7 @@
                 } else if (key === 'ArrowRight') {
                     if (sys === 9 && page === 1) {
                         const targetInput = document.getElementById(`${items[itemIdx].id}_return`);
-                        if (targetInput) { targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
+                        if (targetInput) { targetInput.disabled = false; targetInput.readOnly = false; targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
                         return;
                     }
                     nextSys = sys + 1;
@@ -649,7 +683,7 @@
 
                 let targetId = (nextIdx === -1) ? `sys_wo_s${nextSys}` : `${items[nextIdx].id}_s${nextSys}`;
                 const targetInput = document.getElementById(targetId);
-                if (targetInput) { targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
+                if (targetInput) { targetInput.disabled = false; targetInput.readOnly = false; targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
             }
         }
 
@@ -835,7 +869,6 @@
 
         function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); }
 
-        /* LIMPA FORMULÁRIO COMPLETO, ESCONDE A PAGE 2 E LIBERA TODOS OS CAMPOS */
         function resetForm() {
             if(confirm('Are you sure you want to clear all data in the form?')) {
                 hasPage2 = false;
@@ -844,8 +877,11 @@
                 document.querySelectorAll('input').forEach(input => { 
                     input.value = ''; 
                     delete input.dataset.custom; 
+                    input.classList.remove('wo-duplicate');
                     input.readOnly = false;
                     input.disabled = false;
+                    input.removeAttribute('readonly');
+                    input.removeAttribute('disabled');
                 });
 
                 const obs = document.getElementById('observations');
@@ -853,6 +889,8 @@
                     obs.value = ''; 
                     obs.disabled = false; 
                     obs.readOnly = false;
+                    obs.removeAttribute('readonly');
+                    obs.removeAttribute('disabled');
                 }
                 
                 setupDropdowns(true);
