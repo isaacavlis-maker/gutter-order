@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order System</title>
 
-    <!-- FAVICON / ÍCONE DE LUXO EMBARCADO EM EMBEDDED SVG -->
+    <!-- FAVICON / ÍCONE DE LUXO EMBARCADO -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%230f172a'/><path d='M256 64L64 220h48v228h288V220h48L256 64z' fill='none' stroke='%2338bdf8' stroke-width='24' stroke-linejoin='round'/><path d='M120 280h272v24H120z' fill='%23f59e0b'/><path d='M392 304v80c0 13.2-10.8 24-24 24s-24-10.8-24-24v-80' fill='none' stroke='%23f59e0b' stroke-width='20' stroke-linecap='round'/></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,6 @@
 
         .navbar-brand { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 800; color: #f8fafc; }
         
-        /* ÍCONE DE LUXO CUSTOMIZADO NO TOPO */
         .brand-logo-icon {
             width: 36px;
             height: 36px;
@@ -175,7 +174,7 @@
         .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
         .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
 
-        /* ==================== IMPRESSÃO ==================== */
+        /* ==================== IMPRESSÃO REGRAS RÍGIDAS DE ORDEM ==================== */
         @page page-portrait { size: letter portrait; margin: 0.25in; }
         @page page-landscape { size: letter landscape; margin: 0.25in; }
 
@@ -185,13 +184,31 @@
 
             html, body { background: #ffffff !important; color: #0f172a !important; padding: 0 !important; margin: 0 !important; font-size: 9pt !important; width: 100% !important; }
             .navbar, .tabs-wrapper, .btn, .no-print, .modal-overlay { display: none !important; }
-            .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; display: block !important; }
+            .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; display: flex !important; flex-direction: column !important; }
 
             .tab-content { display: block !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
 
-            #tab2 { page: page-portrait !important; page-break-before: avoid !important; page-break-after: always !important; break-after: page !important; width: 100% !important; }
-            #tab1 { page: page-landscape !important; page-break-before: always !important; break-before: page !important; page-break-after: avoid !important; break-after: avoid !important; width: 100% !important; }
+            /* FORÇA A TAB 2 A SER IMPRESSA PRIMEIRO (ORDEM = 1) */
+            #tab2 {
+                order: 1 !important;
+                page: page-portrait !important;
+                page-break-before: avoid !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                width: 100% !important;
+            }
+
+            /* FORÇA A TAB 1 A SER IMPRESSA EM SEGUNDO (ORDEM = 2) */
+            #tab1 {
+                order: 2 !important;
+                page: page-landscape !important;
+                page-break-before: always !important;
+                break-before: page !important;
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+                width: 100% !important;
+            }
 
             .tab1-page-block { padding: 0 !important; border: none !important; box-shadow: none !important; width: 100% !important; }
             #tab1 .doc-title-header { padding-bottom: 2px !important; margin-bottom: 4px !important; }
@@ -266,7 +283,6 @@
     <!-- TOP NAVIGATION BAR -->
     <header class="navbar">
         <div class="navbar-brand">
-            <!-- ÍCONE PERSONALIZADO DE LUXO -->
             <div class="brand-logo-icon">
                 <i class="fa-solid fa-house-chimney-crack" style="color:#f59e0b; font-size:18px;"></i>
             </div>
@@ -409,8 +425,7 @@
                                     <th style="width: 22%; background-color:#1e293b; border-color:#0f172a;">
                                         Dispatched Qty
                                         <select id="global_dispatched_unit" class="unit-select-header" onchange="syncSheet2()">
-                                            <option value="" selected></option>
-                                            <option value="ST">ST</option>
+                                            <option value="ST" selected>ST</option>
                                             <option value="MF">MF</option>
                                             <option value="FLC">FLC</option>
                                         </select>
@@ -476,6 +491,19 @@
             document.getElementById('tab2_doc_title').innerText = shortBrandName;
             document.getElementById('btn_tab1_label').innerText = shortBrandName;
             document.title = companyFull;
+
+            const unitSelect = document.getElementById('global_dispatched_unit');
+            if (unitSelect) {
+                if (companyFull.includes('Silver Trend')) {
+                    unitSelect.value = 'ST';
+                } else if (companyFull.includes('Mid Florida')) {
+                    unitSelect.value = 'MF';
+                } else if (companyFull.includes('FLC')) {
+                    unitSelect.value = 'FLC';
+                }
+            }
+
+            syncSheet2();
         }
 
         function formatVal(val) { const num = parseFloat(val); return (isNaN(num) || num === 0) ? '' : num; }
@@ -509,7 +537,7 @@
             trWo1.innerHTML = wo1Html;
             tbody1.appendChild(trWo1);
 
-            // PAGE 2: WO ROW
+            // PAGE 2: WO ROW (TOTALMENTE EDITÁVEL)
             const trWo2 = document.createElement('tr');
             trWo2.className = 'wo-row';
             let wo2Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
@@ -560,7 +588,6 @@
             if (['Enter', 'ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(key)) {
                 event.preventDefault();
 
-                // CHEGOU AO FINAL DO SYS 9 (ÚLTIMO ITEM: WEDGE) -> PERGUNTA E EXPANDE PAGE 2
                 if (page === 1 && itemIdx === items.length - 1 && sys === 9 && (key === 'Enter' || key === 'ArrowDown')) {
                     if (!hasPage2) {
                         if (confirm('Do you want to add more systems? (Page 2: Systems 10 to 18)')) {
@@ -814,7 +841,6 @@
                 hasPage2 = false;
                 document.getElementById('page2-container').style.display = 'none';
 
-                // Força a liberação e limpeza de todos os inputs
                 document.querySelectorAll('input').forEach(input => { 
                     input.value = ''; 
                     delete input.dataset.custom; 
@@ -831,9 +857,8 @@
                 
                 setupDropdowns(true);
                 document.getElementById('size').value = '';
-                document.getElementById('global_dispatched_unit').value = '';
                 
-                syncAll();
+                updateCompanyBrand();
 
                 setTimeout(() => {
                     const firstInput = document.getElementById('sys_wo_s1');
