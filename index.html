@@ -106,7 +106,7 @@
         .info-card-title { font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
         .textarea-control { width: 100%; height: 65px; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; font-family: inherit; font-size: 12px; resize: none; outline: none; }
 
-        /* QUADRADINHO CINZA CLARO TAB 2 (TABELA 2X2) */
+        /* QUADRADINHO CINZA CLARO TAB 2 (TABELA 2X2 EXCLUSIVA DA FOLHA 1 DE IMPRESSÃO) */
         .grid-box-lightgrey-tab2 {
             background-color: #f8fafc;
             border: 1px solid #cbd5e1;
@@ -188,12 +188,13 @@
             .tab-content { display: block !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
 
-            /* TAB 1 - PAISAGEM (FOLHA 1) */
+            /* TAB 1 - PAISAGEM (FOLHA 2 NA IMPRESSÃO) */
             #tab1 {
                 page: page-landscape !important;
-                page-break-before: avoid !important;
-                page-break-after: always !important;
-                break-after: page !important;
+                page-break-before: always !important;
+                break-before: page !important;
+                page-break-after: avoid !important;
+                break-after: avoid !important;
                 width: 100% !important;
             }
 
@@ -228,13 +229,12 @@
             #tab1 .sig-label { font-size: 8pt !important; }
             #tab1 .brand-credit { margin-top: 4px !important; font-size: 8.5pt !important; }
 
-            /* TAB 2 - RETRATO (FOLHA 2) */
+            /* TAB 2 - RETRATO (FOLHA 1 NA IMPRESSÃO) */
             #tab2 {
                 page: page-portrait !important;
-                page-break-before: always !important;
-                break-before: page !important;
-                page-break-after: avoid !important;
-                break-after: avoid !important;
+                page-break-before: avoid !important;
+                page-break-after: always !important;
+                break-after: page !important;
                 width: 100% !important;
             }
 
@@ -307,7 +307,7 @@
 
     <div class="container">
 
-        <!-- TAB 1: MAIN ENTRY FORM (TOTALMENTE ORIGINAL) -->
+        <!-- TAB 1: MAIN ENTRY FORM (TOTALMENTE ORIGINAL - PAISAGEM) -->
         <div id="tab1" class="tab-content active">
             <div class="sheet-page tab1-page-block">
                 <div class="doc-title-header">
@@ -382,7 +382,7 @@
             </div>
         </div>
 
-        <!-- TAB 2: SUMMARY REQUISITION SHEET (COM O PAINEL CINZA CLARO 2X2) -->
+        <!-- TAB 2: SUMMARY REQUISITION SHEET (PRIMEIRA FOLHA IMPRESSA - RETRATO) -->
         <div id="tab2" class="tab-content">
             <div class="sheet-page">
                 <div class="sheet-summary-container">
@@ -420,13 +420,13 @@
 
                     <div>
                         <div class="bottom-grid" style="margin-top: 18px; grid-template-columns: 1fr 1fr;">
-                            <!-- MANTÉM CAMPO OBS MENSAGENS DA TAB 1 -->
+                            <!-- EXIBE AS OBSERVAÇÕES DIGITADAS NA TAB 1 -->
                             <div class="info-card">
                                 <div class="info-card-title">Observations</div>
                                 <p id="s2_observations" style="font-size: 11.5px; color: #334155; min-height: 40px;">No observations entered.</p>
                             </div>
 
-                            <!-- QUADRADINHO CINZA CLARO 2X2 AQUI NA TAB 2 -->
+                            <!-- QUADRADINHO CINZA CLARO 2X2 AQUI NA TAB 2 COM LINHA PARA ESCRITA MANUAL -->
                             <div class="grid-box-lightgrey-tab2">
                                 <table class="summary-info-table">
                                     <tr>
@@ -756,10 +756,9 @@
 
         function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); }
 
-        /* LIMPA FORMULÁRIO COMPLETO E GARANTE QUE TODOS OS CAMPOS FICAM DIGITÁVEIS */
+        /* LIMPA FORMULÁRIO COMPLETO E GARANTE QUE TODOS OS CAMPOS FICAM EDITÁVEIS */
         function resetForm() {
             if(confirm('Are you sure you want to clear all data in the form?')) {
-                // Limpa campos numéricos e limpa os marcadores manuais
                 document.querySelectorAll('input[type="number"]').forEach(input => { 
                     input.value = ''; 
                     delete input.dataset.custom; 
@@ -767,30 +766,26 @@
                     input.disabled = false;
                 });
 
-                // Limpa campos de texto e garante edição ativa
                 document.querySelectorAll('input[type="text"]').forEach(input => { 
                     input.value = ''; 
                     input.readOnly = false;
                     input.disabled = false;
                 });
 
-                // Limpa campos de data
                 document.querySelectorAll('input[type="date"]').forEach(input => { 
                     input.value = ''; 
                     input.disabled = false;
                 });
 
-                // Limpa observações
                 const obs = document.getElementById('observations');
                 if (obs) { obs.value = ''; obs.disabled = false; }
 
-                // Reseta dropdowns da Tab 2
                 const s2Gutter = document.getElementById('s2_gutter_number');
                 const s2Disp = document.getElementById('s2_dispatched_info');
                 const s2Type = document.getElementById('s2_st_date_type');
-                if (s2Gutter) s2Gutter.value = '';
-                if (s2Disp) s2Disp.value = '';
-                if (s2Type) s2Type.value = 'ST DATE';
+                if (s2Gutter) { s2Gutter.value = ''; s2Gutter.disabled = false; }
+                if (s2Disp) { s2Disp.value = ''; s2Disp.disabled = false; }
+                if (s2Type) { s2Type.value = 'ST DATE'; s2Type.disabled = false; }
                 
                 setupDropdowns(true);
                 document.getElementById('size').value = '';
