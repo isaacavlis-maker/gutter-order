@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order System</title>
+
+    <!-- FAVICON / ÍCONE DE LUXO EMBARCADO EM EMBEDDED SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%230f172a'/><path d='M256 64L64 220h48v228h288V220h48L256 64z' fill='none' stroke='%2338bdf8' stroke-width='24' stroke-linejoin='round'/><path d='M120 280h272v24H120z' fill='%23f59e0b'/><path d='M392 304v80c0 13.2-10.8 24-24 24s-24-10.8-24-24v-80' fill='none' stroke='%23f59e0b' stroke-width='20' stroke-linecap='round'/></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -38,9 +42,20 @@
         }
 
         .navbar-brand { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 800; color: #f8fafc; }
-        .navbar-brand i { color: #e2e8f0; font-size: 22px; }
+        
+        /* ÍCONE DE LUXO CUSTOMIZADO NO TOPO */
+        .brand-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+        }
 
-        /* SELETOR DE EMPRESA NO TOPO */
         .company-select-nav {
             background: rgba(30, 41, 59, 0.8);
             color: #ffffff;
@@ -54,11 +69,7 @@
             cursor: pointer;
         }
 
-        .company-select-nav option {
-            background-color: #0f172a;
-            color: #ffffff;
-        }
-
+        .company-select-nav option { background-color: #0f172a; color: #ffffff; }
         .nav-actions { display: flex; gap: 10px; }
 
         .btn {
@@ -126,7 +137,6 @@
         .info-card-title { font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
         .textarea-control { width: 100%; height: 65px; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; font-family: inherit; font-size: 12px; resize: none; outline: none; }
 
-        /* ESTILOS TAB 2 SUMMARY */
         .sheet-summary-container { display: flex; flex-direction: column; justify-content: space-between; min-height: 850px; }
         .sheet-summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .sheet-summary-table th { background: linear-gradient(180deg, #64748b 0%, #475569 100%); color: #ffffff; padding: 10px 12px; font-size: 12px; border: 1px solid #64748b; text-align: center; }
@@ -165,7 +175,7 @@
         .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
         .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
 
-        /* ==================== IMPRESSÃO INDIVIDUALIZADA DE ORIENTAÇÃO ==================== */
+        /* ==================== IMPRESSÃO ==================== */
         @page page-portrait { size: letter portrait; margin: 0.25in; }
         @page page-landscape { size: letter landscape; margin: 0.25in; }
 
@@ -180,24 +190,8 @@
             .tab-content { display: block !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
 
-            /* TAB 2 - RETRATO (FOLHA 1 NA IMPRESSÃO) */
-            #tab2 {
-                page: page-portrait !important;
-                page-break-before: avoid !important;
-                page-break-after: always !important;
-                break-after: page !important;
-                width: 100% !important;
-            }
-
-            /* TAB 1 - PAISAGEM (FOLHA 2 NA IMPRESSÃO) */
-            #tab1 {
-                page: page-landscape !important;
-                page-break-before: always !important;
-                break-before: page !important;
-                page-break-after: avoid !important;
-                break-after: avoid !important;
-                width: 100% !important;
-            }
+            #tab2 { page: page-portrait !important; page-break-before: avoid !important; page-break-after: always !important; break-after: page !important; width: 100% !important; }
+            #tab1 { page: page-landscape !important; page-break-before: always !important; break-before: page !important; page-break-after: avoid !important; break-after: avoid !important; width: 100% !important; }
 
             .tab1-page-block { padding: 0 !important; border: none !important; box-shadow: none !important; width: 100% !important; }
             #tab1 .doc-title-header { padding-bottom: 2px !important; margin-bottom: 4px !important; }
@@ -236,13 +230,7 @@
             #tab2 .sheet-summary-table td { padding: 6px 6px !important; font-size: 9.5pt !important; height: 26px !important; color: #000000 !important; }
             #tab2 .sheet-summary-table th { padding: 6px 6px !important; font-size: 9.5pt !important; }
 
-            .unit-select-header {
-                border: 1px solid #000000 !important;
-                background-color: #ffffff !important;
-                color: #000000 !important;
-                font-weight: 800 !important;
-            }
-
+            .unit-select-header { border: 1px solid #000000 !important; background-color: #ffffff !important; color: #000000 !important; font-weight: 800 !important; }
             .form-control, .cell-input, .textarea-control { border: none !important; background: transparent !important; color: #000000 !important; }
             select, .full-cell-select { appearance: none !important; background: transparent !important; border: none !important; color: #000000 !important; }
 
@@ -251,7 +239,6 @@
         }
     </style>
 
-    <!-- PWA Settings -->
     <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiT3JkZXIgU3lzdGVtIiwic2hvcnRfbmFtZSI6Ik9yZGVyU3lzdGVtIiwic3RhcnRfdXJsIjoiLi9pbmRleC5odG1sIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzQ3NTU2OSJ9">
     <meta name="theme-color" content="#0f172a">
 </head>
@@ -279,8 +266,11 @@
     <!-- TOP NAVIGATION BAR -->
     <header class="navbar">
         <div class="navbar-brand">
-            <i class="fa-solid fa-sheet-plastic"></i>
-            <!-- SELETOR DE EMPRESA COM NORMAS LIMPAS -->
+            <!-- ÍCONE PERSONALIZADO DE LUXO -->
+            <div class="brand-logo-icon">
+                <i class="fa-solid fa-house-chimney-crack" style="color:#f59e0b; font-size:18px;"></i>
+            </div>
+            
             <select id="app_company_select" class="company-select-nav" onchange="updateCompanyBrand()">
                 <option value="Silver Trend Order System" selected>Silver Trend Order System</option>
                 <option value="Mid Florida Order System">Mid Florida Order System</option>
@@ -311,7 +301,7 @@
 
     <div class="container">
 
-        <!-- TAB 1: MAIN ENTRY FORM (TOTALMENTE ORIGINAL - PAISAGEM) -->
+        <!-- TAB 1: MAIN ENTRY FORM -->
         <div id="tab1" class="tab-content active">
             <div class="sheet-page tab1-page-block">
                 <div class="doc-title-header">
@@ -387,7 +377,7 @@
             </div>
         </div>
 
-        <!-- TAB 2: SUMMARY REQUISITION SHEET (FOLHA 1 NA IMPRESSÃO - RETRATO ORIGINALMENTE LIMPA) -->
+        <!-- TAB 2: SUMMARY REQUISITION SHEET -->
         <div id="tab2" class="tab-content">
             <div class="sheet-page">
                 <div class="sheet-summary-container">
