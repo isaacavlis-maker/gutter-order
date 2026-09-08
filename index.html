@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gutter Order System</title>
+    <title>Order System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -252,7 +252,7 @@
     </style>
 
     <!-- PWA Settings -->
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiR3V0dGVyIE9yZGVyIFN5c3RlbSIsInNob3J0X25hbWUiOiJHdXR0ZXJPcmRlciIsInN0YXJ0X3VybCI6Ii4vaW5kZXguaHRtbCIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMwZjE3MmEiLCJ0aGVtZV9jb2xvciI6IiM0NzU1NjkifQ==">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiT3JkZXIgU3lzdGVtIiwic2hvcnRfbmFtZSI6Ik9yZGVyU3lzdGVtIiwic3RhcnRfdXJsIjoiLi9pbmRleC5odG1sIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzQ3NTU2OSJ9">
     <meta name="theme-color" content="#0f172a">
 </head>
 <body class="print-mode-color">
@@ -280,11 +280,11 @@
     <header class="navbar">
         <div class="navbar-brand">
             <i class="fa-solid fa-sheet-plastic"></i>
-            <!-- SELETOR DE EMPRESA NO TOPO DA NAVEGAÇÃO -->
+            <!-- SELETOR DE EMPRESA COM NORMAS LIMPAS -->
             <select id="app_company_select" class="company-select-nav" onchange="updateCompanyBrand()">
                 <option value="Silver Trend Order System" selected>Silver Trend Order System</option>
                 <option value="Mid Florida Order System">Mid Florida Order System</option>
-                <option value="FLC Order System">FLC Order System</option>
+                <option value="FLC MACHINE Order System">FLC MACHINE Order System</option>
             </select>
         </div>
         <div class="nav-actions">
@@ -301,7 +301,7 @@
     <div class="tabs-wrapper">
         <div class="tab-buttons">
             <button class="tab-btn active" onclick="switchTab('tab1')" id="btn-tab1">
-                <i class="fa-solid fa-table-cells"></i> <span id="btn_tab1_label">Silver Trend List</span>
+                <i class="fa-solid fa-table-cells"></i> <span id="btn_tab1_label">Silver Trend Order List</span>
             </button>
             <button class="tab-btn" onclick="switchTab('tab2')" id="btn-tab2">
                 <i class="fa-solid fa-file-invoice"></i> Tab 2: Requisition Sheet (Summary)
@@ -315,7 +315,7 @@
         <div id="tab1" class="tab-content active">
             <div class="sheet-page tab1-page-block">
                 <div class="doc-title-header">
-                    <div><h1 id="tab1_doc_title">Silver Trend List</h1></div>
+                    <div><h1 id="tab1_doc_title">Silver Trend Order List</h1></div>
                     <div class="doc-meta-top">
                         <span id="top-date-display">Date: <span id="p1_date_val">--/--/----</span><span id="p1_date_line" class="print-blank-line"></span></span>
                     </div>
@@ -345,6 +345,7 @@
                     </table>
                 </div>
 
+                <!-- PAGE 2 CONTAINER: SYSTEMS 10 TO 18 -->
                 <div id="page2-container" style="display: none; margin-top: 24px;">
                     <div class="page-block-header" style="background:#0f766e; color:#ffffff;"><span>Systems 10 to 18 (Page 2 - Preview Subtotal)</span><span style="font-size:10px; font-weight:normal;">Page 2</span></div>
                     <div class="gutter-table-wrapper">
@@ -393,7 +394,7 @@
                     <div>
                         <div class="doc-title-header">
                             <div>
-                                <h1 id="tab2_doc_title">Silver Trend Gutter List</h1>
+                                <h1 id="tab2_doc_title">Silver Trend Order List</h1>
                                 <div style="font-size:12px; font-weight:700; color:#475569; margin-top:2px;">MATERIAL REQUISITION & DISPATCH SHEET</div>
                             </div>
                             <div class="doc-meta-top"><span id="sheet2-date-display">Date: --/--/----</span></div>
@@ -479,8 +480,7 @@
 
         function updateCompanyBrand() {
             const companyFull = document.getElementById('app_company_select').value;
-            // Remove a palavra "System" dos títulos impressos
-            const shortBrandName = companyFull.replace(' Order System', '');
+            const shortBrandName = companyFull.replace(' Order System', ' Order List');
             
             document.getElementById('tab1_doc_title').innerText = shortBrandName;
             document.getElementById('tab2_doc_title').innerText = shortBrandName;
@@ -508,6 +508,7 @@
             const tbody2 = document.getElementById('gutter-rows-p2');
             tbody1.innerHTML = ''; tbody2.innerHTML = '';
 
+            // PAGE 1: WO ROW
             const trWo1 = document.createElement('tr');
             trWo1.className = 'wo-row';
             let wo1Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
@@ -518,7 +519,19 @@
             trWo1.innerHTML = wo1Html;
             tbody1.appendChild(trWo1);
 
+            // PAGE 2: WO ROW
+            const trWo2 = document.createElement('tr');
+            trWo2.className = 'wo-row';
+            let wo2Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
+            for (let sys = 10; sys <= 18; sys++) {
+                wo2Html += `<td><input type="text" placeholder="#" id="sys_wo_s${sys}" class="cell-input" style="font-weight:700; color:#0f172a;" oninput="syncAll()" onfocus="this.select()" onkeydown="handleKeyDown(event, -1, ${sys}, 2)"></td>`;
+            }
+            wo2Html += `<td style="background-color:#f8fafc; font-size:10px; color:#64748b; font-weight:600;">Subtotal (P2)</td>`;
+            trWo2.innerHTML = wo2Html;
+            tbody2.appendChild(trWo2);
+
             items.forEach((item, itemIdx) => {
+                // ROW PAGE 1
                 const tr1 = document.createElement('tr');
                 let colItemHtml = item.hasDropdown ? `<td style="padding:0; background-color:#ffffff;"><select id="${item.id}_spec" class="full-cell-select" onchange="syncAll()">${item.options.map(o => `<option value="${o}">${o}</option>`).join('')}</select></td>` : `<td class="item-name">${item.name}</td>`;
                 let html1 = colItemHtml;
@@ -536,15 +549,46 @@
 
                 tr1.innerHTML = html1;
                 tbody1.appendChild(tr1);
+
+                // ROW PAGE 2
+                const tr2 = document.createElement('tr');
+                let html2 = `<td class="item-name">${item.name}</td>`;
+
+                for (let sys = 10; sys <= 18; sys++) {
+                    html2 += `<td><input type="number" min="0" value="" id="${item.id}_s${sys}" class="cell-input" data-item-idx="${itemIdx}" data-sys="${sys}" data-page="2" oninput="calculateRow('${item.id}')" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, ${sys}, 2)"></td>`;
+                }
+
+                html2 += `<td><input type="text" id="${item.id}_subtotal_p2" class="cell-input cell-readonly" value="" readonly></td>`;
+                tr2.innerHTML = html2;
+                tbody2.appendChild(tr2);
             });
         }
 
+        // NAVEGAÇÃO E POPUP DE EXPANSÃO PARA PAGE 2 (SYS 10 A 18)
         function handleKeyDown(event, itemIdx, sys, page) {
             const key = event.key;
             if (['Enter', 'ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(key)) {
                 event.preventDefault();
+
+                // CHEGOU AO FINAL DO SYS 9 (ÚLTIMO ITEM: WEDGE) -> PERGUNTA E EXPANDE PAGE 2
+                if (page === 1 && itemIdx === items.length - 1 && sys === 9 && (key === 'Enter' || key === 'ArrowDown')) {
+                    if (!hasPage2) {
+                        if (confirm('Do you want to add more systems? (Page 2: Systems 10 to 18)')) {
+                            hasPage2 = true;
+                            document.getElementById('page2-container').style.display = 'block';
+                            syncAll();
+                            setTimeout(() => {
+                                const targetInput = document.getElementById('sys_wo_s10');
+                                if (targetInput) { targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
+                            }, 100);
+                            return;
+                        }
+                    }
+                }
+
                 let nextIdx = itemIdx;
                 let nextSys = sys;
+                let nextPage = page;
 
                 if (sys === 'return') {
                     if (key === 'Enter' || key === 'ArrowDown') { nextIdx = itemIdx + 1; if (nextIdx >= items.length) nextIdx = 0; }
@@ -559,21 +603,32 @@
 
                 if (key === 'Enter' || key === 'ArrowDown') {
                     if (itemIdx === -1) { nextIdx = 0; }
-                    else { nextIdx = itemIdx + 1; if (nextIdx >= items.length) { nextIdx = 0; nextSys = sys + 1; } }
+                    else { 
+                        nextIdx = itemIdx + 1; 
+                        if (nextIdx >= items.length) { 
+                            nextIdx = 0; 
+                            nextSys = sys + 1; 
+                            if (nextSys > 9 && page === 1 && hasPage2) { nextSys = 10; nextPage = 2; }
+                        } 
+                    }
                 } else if (key === 'ArrowUp') {
                     if (itemIdx === 0) { nextIdx = -1; }
                     else if (itemIdx > 0) { nextIdx = itemIdx - 1; }
                 } else if (key === 'ArrowRight') {
-                    if (sys === 9) {
+                    if (sys === 9 && page === 1) {
                         const targetInput = document.getElementById(`${items[itemIdx].id}_return`);
                         if (targetInput) { targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
                         return;
                     }
                     nextSys = sys + 1;
-                } else if (key === 'ArrowLeft') { nextSys = sys - 1; }
+                    if (nextSys > 9 && page === 1 && hasPage2) { nextSys = 10; nextPage = 2; }
+                } else if (key === 'ArrowLeft') { 
+                    nextSys = sys - 1; 
+                    if (nextSys < 10 && page === 2) { nextSys = 9; nextPage = 1; }
+                }
 
-                if (nextSys < 1) nextSys = 1;
-                if (nextSys > 9) nextSys = 9;
+                if (nextPage === 1) { if (nextSys < 1) nextSys = 1; if (nextSys > 9) nextSys = 9; }
+                if (nextPage === 2) { if (nextSys < 10) nextSys = 10; if (nextSys > 18) nextSys = 18; }
 
                 let targetId = (nextIdx === -1) ? `sys_wo_s${nextSys}` : `${items[nextIdx].id}_s${nextSys}`;
                 const targetInput = document.getElementById(targetId);
@@ -597,12 +652,23 @@
         }
 
         function calculateRow(itemId) {
-            let total = 0;
+            let subtotalP1 = 0;
             for (let sys = 1; sys <= 9; sys++) {
-                total += parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
+                subtotalP1 += parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
             }
 
+            let subtotalP2 = 0;
+            if (hasPage2) {
+                for (let sys = 10; sys <= 18; sys++) {
+                    subtotalP2 += parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
+                }
+                const subP2El = document.getElementById(`${itemId}_subtotal_p2`);
+                if (subP2El) subP2El.value = formatVal(subtotalP2);
+            }
+
+            const total = subtotalP1 + subtotalP2;
             document.getElementById(`${itemId}_total`).value = formatVal(total);
+
             const extraEl = document.getElementById(`${itemId}_extra`);
             let extra = 0;
             
@@ -627,7 +693,8 @@
         }
 
         function calculateElbows() {
-            for (let sys = 1; sys <= 9; sys++) {
+            const maxSys = hasPage2 ? 18 : 9;
+            for (let sys = 1; sys <= maxSys; sys++) {
                 const dsVal = parseNum(document.getElementById(`downspout_s${sys}`)?.value);
                 const currentElbowInput = document.getElementById(`elbow_a_s${sys}`);
                 if (currentElbowInput) currentElbowInput.value = formatVal(dsVal * 3);
@@ -636,7 +703,8 @@
         }
 
         function calculateHangers() {
-            for (let sys = 1; sys <= 9; sys++) {
+            const maxSys = hasPage2 ? 18 : 9;
+            for (let sys = 1; sys <= maxSys; sys++) {
                 const coilVal = parseNum(document.getElementById(`gutter_coil_s${sys}`)?.value);
                 const hangersVal = Math.ceil(coilVal / 1.4);
                 const currentHangerInput = document.getElementById(`hangers_s${sys}`);
@@ -646,7 +714,8 @@
         }
 
         function calculateCaulk() {
-            for (let sys = 1; sys <= 9; sys++) {
+            const maxSys = hasPage2 ? 18 : 9;
+            for (let sys = 1; sys <= maxSys; sys++) {
                 const caps = parseNum(document.getElementById(`left_cap_s${sys}`)?.value) +
                              parseNum(document.getElementById(`right_cap_s${sys}`)?.value) +
                              parseNum(document.getElementById(`out_miter_s${sys}`)?.value) +
@@ -749,35 +818,40 @@
 
         function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); }
 
-        /* LIMPA FORMULÁRIO COMPLETO E GARANTE QUE TODOS OS CAMPOS FICAM EDITÁVEIS */
+        /* LIMPA FORMULÁRIO COMPLETO, ESCONDE A PAGE 2 E LIBERA TODOS OS CAMPOS */
         function resetForm() {
             if(confirm('Are you sure you want to clear all data in the form?')) {
-                document.querySelectorAll('input[type="number"]').forEach(input => { 
+                hasPage2 = false;
+                document.getElementById('page2-container').style.display = 'none';
+
+                // Força a liberação e limpeza de todos os inputs
+                document.querySelectorAll('input').forEach(input => { 
                     input.value = ''; 
                     delete input.dataset.custom; 
                     input.readOnly = false;
                     input.disabled = false;
                 });
 
-                document.querySelectorAll('input[type="text"]').forEach(input => { 
-                    input.value = ''; 
-                    input.readOnly = false;
-                    input.disabled = false;
-                });
-
-                document.querySelectorAll('input[type="date"]').forEach(input => { 
-                    input.value = ''; 
-                    input.disabled = false;
-                });
-
                 const obs = document.getElementById('observations');
-                if (obs) { obs.value = ''; obs.disabled = false; }
+                if (obs) { 
+                    obs.value = ''; 
+                    obs.disabled = false; 
+                    obs.readOnly = false;
+                }
                 
                 setupDropdowns(true);
                 document.getElementById('size').value = '';
                 document.getElementById('global_dispatched_unit').value = '';
                 
                 syncAll();
+
+                setTimeout(() => {
+                    const firstInput = document.getElementById('sys_wo_s1');
+                    if (firstInput) {
+                        firstInput.focus();
+                        if (typeof firstInput.select === 'function') firstInput.select();
+                    }
+                }, 100);
             }
         }
 
