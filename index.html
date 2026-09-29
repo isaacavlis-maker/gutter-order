@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order System</title>
 
-    <!-- FAVICON / ÍCONE DE LUXO EMBARCADO -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%230f172a'/><path d='M256 64L64 220h48v228h288V220h48L256 64z' fill='none' stroke='%2338bdf8' stroke-width='24' stroke-linejoin='round'/><path d='M120 280h272v24H120z' fill='%23f59e0b'/><path d='M392 304v80c0 13.2-10.8 24-24 24s-24-10.8-24-24v-80' fill='none' stroke='%23f59e0b' stroke-width='20' stroke-linecap='round'/></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,11 +13,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
+        /* ==================== ESTILOS 3D DE TELA ==================== */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            background: radial-gradient(circle at top left, #1e293b 0%, #0f172a 60%, #020617 100%);
             background-attachment: fixed;
             color: #f8fafc;
             padding-bottom: 40px;
@@ -26,15 +26,14 @@
         }
 
         .navbar {
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(12px);
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
             color: #ffffff;
             padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            border-bottom: 1.5px solid #94a3b8;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid #334155;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -43,85 +42,127 @@
         .navbar-brand { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 800; color: #f8fafc; }
         
         .brand-logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
             border: 2px solid #f59e0b;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.5), inset -2px -2px 6px rgba(0,0,0,0.4), inset 2px 2px 6px rgba(255,255,255,0.1);
         }
 
         .company-select-nav {
-            background: rgba(30, 41, 59, 0.8);
+            background: linear-gradient(145deg, #1e293b, #0f172a);
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             font-size: 16px;
             font-weight: 800;
-            border: 1.5px solid #64748b;
+            border: 1.5px solid #475569;
             border-radius: 8px;
             padding: 6px 12px;
             outline: none;
             cursor: pointer;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.4), inset -1px -1px 3px rgba(0,0,0,0.3);
         }
 
         .company-select-nav option { background-color: #0f172a; color: #ffffff; }
         .nav-actions { display: flex; gap: 10px; }
 
         .btn {
-            display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
+            display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px;
             border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; border: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
         }
 
-        .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
-        .btn-outline { background: rgba(30, 41, 59, 0.6); color: #e2e8f0; border: 1px solid rgba(148, 163, 184, 0.4); }
+        .btn-success { 
+            background: linear-gradient(180deg, #10b981 0%, #047857 100%); 
+            color: #ffffff; 
+            box-shadow: 0 4px 0 #064e3b, 0 8px 15px rgba(0, 0, 0, 0.4); 
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+        }
+        .btn-success:active { transform: translateY(3px); box-shadow: 0 1px 0 #064e3b; }
+
+        .btn-outline { 
+            background: linear-gradient(180deg, #334155 0%, #1e293b 100%); 
+            color: #e2e8f0; 
+            border: 1px solid #475569;
+            box-shadow: 0 4px 0 #0f172a, 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .btn-outline:active { transform: translateY(3px); box-shadow: 0 1px 0 #0f172a; }
 
         .tabs-wrapper { max-width: 1380px; margin: 20px auto 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        .tab-buttons { display: flex; background: rgba(15, 23, 42, 0.6); padding: 4px; border-radius: 10px; gap: 6px; border: 1px solid rgba(148, 163, 184, 0.3); }
-        .tab-btn { padding: 8px 20px; border-radius: 8px; border: none; background: transparent; font-weight: 700; color: #94a3b8; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-        .tab-btn.active { background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%); color: #0f172a; border: 1px solid #cbd5e1; }
+        .tab-buttons { display: flex; background: #0f172a; padding: 6px; border-radius: 12px; gap: 8px; border: 1px solid #334155; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.6); }
+        .tab-btn { padding: 9px 22px; border-radius: 8px; border: none; background: transparent; font-weight: 700; color: #94a3b8; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+        .tab-btn.active { 
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%); 
+            color: #0f172a; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+        }
 
         .container { max-width: 1380px; margin: 16px auto; padding: 0 20px; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
         .sheet-page {
-            background: rgba(255, 255, 255, 0.98); color: #0f172a; border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); padding: 24px; border: 1px solid #cbd5e1; margin-bottom: 24px;
+            background: #ffffff; color: #0f172a; border-radius: 14px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.8); 
+            padding: 24px; border: 1px solid #94a3b8; margin-bottom: 24px;
         }
 
-        .doc-title-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 10px; margin-bottom: 16px; }
-        .doc-title-header h1 { font-size: 22px; font-weight: 800; color: #0f172a; text-transform: uppercase; }
+        .doc-title-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #0f172a; padding-bottom: 10px; margin-bottom: 16px; }
+        .doc-title-header h1 { font-size: 22px; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: -0.5px; }
         .doc-title-header .doc-meta-top { font-size: 11px; color: #64748b; font-weight: 600; text-align: right; }
 
-        .form-header-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; background-color: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #cbd5e1; margin-bottom: 16px; }
-        .form-header-grid-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; background-color: #f8fafc; padding: 14px; border-radius: 8px; border: 1.5px solid #64748b; margin-bottom: 16px; font-size: 14px; }
+        .form-header-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; 
+            background: linear-gradient(145deg, #f8fafc, #e2e8f0); 
+            padding: 14px; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 16px; 
+            box-shadow: inset 2px 2px 5px rgba(255,255,255,0.8), inset -2px -2px 5px rgba(0,0,0,0.05), 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .form-header-grid-summary { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; 
+            background: linear-gradient(145deg, #f8fafc, #e2e8f0); 
+            padding: 14px; border-radius: 10px; border: 1.5px solid #64748b; margin-bottom: 16px; font-size: 14px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
         .form-header-grid-summary div { font-size: 14px; color: #0f172a; font-weight: 700; }
         .form-header-grid-summary span { font-size: 16px; font-weight: 900; color: #0f172a; }
 
         .form-group { display: flex; flex-direction: column; gap: 4px; }
         .form-group label { font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; }
-        .form-control { padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 12px; font-weight: 600; color: #0f172a; outline: none; background-color: #ffffff; }
+        
+        .form-control { 
+            padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; font-weight: 600; color: #0f172a; outline: none; 
+            background-color: #ffffff; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.15);
+        }
 
-        .page-block-header { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #475569 0%, #1e293b 100%); color: #ffffff; padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 12px; margin-bottom: 8px; border: 1px solid #64748b; }
+        .page-block-header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: linear-gradient(180deg, #334155 0%, #1e293b 100%); 
+            color: #ffffff; padding: 7px 14px; border-radius: 8px; font-weight: 700; font-size: 12px; margin-bottom: 8px; 
+            border: 1px solid #475569; box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
 
-        .gutter-table-wrapper { overflow-x: auto; margin-bottom: 16px; border-radius: 6px; }
+        .gutter-table-wrapper { overflow-x: auto; margin-bottom: 16px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .gutter-table { width: 100%; border-collapse: collapse; font-size: 12px; }
         
-        .gutter-table th { background: linear-gradient(180deg, #64748b 0%, #475569 100%); color: #ffffff; font-weight: 700; padding: 10px 6px; text-align: center; border: 1px solid #64748b; white-space: nowrap; }
-        .gutter-table th.col-item { text-align: left; padding-left: 12px; width: 220px; background: #0f172a; color: #ffffff; }
-        .gutter-table th.col-summary { background: linear-gradient(180deg, #475569 0%, #334155 100%); color: #ffffff; }
-        .gutter-table th.col-return { background-color: #0d9488; color: #ffffff; }
+        .gutter-table th { 
+            background: linear-gradient(180deg, #475569 0%, #334155 100%); 
+            color: #ffffff; font-weight: 700; padding: 10px 6px; text-align: center; border: 1px solid #475569; white-space: nowrap; 
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        .gutter-table th.col-item { text-align: left; padding-left: 12px; width: 220px; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); color: #ffffff; }
+        .gutter-table th.col-summary { background: linear-gradient(180deg, #334155 0%, #1e293b 100%); color: #ffffff; }
+        .gutter-table th.col-return { background: linear-gradient(180deg, #0d9488 0%, #0f766e 100%); color: #ffffff; }
 
         .gutter-table td { border: 1px solid #cbd5e1; padding: 0; height: 38px; text-align: center; vertical-align: middle; background-color: #ffffff; }
         .gutter-table td.item-name { font-weight: 600; text-align: left; padding-left: 12px; color: #1e293b; background-color: #f8fafc; }
 
-        .cell-input { width: 100%; height: 100%; padding: 6px 4px; border: none; text-align: center; font-size: 13px; font-weight: 600; background: #ffffff; outline: none; color: #0f172a; }
-        .cell-auto-white { font-weight: 700; background-color: #ffffff !important; color: #0f172a; }
-
+        .cell-input { width: 100%; height: 100%; padding: 6px 4px; border: none; text-align: center; font-size: 13px; font-weight: 600; background: transparent; outline: none; color: #0f172a; }
+        
         .gutter-table tr:nth-child(odd) .cell-readonly, .gutter-table tr:nth-child(odd) .cell-given { font-weight: 700; background-color: #ffffff !important; color: #0f172a !important; }
         .gutter-table tr:nth-child(even) .cell-readonly, .gutter-table tr:nth-child(even) .cell-given { font-weight: 700; background-color: #f8fafc !important; color: #0f172a !important; }
         .cell-return { background-color: #ffffff; color: #0f766e; font-weight: 700; }
@@ -131,13 +172,13 @@
         .wo-row input { background-color: #f8fafc !important; color: #0f172a !important; font-weight: 700 !important; }
 
         .bottom-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 16px; }
-        .info-card { border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; background-color: #ffffff; }
+        .info-card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; background-color: #ffffff; box-shadow: 0 4px 8px rgba(0,0,0,0.04); }
         .info-card-title { font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
-        .textarea-control { width: 100%; height: 65px; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; font-family: inherit; font-size: 12px; resize: none; outline: none; }
+        .textarea-control { width: 100%; height: 65px; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px; font-family: inherit; font-size: 12px; resize: none; outline: none; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1); }
 
         .sheet-summary-container { display: flex; flex-direction: column; justify-content: space-between; min-height: 850px; }
-        .sheet-summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .sheet-summary-table th { background: linear-gradient(180deg, #64748b 0%, #475569 100%); color: #ffffff; padding: 10px 12px; font-size: 12px; border: 1px solid #64748b; text-align: center; }
+        .sheet-summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); }
+        .sheet-summary-table th { background: linear-gradient(180deg, #475569 0%, #334155 100%); color: #ffffff; padding: 10px 12px; font-size: 12px; border: 1px solid #475569; text-align: center; }
         .sheet-summary-table td { padding: 10px 12px; border: 1px solid #cbd5e1; font-size: 12.5px; text-align: center; font-weight: 600; background-color: #ffffff; color: #0f172a; }
 
         .unit-select-header {
@@ -153,18 +194,19 @@
             border-radius: 4px;
             outline: none;
             cursor: pointer;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
         }
 
-        .badge-alert { background-color: #fef3c7; color: #92400e; border: 1px solid #f59e0b; padding: 14px; border-radius: 6px; font-size: 11.5px; font-weight: 600; }
+        .badge-alert { background: linear-gradient(145deg, #fef3c7, #fde68a); color: #92400e; border: 1px solid #f59e0b; padding: 14px; border-radius: 8px; font-size: 11.5px; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(6px); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-card { background: #ffffff; border-radius: 16px; padding: 28px 32px; max-width: 420px; width: 90%; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); text-align: center; color: #0f172a; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-card { background: #ffffff; border-radius: 16px; padding: 28px 32px; max-width: 420px; width: 90%; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); text-align: center; color: #0f172a; }
         .modal-title { font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
         .modal-desc { font-size: 12px; color: #64748b; margin-bottom: 20px; }
         .modal-options { display: flex; flex-direction: column; gap: 12px; }
         .btn-modal-opt { padding: 14px 18px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .btn-modal-color { background: linear-gradient(135deg, #64748b 0%, #475569 100%); color: #ffffff; border-color: #64748b; }
-        .btn-modal-bw { background: #0f172a; color: #ffffff; border-color: #0f172a; }
+        .btn-modal-color { background: linear-gradient(180deg, #475569 0%, #334155 100%); color: #ffffff; border-color: #334155; box-shadow: 0 4px 0 #1e293b; }
+        .btn-modal-bw { background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); color: #ffffff; border-color: #0f172a; box-shadow: 0 4px 0 #020617; }
 
         .signatures-wrapper { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding-top: 10px; }
         .sig-box { display: flex; flex-direction: column; gap: 4px; }
@@ -173,20 +215,22 @@
         .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
         .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
 
-        @page page-portrait { size: letter portrait; margin: 0.25in; }
-        @page page-landscape { size: letter landscape; margin: 0.25in; }
+        /* ==================== REGRAS DE IMPRESSÃO - FOLHA INTEIRA (100% HEIGHT) ==================== */
+        @page page-portrait { size: letter portrait; margin: 0.2in; }
+        @page page-landscape { size: letter landscape; margin: 0.2in; }
 
         @media print {
             body.print-mode-color * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             body.print-mode-bw * { -webkit-print-color-adjust: economy !important; print-color-adjust: economy !important; background-color: transparent !important; color: #000000 !important; border-color: #000000 !important; }
 
-            html, body { background: #ffffff !important; color: #0f172a !important; padding: 0 !important; margin: 0 !important; font-size: 9pt !important; width: 100% !important; }
+            html, body { background: #ffffff !important; color: #0f172a !important; padding: 0 !important; margin: 0 !important; font-size: 10pt !important; width: 100% !important; height: 100% !important; }
             .navbar, .tabs-wrapper, .btn, .no-print, .modal-overlay { display: none !important; }
-            .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; display: flex !important; flex-direction: column !important; }
+            .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; display: flex !important; flex-direction: column !important; width: 100% !important; }
 
             .tab-content { display: block !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
 
+            /* TAB 2: FOLHA 1 - RETRATO PREENCHENDO A PÁGINA INTEIRA DE CIMA A BAIXO */
             #tab2 {
                 order: 1 !important;
                 page: page-portrait !important;
@@ -194,8 +238,27 @@
                 page-break-after: always !important;
                 break-after: page !important;
                 width: 100% !important;
+                height: 10in !important;
             }
 
+            .sheet-summary-container { 
+                display: flex !important; 
+                flex-direction: column !important; 
+                justify-content: space-between !important; 
+                height: 10.2in !important; 
+                padding-bottom: 0.1in !important;
+            }
+
+            #tab2 .doc-title-header h1 { font-size: 20pt !important; }
+            #tab2 .form-header-grid-summary { padding: 12px 14px !important; margin-bottom: 14px !important; font-size: 11pt !important; border: 1.5px solid #0f172a !important; background-color: #f8fafc !important; }
+            #tab2 .form-header-grid-summary div { font-size: 11pt !important; }
+            #tab2 .form-header-grid-summary span { font-size: 13pt !important; }
+
+            #tab2 .sheet-summary-table { margin-top: 14px !important; width: 100% !important; }
+            #tab2 .sheet-summary-table th { padding: 9px 8px !important; font-size: 10.5pt !important; background-color: #1e293b !important; color: #ffffff !important; }
+            #tab2 .sheet-summary-table td { padding: 9px 8px !important; font-size: 11pt !important; height: 34px !important; color: #000000 !important; font-weight: 700 !important; }
+
+            /* TAB 1: FOLHA 2 - PAISAGEM PREENCHENDO A PÁGINA INTEIRA */
             #tab1 {
                 order: 2 !important;
                 page: page-landscape !important;
@@ -204,44 +267,37 @@
                 page-break-after: avoid !important;
                 break-after: avoid !important;
                 width: 100% !important;
+                height: 7.8in !important;
             }
 
             .tab1-page-block { padding: 0 !important; border: none !important; box-shadow: none !important; width: 100% !important; }
-            #tab1 .doc-title-header { padding-bottom: 2px !important; margin-bottom: 4px !important; }
-            #tab1 .doc-title-header h1 { font-size: 16pt !important; }
-            #tab1 .form-header-grid { padding: 6px 8px !important; gap: 6px !important; margin-bottom: 6px !important; width: 100% !important; }
-            #tab1 .form-group label { font-size: 8pt !important; }
-            #tab1 .page-block-header { padding: 4px 8px !important; margin-bottom: 4px !important; font-size: 9pt !important; width: 100% !important; }
+            #tab1 .doc-title-header { padding-bottom: 4px !important; margin-bottom: 8px !important; }
+            #tab1 .doc-title-header h1 { font-size: 18pt !important; }
+            #tab1 .form-header-grid { padding: 8px 10px !important; gap: 8px !important; margin-bottom: 10px !important; width: 100% !important; border: 1.5px solid #0f172a !important; background-color: #f8fafc !important; }
+            #tab1 .form-group label { font-size: 8.5pt !important; }
+            #tab1 .page-block-header { padding: 6px 10px !important; margin-bottom: 6px !important; font-size: 10pt !important; width: 100% !important; background-color: #1e293b !important; color: #ffffff !important; }
 
-            #tab1 .gutter-table-wrapper { margin-bottom: 4px !important; width: 100% !important; overflow: hidden !important; }
+            #tab1 .gutter-table-wrapper { margin-bottom: 8px !important; width: 100% !important; overflow: hidden !important; }
             #tab1 .gutter-table { table-layout: fixed !important; width: 100% !important; }
             
-            #tab1 .gutter-table th.col-item { width: 18% !important; }
-            #tab1 .gutter-table th:not(.col-item):not(.col-summary):not(.col-return) { width: 5% !important; }
-            #tab1 .gutter-table th.col-summary:nth-last-child(3) { width: 8% !important; }
-            #tab1 .gutter-table th.col-summary:nth-last-child(2) { width: 9% !important; }
-            #tab1 .gutter-table th.col-summary:nth-last-child(1) { width: 10% !important; }
-            #tab1 .gutter-table th.col-return { width: 10% !important; }
+            #tab1 .gutter-table th.col-item { width: 18% !important; background-color: #0f172a !important; color: #ffffff !important; }
+            #tab1 .gutter-table th:not(.col-item):not(.col-summary):not(.col-return) { width: 5.2% !important; background-color: #334155 !important; color: #ffffff !important; }
+            #tab1 .gutter-table th.col-summary { background-color: #1e293b !important; color: #ffffff !important; }
+            #tab1 .gutter-table th.col-return { background-color: #0f766e !important; color: #ffffff !important; }
 
-            #tab1 .gutter-table th { padding: 4px 2px !important; font-size: 8pt !important; }
-            #tab1 .gutter-table td { height: 26px !important; font-size: 9pt !important; }
-            #tab1 .cell-input { font-size: 9pt !important; }
+            #tab1 .gutter-table th { padding: 6px 3px !important; font-size: 8.5pt !important; border: 1px solid #0f172a !important; }
+            #tab1 .gutter-table td { height: 30px !important; font-size: 10pt !important; border: 1px solid #cbd5e1 !important; }
+            #tab1 .cell-input { font-size: 10pt !important; font-weight: 700 !important; }
 
-            #tab1 .bottom-grid { margin-top: 6px !important; gap: 8px !important; width: 100% !important; }
-            #tab1 .info-card { padding: 4px 8px !important; }
-            #tab1 .info-card-title { font-size: 8pt !important; margin-bottom: 2px !important; }
-            #tab1 .textarea-control { height: 32px !important; font-size: 8.5pt !important; }
+            #tab1 .bottom-grid { margin-top: 10px !important; gap: 12px !important; width: 100% !important; }
+            #tab1 .info-card { padding: 6px 10px !important; border: 1px solid #0f172a !important; }
+            #tab1 .info-card-title { font-size: 8.5pt !important; margin-bottom: 4px !important; }
+            #tab1 .textarea-control { height: 42px !important; font-size: 9.5pt !important; }
 
-            #tab1 .signatures-wrapper { margin-top: 6px !important; gap: 20px !important; width: 100% !important; }
-            #tab1 .sig-line { height: 16px !important; }
-            #tab1 .sig-label { font-size: 8pt !important; }
-            #tab1 .brand-credit { margin-top: 4px !important; font-size: 8.5pt !important; }
-
-            .sheet-summary-container { display: flex !important; flex-direction: column !important; justify-content: space-between !important; height: 9.8in !important; }
-            #tab2 .doc-title-header h1 { font-size: 18pt !important; }
-            #tab2 .form-header-grid-summary { padding: 8px 12px !important; margin-bottom: 10px !important; }
-            #tab2 .sheet-summary-table td { padding: 6px 6px !important; font-size: 9.5pt !important; height: 26px !important; color: #000000 !important; }
-            #tab2 .sheet-summary-table th { padding: 6px 6px !important; font-size: 9.5pt !important; }
+            #tab1 .signatures-wrapper, #tab2 .signatures-wrapper { margin-top: 16px !important; gap: 40px !important; width: 100% !important; }
+            .sig-line { height: 22px !important; border-bottom: 1.5px solid #0f172a !important; }
+            .sig-label { font-size: 8.5pt !important; font-weight: 700 !important; }
+            .brand-credit { margin-top: 8px !important; font-size: 9.5pt !important; font-weight: 700 !important; color: #475569 !important; }
 
             .unit-select-header { border: 1px solid #000000 !important; background-color: #ffffff !important; color: #000000 !important; font-weight: 800 !important; }
             .form-control, .cell-input, .textarea-control { border: none !important; background: transparent !important; color: #000000 !important; }
@@ -346,7 +402,7 @@
 
                 <!-- PAGE 2 CONTAINER: SYSTEMS 10 TO 18 -->
                 <div id="page2-container" style="display: none; margin-top: 24px;">
-                    <div class="page-block-header" style="background:#0f766e; color:#ffffff;"><span>Systems 10 to 18 (Page 2 - Preview Subtotal)</span><span style="font-size:10px; font-weight:normal;">Page 2</span></div>
+                    <div class="page-block-header" style="background: linear-gradient(180deg, #0f766e 0%, #115e59 100%); color:#ffffff;"><span>Systems 10 to 18 (Page 2 - Preview Subtotal)</span><span style="font-size:10px; font-weight:normal;">Page 2</span></div>
                     <div class="gutter-table-wrapper">
                         <table class="gutter-table" id="table-page-2">
                             <thead>
@@ -457,7 +513,6 @@
         const INSTALLERS = ['Dimas', 'Joao', 'Fabio', 'Yaniel'];
         const COLORS = ['White', 'Brown', 'Bronze', 'Black', 'Linen'];
 
-        // ESTRUTURA ORIGINAL - OFFSET VOLTA A TER O DROPDOWN SELECIONÁVEL COM NOME ORIGINAL
         const items = [
             { id: 'gutter_coil', name: 'Gutter Coil' },
             { id: 'downspout', name: '3x4x10 Downspout' },
@@ -477,7 +532,6 @@
 
         let hasPage2 = false;
 
-        // VALIDAÇÃO COM POPUP DE ALERTA QUE APAGA APENAS O VALOR DUPLICADO E LIBERA O CAMPO IMEDIATAMENTE
         function checkWorkOrderDuplicate(inputEl) {
             const val = inputEl.value.trim().toUpperCase();
             if (!val) return;
@@ -546,7 +600,6 @@
             const tbody2 = document.getElementById('gutter-rows-p2');
             tbody1.innerHTML = ''; tbody2.innerHTML = '';
 
-            // PAGE 1: WO ROW
             const trWo1 = document.createElement('tr');
             trWo1.className = 'wo-row';
             let wo1Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
@@ -557,7 +610,6 @@
             trWo1.innerHTML = wo1Html;
             tbody1.appendChild(trWo1);
 
-            // PAGE 2: WO ROW
             const trWo2 = document.createElement('tr');
             trWo2.className = 'wo-row';
             let wo2Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
@@ -569,17 +621,16 @@
             tbody2.appendChild(trWo2);
 
             items.forEach((item, itemIdx) => {
-                // ROW PAGE 1
                 const tr1 = document.createElement('tr');
                 let colItemHtml = item.hasDropdown ? `<td style="padding:0; background-color:#ffffff;"><select id="${item.id}_spec" class="full-cell-select" onchange="syncAll()">${item.options.map(o => `<option value="${o}">${o}</option>`).join('')}</select></td>` : `<td class="item-name">${item.name}</td>`;
                 let html1 = colItemHtml;
 
                 for (let sys = 1; sys <= 9; sys++) {
-                    html1 += `<td><input type="number" min="0" value="" id="${item.id}_s${sys}" class="cell-input" data-item-idx="${itemIdx}" data-sys="${sys}" data-page="1" oninput="calculateRow('${item.id}')" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, ${sys}, 1)"></td>`;
+                    html1 += `<td><input type="number" min="0" value="" id="${item.id}_s${sys}" class="cell-input" data-item-idx="${itemIdx}" data-sys="${sys}" data-page="1" oninput="onCellInput('${item.id}', ${sys})" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, ${sys}, 1)"></td>`;
                 }
 
                 html1 += `
-                    <td><input type="text" id="${item.id}_total" class="cell-input cell-readonly" value="" readonly></td>
+                    <td><input type="number" min="0" id="${item.id}_total" class="cell-input cell-readonly" value="" placeholder="" oninput="onTotalManualInput('${item.id}')" onfocus="this.select()"></td>
                     <td><input type="number" min="0" id="${item.id}_extra" class="cell-input cell-readonly" value="" placeholder="" oninput="onExtraManualInput('${item.id}')" onfocus="this.select()"></td>
                     <td><input type="text" id="${item.id}_given" class="cell-input cell-given" value="" readonly></td>
                     <td><input type="number" min="0" value="" placeholder="" id="${item.id}_return" class="cell-input cell-return" oninput="syncSheet2()" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, 'return', 1)"></td>
@@ -588,18 +639,129 @@
                 tr1.innerHTML = html1;
                 tbody1.appendChild(tr1);
 
-                // ROW PAGE 2
                 const tr2 = document.createElement('tr');
                 let html2 = `<td class="item-name">${item.name}</td>`;
 
                 for (let sys = 10; sys <= 18; sys++) {
-                    html2 += `<td><input type="number" min="0" value="" id="${item.id}_s${sys}" class="cell-input" data-item-idx="${itemIdx}" data-sys="${sys}" data-page="2" oninput="calculateRow('${item.id}')" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, ${sys}, 2)"></td>`;
+                    html2 += `<td><input type="number" min="0" value="" id="${item.id}_s${sys}" class="cell-input" data-item-idx="${itemIdx}" data-sys="${sys}" data-page="2" oninput="onCellInput('${item.id}', ${sys})" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, ${sys}, 2)"></td>`;
                 }
 
                 html2 += `<td><input type="text" id="${item.id}_subtotal_p2" class="cell-input cell-readonly" value="" readonly></td>`;
                 tr2.innerHTML = html2;
                 tbody2.appendChild(tr2);
             });
+        }
+
+        function onCellInput(itemId, sys) {
+            if (itemId === 'elbow_a' || itemId === 'elbow_b') {
+                const el = document.getElementById(`${itemId}_s${sys}`);
+                if (el) el.dataset.manual = 'true';
+            }
+
+            const totalEl = document.getElementById(`${itemId}_total`);
+            if (totalEl && totalEl.dataset.customTotal === 'true') {
+                delete totalEl.dataset.customTotal;
+            }
+
+            calculateRow(itemId);
+        }
+
+        function onTotalManualInput(itemId) {
+            const totalEl = document.getElementById(`${itemId}_total`);
+            if (totalEl) totalEl.dataset.customTotal = 'true';
+            calculateRow(itemId);
+        }
+
+        function onExtraManualInput(itemId) {
+            const extraEl = document.getElementById(`${itemId}_extra`);
+            if (extraEl) extraEl.dataset.customExtra = 'true';
+            calculateRow(itemId);
+        }
+
+        function calculateRow(itemId) {
+            const totalEl = document.getElementById(`${itemId}_total`);
+            let total = 0;
+
+            if (totalEl && totalEl.dataset.customTotal === 'true') {
+                total = parseNum(totalEl.value);
+            } else {
+                let subtotalP1 = 0;
+                for (let sys = 1; sys <= 9; sys++) {
+                    subtotalP1 += parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
+                }
+
+                let subtotalP2 = 0;
+                if (hasPage2) {
+                    for (let sys = 10; sys <= 18; sys++) {
+                        subtotalP2 += parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
+                    }
+                    const subP2El = document.getElementById(`${itemId}_subtotal_p2`);
+                    if (subP2El) subP2El.value = formatVal(subtotalP2);
+                }
+
+                total = subtotalP1 + subtotalP2;
+                if (totalEl) totalEl.value = formatVal(total);
+            }
+
+            const extraEl = document.getElementById(`${itemId}_extra`);
+            let extra = 0;
+            
+            if (itemId === 'splash_block') {
+                extra = 0;
+                if (extraEl) extraEl.value = '';
+            } else if (extraEl && extraEl.dataset.customExtra === 'true') {
+                extra = parseNum(extraEl.value);
+            } else {
+                extra = Math.ceil(total * 0.1);
+                if (extraEl) extraEl.value = formatVal(extra);
+            }
+
+            const given = total + extra;
+            document.getElementById(`${itemId}_given`).value = formatVal(given);
+
+            if (itemId === 'gutter_coil') calculateHangers();
+            if (itemId === 'downspout') calculateElbows();
+            if (['left_cap', 'right_cap', 'out_miter', 'in_miter', 'bay_miter'].includes(itemId)) { calculateCaulk(); }
+
+            syncSheet2();
+        }
+
+        function calculateElbows() {
+            const maxSys = hasPage2 ? 18 : 9;
+            for (let sys = 1; sys <= maxSys; sys++) {
+                const dsVal = parseNum(document.getElementById(`downspout_s${sys}`)?.value);
+                const elbowAInput = document.getElementById(`elbow_a_s${sys}`);
+                if (elbowAInput && elbowAInput.dataset.manual !== 'true') {
+                    elbowAInput.value = formatVal(dsVal * 3);
+                }
+            }
+            calculateRow('elbow_a');
+        }
+
+        function calculateHangers() {
+            const maxSys = hasPage2 ? 18 : 9;
+            for (let sys = 1; sys <= maxSys; sys++) {
+                const coilVal = parseNum(document.getElementById(`gutter_coil_s${sys}`)?.value);
+                const hangersVal = Math.ceil(coilVal / 1.4);
+                const currentHangerInput = document.getElementById(`hangers_s${sys}`);
+                if (currentHangerInput) currentHangerInput.value = formatVal(hangersVal);
+            }
+            calculateRow('hangers');
+        }
+
+        function calculateCaulk() {
+            const maxSys = hasPage2 ? 18 : 9;
+            for (let sys = 1; sys <= maxSys; sys++) {
+                const caps = parseNum(document.getElementById(`left_cap_s${sys}`)?.value) +
+                             parseNum(document.getElementById(`right_cap_s${sys}`)?.value) +
+                             parseNum(document.getElementById(`out_miter_s${sys}`)?.value) +
+                             parseNum(document.getElementById(`in_miter_s${sys}`)?.value) +
+                             parseNum(document.getElementById(`bay_miter_s${sys}`)?.value);
+                const caulkVal = Math.ceil(caps / 3);
+                const currentCaulkInput = document.getElementById(`caulk_s${sys}`);
+                if (currentCaulkInput) currentCaulkInput.value = formatVal(caulkVal);
+            }
+            calculateRow('caulk');
         }
 
         function handleKeyDown(event, itemIdx, sys, page) {
@@ -679,89 +841,6 @@
             if(tabId === 'tab1') document.getElementById('btn-tab1').classList.add('active');
             if(tabId === 'tab2') document.getElementById('btn-tab2').classList.add('active');
             syncAll();
-        }
-
-        function onExtraManualInput(itemId) {
-            const extraEl = document.getElementById(`${itemId}_extra`);
-            if (extraEl) extraEl.dataset.custom = 'true';
-            calculateRow(itemId);
-        }
-
-        function calculateRow(itemId) {
-            let subtotalP1 = 0;
-            for (let sys = 1; sys <= 9; sys++) {
-                subtotalP1 += parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
-            }
-
-            let subtotalP2 = 0;
-            if (hasPage2) {
-                for (let sys = 10; sys <= 18; sys++) {
-                    subtotalP2 += parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
-                }
-                const subP2El = document.getElementById(`${itemId}_subtotal_p2`);
-                if (subP2El) subP2El.value = formatVal(subtotalP2);
-            }
-
-            const total = subtotalP1 + subtotalP2;
-            document.getElementById(`${itemId}_total`).value = formatVal(total);
-
-            const extraEl = document.getElementById(`${itemId}_extra`);
-            let extra = 0;
-            
-            if (itemId === 'splash_block') {
-                extra = 0;
-                if (extraEl) extraEl.value = '';
-            } else if (extraEl && extraEl.dataset.custom === 'true') {
-                extra = parseNum(extraEl.value);
-            } else {
-                extra = Math.ceil(total * 0.1);
-                if (extraEl) extraEl.value = formatVal(extra);
-            }
-
-            const given = total + extra;
-            document.getElementById(`${itemId}_given`).value = formatVal(given);
-
-            if (itemId === 'gutter_coil') calculateHangers();
-            if (itemId === 'downspout') calculateElbows();
-            if (['left_cap', 'right_cap', 'out_miter', 'in_miter', 'bay_miter'].includes(itemId)) { calculateCaulk(); }
-
-            syncSheet2();
-        }
-
-        function calculateElbows() {
-            const maxSys = hasPage2 ? 18 : 9;
-            for (let sys = 1; sys <= maxSys; sys++) {
-                const dsVal = parseNum(document.getElementById(`downspout_s${sys}`)?.value);
-                const currentElbowInput = document.getElementById(`elbow_a_s${sys}`);
-                if (currentElbowInput) currentElbowInput.value = formatVal(dsVal * 3);
-            }
-            calculateRow('elbow_a');
-        }
-
-        function calculateHangers() {
-            const maxSys = hasPage2 ? 18 : 9;
-            for (let sys = 1; sys <= maxSys; sys++) {
-                const coilVal = parseNum(document.getElementById(`gutter_coil_s${sys}`)?.value);
-                const hangersVal = Math.ceil(coilVal / 1.4);
-                const currentHangerInput = document.getElementById(`hangers_s${sys}`);
-                if (currentHangerInput) currentHangerInput.value = formatVal(hangersVal);
-            }
-            calculateRow('hangers');
-        }
-
-        function calculateCaulk() {
-            const maxSys = hasPage2 ? 18 : 9;
-            for (let sys = 1; sys <= maxSys; sys++) {
-                const caps = parseNum(document.getElementById(`left_cap_s${sys}`)?.value) +
-                             parseNum(document.getElementById(`right_cap_s${sys}`)?.value) +
-                             parseNum(document.getElementById(`out_miter_s${sys}`)?.value) +
-                             parseNum(document.getElementById(`in_miter_s${sys}`)?.value) +
-                             parseNum(document.getElementById(`bay_miter_s${sys}`)?.value);
-                const caulkVal = Math.ceil(caps / 3);
-                const currentCaulkInput = document.getElementById(`caulk_s${sys}`);
-                if (currentCaulkInput) currentCaulkInput.value = formatVal(caulkVal);
-            }
-            calculateRow('caulk');
         }
 
         function setupDatePrintFormatting(dateInputId, wrapperId, lineId, textDisplayId) {
@@ -854,7 +933,6 @@
 
         function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); }
 
-        /* LIMPA FORMULÁRIO COMPLETO, ESCONDE A PAGE 2 E LIBERA TODOS OS CAMPOS RAPIDAMENTE */
         function resetForm() {
             if(confirm('Are you sure you want to clear all data in the form?')) {
                 hasPage2 = false;
@@ -862,7 +940,9 @@
 
                 document.querySelectorAll('input').forEach(input => { 
                     input.value = ''; 
-                    delete input.dataset.custom; 
+                    delete input.dataset.customTotal; 
+                    delete input.dataset.customExtra;
+                    delete input.dataset.manual;
                     input.readOnly = false;
                     input.disabled = false;
                 });
