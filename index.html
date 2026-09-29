@@ -273,7 +273,7 @@
             .tab-content { display: block !important; position: static !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; position: static !important; }
 
-            /* PRIMEIRA FOLHA DA IMPRESSÃO: TAB 2 (REQUISITION SHEET - RETRATO) */
+            /* PRIMEIRA PÁGINA (TAB 2 - REQUISITION SHEET): RETRATO EXATO */
             #tab2 {
                 order: 1 !important;
                 page-break-before: avoid !important;
@@ -282,7 +282,6 @@
                 width: 100% !important;
                 height: 9.8in !important;
                 display: block !important;
-                position: static !important;
             }
 
             .sheet-summary-container { 
@@ -301,19 +300,19 @@
             #tab2 .sheet-summary-table th { padding: 8px 6px !important; font-size: 10pt !important; background-color: #1e293b !important; color: #ffffff !important; }
             #tab2 .sheet-summary-table td { padding: 8px 6px !important; font-size: 10.5pt !important; height: 32px !important; color: #000000 !important; font-weight: 700 !important; }
 
-            /* SEGUNDA FOLHA DA IMPRESSÃO: TAB 1 (ORDER LIST - PAISAGEM ROTAÇÃO PERFEITA) */
+            /* SEGUNDA FOLHA DA IMPRESSÃO: TAB 1 (ORDER LIST - PAISAGEM 100% EXPANDIDA E CENTRALIZADA) */
             #tab1 {
                 order: 2 !important;
                 page-break-before: always !important;
                 break-before: page !important;
                 page-break-after: avoid !important;
                 break-after: avoid !important;
-                width: 10.2in !important;
-                height: 7.6in !important;
+                width: 10.5in !important;
+                height: 7.9in !important;
                 display: block !important;
-                transform: rotate(-90deg) translate(-10.2in, 0);
+                transform: rotate(-90deg) translate(-10.2in, -0.2in);
                 transform-origin: top left;
-                margin-top: 0.2in !important;
+                margin: 0 auto !important;
             }
 
             .tab1-page-block { padding: 0 !important; border: none !important; box-shadow: none !important; width: 100% !important; }
@@ -359,7 +358,6 @@
 </head>
 <body class="print-mode-color">
 
-    <!-- POP-UP RESTAURADO COM OPÇÕES COLORIDA E PRETO & BRANCO -->
     <div id="printModal" class="modal-overlay">
         <div class="modal-card">
             <div class="modal-title"><i class="fa-solid fa-print" style="color:#475569;"></i> Print Order Sheets</div>
@@ -638,7 +636,7 @@
             }
 
             if (isDuplicate) {
-                alert(`⚠️️ WARNING: Work Order Number "${val}" is already entered in another System!\nPlease enter a unique WO number.`);
+                alert(`⚠️ WARNING: Work Order Number "${val}" is already entered in another System!\nPlease enter a unique WO number.`);
                 inputEl.value = '';
                 setTimeout(() => {
                     inputEl.focus();
@@ -1011,7 +1009,7 @@
         function executePrint(mode) {
             closePrintModal();
             
-            // Buscar o primeiro WO digitado para o nome do arquivo ao salvar (ex: WO123456silvertrend)
+            // Buscar o primeiro WO digitado para o nome do arquivo ao salvar
             let firstWO = '';
             for (let sys = 1; sys <= 18; sys++) {
                 const woInput = document.getElementById(`sys_wo_s${sys}`);
