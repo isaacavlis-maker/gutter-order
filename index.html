@@ -236,7 +236,7 @@
         .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
         .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
 
-        /* ==================== REGRAS RÍGIDAS DE IMPRESSÃO - ORDEM DAS FOLHAS ==================== */
+        /* ==================== REGRAS DE IMPRESSÃO PERFEITAS ==================== */
         @page { size: letter portrait; margin: 0.2in; }
 
         @media print {
@@ -259,21 +259,21 @@
                 max-width: 100% !important; 
                 padding: 0 !important; 
                 margin: 0 !important; 
-                display: flex !important; 
-                flex-direction: column !important; 
+                display: block !important; 
                 width: 100% !important; 
             }
 
             .tab-content { display: block !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
 
-            /* PRIMEIRA FOLHA (OBRIGATÓRIA): TAB 2 - REQUISITION SHEET */
+            /* PRIMEIRA FOLHA (TAB 2 - REQUISITION SHEET): RETRATO */
             #tab2 {
                 order: 1 !important;
                 page-break-before: avoid !important;
                 page-break-after: always !important;
                 break-after: page !important;
                 width: 100% !important;
+                height: 10in !important;
             }
 
             .sheet-summary-container { 
@@ -292,17 +292,22 @@
             #tab2 .sheet-summary-table th { padding: 8px 6px !important; font-size: 10pt !important; background-color: #1e293b !important; color: #ffffff !important; }
             #tab2 .sheet-summary-table td { padding: 8px 6px !important; font-size: 10.5pt !important; height: 32px !important; color: #000000 !important; font-weight: 700 !important; }
 
-            /* SEGUNDA FOLHA (OBRIGATÓRIA): TAB 1 - ORDER LIST */
+            /* SEGUNDA FOLHA (TAB 1 - ORDER LIST): ROTAÇÃO PAISAGEM LIMPA */
             #tab1 {
                 order: 2 !important;
                 page-break-before: always !important;
                 break-before: page !important;
                 page-break-after: avoid !important;
                 break-after: avoid !important;
-                width: 100% !important;
+                width: 10in !important;
+                height: 7.5in !important;
+                transform: rotate(-90deg) translate(-10.2in, 0);
+                transform-origin: top left;
+                position: absolute !important;
+                left: 0 !important;
             }
 
-            .tab1-page-block { padding: 0 !important; border: none !important; box-shadow: none !important; width: 100% !important; transform: none !important; position: static !important; }
+            .tab1-page-block { padding: 0 !important; border: none !important; box-shadow: none !important; width: 100% !important; }
             #tab1 .doc-title-header { padding-bottom: 4px !important; margin-bottom: 8px !important; }
             #tab1 .doc-title-header h1 { font-size: 18pt !important; }
             #tab1 .form-header-grid { padding: 8px 10px !important; gap: 8px !important; margin-bottom: 10px !important; width: 100% !important; border: 1.5px solid #0f172a !important; background-color: #f8fafc !important; box-shadow: none !important; }
@@ -333,7 +338,7 @@
 
             .unit-select-header { border: 1px solid #000000 !important; background-color: #ffffff !important; color: #000000 !important; font-weight: 800 !important; box-shadow: none !important; }
             .form-control, .cell-input, .textarea-control { border: none !important; background: transparent !important; color: #000000 !important; box-shadow: none !important; }
-            select, .full-cell-select { appearance: none !important; background: transparent !important; border: none !important; color: #000000 !important; }
+            select, .full-cell-select { appearance: none !important; background: transparent !important; border: none !important; color: #000000 !important; box-shadow: none !important; }
 
             .empty-date-hide { display: none !important; }
             .print-blank-line-show { display: inline-block !important; }
@@ -638,29 +643,6 @@
             document.getElementById('tab1_doc_title').innerText = shortBrandName;
             document.getElementById('tab2_doc_title').innerText = shortBrandName;
             document.getElementById('btn_tab1_label').innerText = shortBrandName;
-
-            // GERAR NOME DO ARQUIVO PARA SALVAR PDF (ex: WO123456silvertrend)
-            let firstWO = '';
-            for (let sys = 1; sys <= 18; sys++) {
-                const woInput = document.getElementById(`sys_wo_s${sys}`);
-                if (woInput && woInput.value.trim()) {
-                    firstWO = woInput.value.trim().replace(/[^a-zA-Z0-9]/g, '');
-                    break;
-                }
-            }
-
-            let companySuffix = 'silvertrend';
-            if (companyFull.includes('Mid Florida')) {
-                companySuffix = 'midflorida';
-            } else if (companyFull.includes('FLC')) {
-                companySuffix = 'flc';
-            }
-
-            if (firstWO) {
-                document.title = `WO${firstWO}${companySuffix}`;
-            } else {
-                document.title = companyFull;
-            }
 
             const unitSelect = document.getElementById('global_dispatched_unit');
             if (unitSelect) {
@@ -1016,6 +998,32 @@
 
         function executePrint(mode) {
             closePrintModal();
+            
+            // 1. Atualizar o document.title para o nome do arquivo no momento exato de salvar
+            let firstWO = '';
+            for (let sys = 1; sys <= 18; sys++) {
+                const woInput = document.getElementById(`sys_wo_s${sys}`);
+                if (woInput && woInput.value.trim()) {
+                    firstWO = woInput.value.trim().replace(/[^a-zA-Z0-9]/g, '');
+                    break;
+                }
+            }
+
+            const companyFull = document.getElementById('app_company_select').value;
+            let companySuffix = 'silvertrend';
+            if (companyFull.includes('Mid Florida')) {
+                companySuffix = 'midflorida';
+            } else if (companyFull.includes('FLC')) {
+                companySuffix = 'flc';
+            }
+
+            if (firstWO) {
+                document.title = `WO${firstWO}${companySuffix}`;
+            } else {
+                document.title = companyFull;
+            }
+
+            // 2. Definir modo P&B ou Colorido
             if (mode === 'bw') {
                 document.body.classList.remove('print-mode-color');
                 document.body.classList.add('print-mode-bw');
@@ -1027,11 +1035,7 @@
             setTimeout(() => { window.print(); }, 150);
         }
 
-        function syncAll() { 
-            items.forEach(item => calculateRow(item.id)); 
-            syncSheet2(); 
-            updateCompanyBrand();
-        }
+        function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); updateCompanyBrand(); }
 
         function resetForm() {
             if(confirm('Are you sure you want to clear all data in the form?')) {
