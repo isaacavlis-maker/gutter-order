@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order System</title>
 
-    <!-- FAVICON EMBUTIDO -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%230f172a'/><path d='M256 64L64 220h48v228h288V220h48L256 64z' fill='none' stroke='%2338bdf8' stroke-width='24' stroke-linejoin='round'/><path d='M120 280h272v24H120z' fill='%23f59e0b'/><path d='M392 304v80c0 13.2-10.8 24-24 24s-24-10.8-24-24v-80' fill='none' stroke='%23f59e0b' stroke-width='20' stroke-linecap='round'/></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -222,13 +221,13 @@
         .badge-alert { background: linear-gradient(145deg, #fef3c7, #fde68a); color: #92400e; border: 1px solid #f59e0b; padding: 14px; border-radius: 8px; font-size: 11.5px; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-card { background: #ffffff; border-radius: 16px; padding: 28px 32px; max-width: 420px; width: 90%; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); text-align: center; color: #0f172a; }
+        .modal-card { background: #ffffff; border-radius: 16px; padding: 28px 32px; max-width: 460px; width: 90%; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); text-align: center; color: #0f172a; }
         .modal-title { font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
         .modal-desc { font-size: 12px; color: #64748b; margin-bottom: 20px; }
         .modal-options { display: flex; flex-direction: column; gap: 12px; }
         .btn-modal-opt { padding: 14px 18px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .btn-modal-color { background: linear-gradient(180deg, #475569 0%, #334155 100%); color: #ffffff; border-color: #334155; box-shadow: 0 4px 0 #1e293b; }
-        .btn-modal-bw { background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); color: #ffffff; border-color: #0f172a; box-shadow: 0 4px 0 #020617; }
+        .btn-modal-bw { background: linear-gradient(180deg, #0d9488 0%, #0f766e 100%); color: #ffffff; border-color: #0f766e; box-shadow: 0 4px 0 #115e59; }
 
         .signatures-wrapper { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding-top: 10px; }
         .sig-box { display: flex; flex-direction: column; gap: 4px; }
@@ -237,11 +236,15 @@
         .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
         .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
 
-        /* ==================== IMPRESSÃO LIMPA E PERFEITA (SISTEMA DE ORIENTAÇÃO @PAGE NATURAIS) ==================== */
-        @page page-portrait { size: letter portrait; margin: 0.25in; }
-        @page page-landscape { size: letter landscape; margin: 0.25in; }
-
+        /* ==================== IMPRESSÃO DIRETA POR ABA COM REGRAS @PAGE ISOLADAS ==================== */
         @media print {
+            body.print-target-tab1 {
+                @page { size: letter landscape; margin: 0.25in; }
+            }
+            body.print-target-tab2 {
+                @page { size: letter portrait; margin: 0.25in; }
+            }
+
             body.print-mode-color * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             body.print-mode-bw * { -webkit-print-color-adjust: economy !important; print-color-adjust: economy !important; }
 
@@ -262,19 +265,19 @@
 
             html, body { background: #ffffff !important; color: #0f172a !important; padding: 0 !important; margin: 0 !important; font-size: 9.5pt !important; width: 100% !important; }
             .navbar, .tabs-wrapper, .btn, .no-print, .modal-overlay { display: none !important; }
-            .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; display: flex !important; flex-direction: column !important; width: 100% !important; }
+            .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; display: block !important; width: 100% !important; }
+
+            /* ESCONDE A ABA INATIVA DURANTE A IMPRESSÃO PARA EVITAR CONFLITO DE ORIENTAÇÃO */
+            body.print-target-tab1 #tab2 { display: none !important; }
+            body.print-target-tab2 #tab1 { display: none !important; }
 
             .tab-content { display: block !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
 
-            /* TAB 2 (PÁGINA 1): RETRATO DE CIMA A BAIXO */
+            /* TAB 2 (REQUISITION SHEET): RETRATO EXATO */
             #tab2 {
-                order: 1 !important;
-                page: page-portrait !important;
-                page-break-before: avoid !important;
-                page-break-after: always !important;
-                break-after: page !important;
                 width: 100% !important;
+                height: 10in !important;
             }
 
             .sheet-summary-container { 
@@ -284,23 +287,17 @@
                 height: 9.8in !important; 
             }
 
-            #tab2 .doc-title-header h1 { font-size: 18pt !important; }
-            #tab2 .form-header-grid-summary { padding: 10px 12px !important; margin-bottom: 12px !important; font-size: 10.5pt !important; border: 1.5px solid #0f172a !important; background-color: #f8fafc !important; box-shadow: none !important; }
-            #tab2 .form-header-grid-summary div { font-size: 10.5pt !important; }
-            #tab2 .form-header-grid-summary span { font-size: 12.5pt !important; }
+            #tab2 .doc-title-header h1 { font-size: 20pt !important; }
+            #tab2 .form-header-grid-summary { padding: 10px 12px !important; margin-bottom: 12px !important; font-size: 11pt !important; border: 1.5px solid #0f172a !important; background-color: #f8fafc !important; box-shadow: none !important; }
+            #tab2 .form-header-grid-summary div { font-size: 11pt !important; }
+            #tab2 .form-header-grid-summary span { font-size: 13pt !important; }
 
             #tab2 .sheet-summary-table { margin-top: 12px !important; width: 100% !important; box-shadow: none !important; }
             #tab2 .sheet-summary-table th { padding: 8px 6px !important; font-size: 10pt !important; background-color: #1e293b !important; color: #ffffff !important; }
             #tab2 .sheet-summary-table td { padding: 8px 6px !important; font-size: 10.5pt !important; height: 32px !important; color: #000000 !important; font-weight: 700 !important; }
 
-            /* TAB 1 (PÁGINA 2): PAISAGEM NATIIVA INTEIRA */
+            /* TAB 1 (ORDER LIST): PAISAGEM LARGURA TOTAL */
             #tab1 {
-                order: 2 !important;
-                page: page-landscape !important;
-                page-break-before: always !important;
-                break-before: page !important;
-                page-break-after: avoid !important;
-                break-after: avoid !important;
                 width: 100% !important;
             }
 
@@ -342,21 +339,21 @@
         }
     </style>
 
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiT3JkZXIgU3lzdGVtIiwic3RhcnRfdXJsIjoiLi9pbmRleC5odG1sIiwic2hvcnRfbmFtZSI6Ik9yZGVyU3lzdGVtIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzQ3NTU2OSJ9">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiT3JkZXIgU3lzdGVtIiwic2hvcnRfbmFtZSI6Ik9yZGVyU3lzdGVtIiwic3RhcnRfdXJsIjoiLi9pbmRleC5odG1sIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzQ3NTU2OSJ9">
     <meta name="theme-color" content="#0f172a">
 </head>
 <body class="print-mode-color">
 
     <div id="printModal" class="modal-overlay">
         <div class="modal-card">
-            <div class="modal-title"><i class="fa-solid fa-print" style="color:#475569;"></i> Print Order Sheets</div>
-            <div class="modal-desc">Click below to print both sheets on 2 separate pages:</div>
+            <div class="modal-title"><i class="fa-solid fa-print" style="color:#475569;"></i> Print Sheet Options</div>
+            <div class="modal-desc">Select which sheet you want to print:</div>
             <div class="modal-options">
-                <button class="btn-modal-opt btn-modal-color" onclick="executePrint('color')">
-                    <i class="fa-solid fa-palette"></i> Print Both Sheets
+                <button class="btn-modal-opt btn-modal-color" onclick="executePrintSheet('tab1')">
+                    <i class="fa-solid fa-table-cells"></i> Print Order List (Landscape / Paisagem)
                 </button>
-                <button class="btn-modal-opt btn-modal-bw" onclick="executePrint('bw')">
-                    <i class="fa-solid fa-circle-half-stroke"></i> Print in Black & White
+                <button class="btn-modal-opt btn-modal-bw" onclick="executePrintSheet('tab2')">
+                    <i class="fa-solid fa-file-invoice"></i> Print Requisition Sheet (Portrait / Retrato)
                 </button>
                 <button class="btn btn-outline" style="margin-top:8px; color:#64748b;" onclick="closePrintModal()">
                     Cancel
@@ -994,17 +991,15 @@
         function openPrintModal() { document.getElementById('printModal').style.display = 'flex'; }
         function closePrintModal() { document.getElementById('printModal').style.display = 'none'; }
 
-        function executePrint(mode) {
+        // IMPRESSÃO ISOLADA DE FOLHA ÚNICA GARANTINDO ORIENTAÇÃO NATIVA PERFEITA
+        function executePrintSheet(targetTab) {
             closePrintModal();
-            if (mode === 'bw') {
-                document.body.classList.remove('print-mode-color');
-                document.body.classList.add('print-mode-bw');
-            } else {
-                document.body.classList.remove('print-mode-bw');
-                document.body.classList.add('print-mode-color');
-            }
+            document.body.classList.remove('print-target-tab1', 'print-target-tab2');
+            document.body.classList.add(`print-target-${targetTab}`);
 
-            setTimeout(() => { window.print(); }, 150);
+            setTimeout(() => { 
+                window.print(); 
+            }, 150);
         }
 
         function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); }
