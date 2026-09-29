@@ -236,8 +236,8 @@
         .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
         .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
 
-        /* ==================== REGRAS DE IMPRESSÃO PERFEITAS ==================== */
-        @page { size: letter portrait; margin: 0.2in; }
+        /* ==================== IMPRESSÃO LIMPA E SEM SOBREPOSIÇÃO ==================== */
+        @page { size: letter portrait; margin: 0.25in; }
 
         @media print {
             body.print-mode-color * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
@@ -263,17 +263,18 @@
                 width: 100% !important; 
             }
 
-            .tab-content { display: block !important; }
-            .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
+            .tab-content { display: block !important; position: static !important; }
+            .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; position: static !important; }
 
-            /* PRIMEIRA FOLHA (TAB 2 - REQUISITION SHEET): RETRATO */
+            /* FOLHA 1 (TAB 2 - REQUISITION SHEET): RETRATO LIMPO NA PRIMEIRA PÁGINA */
             #tab2 {
                 order: 1 !important;
                 page-break-before: avoid !important;
                 page-break-after: always !important;
                 break-after: page !important;
                 width: 100% !important;
-                height: 10in !important;
+                position: relative !important;
+                display: block !important;
             }
 
             .sheet-summary-container { 
@@ -283,31 +284,28 @@
                 height: 9.8in !important; 
             }
 
-            #tab2 .doc-title-header h1 { font-size: 20pt !important; }
-            #tab2 .form-header-grid-summary { padding: 10px 12px !important; margin-bottom: 12px !important; font-size: 11pt !important; border: 1.5px solid #0f172a !important; background-color: #f8fafc !important; box-shadow: none !important; }
-            #tab2 .form-header-grid-summary div { font-size: 11pt !important; }
-            #tab2 .form-header-grid-summary span { font-size: 13pt !important; }
+            #tab2 .doc-title-header h1 { font-size: 18pt !important; }
+            #tab2 .form-header-grid-summary { padding: 10px 12px !important; margin-bottom: 12px !important; font-size: 10.5pt !important; border: 1.5px solid #0f172a !important; background-color: #f8fafc !important; box-shadow: none !important; }
+            #tab2 .form-header-grid-summary div { font-size: 10.5pt !important; }
+            #tab2 .form-header-grid-summary span { font-size: 12.5pt !important; }
 
             #tab2 .sheet-summary-table { margin-top: 12px !important; width: 100% !important; box-shadow: none !important; }
             #tab2 .sheet-summary-table th { padding: 8px 6px !important; font-size: 10pt !important; background-color: #1e293b !important; color: #ffffff !important; }
             #tab2 .sheet-summary-table td { padding: 8px 6px !important; font-size: 10.5pt !important; height: 32px !important; color: #000000 !important; font-weight: 700 !important; }
 
-            /* SEGUNDA FOLHA (TAB 1 - ORDER LIST): ROTAÇÃO PAISAGEM LIMPA */
+            /* FOLHA 2 (TAB 1 - ORDER LIST): SEGUNDA PÁGINA TOTALMENTE SEPARADA */
             #tab1 {
                 order: 2 !important;
                 page-break-before: always !important;
                 break-before: page !important;
                 page-break-after: avoid !important;
                 break-after: avoid !important;
-                width: 10in !important;
-                height: 7.5in !important;
-                transform: rotate(-90deg) translate(-10.2in, 0);
-                transform-origin: top left;
-                position: absolute !important;
-                left: 0 !important;
+                width: 100% !important;
+                position: relative !important;
+                display: block !important;
             }
 
-            .tab1-page-block { padding: 0 !important; border: none !important; box-shadow: none !important; width: 100% !important; }
+            .tab1-page-block { padding: 0 !important; border: none !important; box-shadow: none !important; width: 100% !important; transform: none !important; position: static !important; }
             #tab1 .doc-title-header { padding-bottom: 4px !important; margin-bottom: 8px !important; }
             #tab1 .doc-title-header h1 { font-size: 18pt !important; }
             #tab1 .form-header-grid { padding: 8px 10px !important; gap: 8px !important; margin-bottom: 10px !important; width: 100% !important; border: 1.5px solid #0f172a !important; background-color: #f8fafc !important; box-shadow: none !important; }
@@ -999,7 +997,7 @@
         function executePrint(mode) {
             closePrintModal();
             
-            // 1. Atualizar o document.title para o nome do arquivo no momento exato de salvar
+            // 1. Atualizar o document.title para o nome do arquivo no momento exato de salvar (ex: WO123456silvertrend)
             let firstWO = '';
             for (let sys = 1; sys <= 18; sys++) {
                 const woInput = document.getElementById(`sys_wo_s${sys}`);
