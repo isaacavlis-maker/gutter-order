@@ -236,7 +236,7 @@
         .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
         .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
 
-        /* ==================== IMPRESSÃO LIMPA E SEM SOBREPOSIÇÃO ==================== */
+        /* ==================== IMPRESSÃO DEFINITIVA: TAB 2 (PAG 1) -> TAB 1 (PAG 2) ==================== */
         @page { size: letter portrait; margin: 0.25in; }
 
         @media print {
@@ -259,22 +259,24 @@
                 max-width: 100% !important; 
                 padding: 0 !important; 
                 margin: 0 !important; 
-                display: block !important; 
+                display: flex !important; 
+                flex-direction: column !important; 
                 width: 100% !important; 
             }
 
             .tab-content { display: block !important; position: static !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; position: static !important; }
 
-            /* FOLHA 1 (TAB 2 - REQUISITION SHEET): RETRATO LIMPO NA PRIMEIRA PÁGINA */
+            /* PRIMEIRA FOLHA DA IMPRESSÃO: TAB 2 (REQUISITION SHEET) */
             #tab2 {
                 order: 1 !important;
                 page-break-before: avoid !important;
                 page-break-after: always !important;
                 break-after: page !important;
                 width: 100% !important;
-                position: relative !important;
+                height: 9.8in !important;
                 display: block !important;
+                position: static !important;
             }
 
             .sheet-summary-container { 
@@ -293,7 +295,7 @@
             #tab2 .sheet-summary-table th { padding: 8px 6px !important; font-size: 10pt !important; background-color: #1e293b !important; color: #ffffff !important; }
             #tab2 .sheet-summary-table td { padding: 8px 6px !important; font-size: 10.5pt !important; height: 32px !important; color: #000000 !important; font-weight: 700 !important; }
 
-            /* FOLHA 2 (TAB 1 - ORDER LIST): SEGUNDA PÁGINA TOTALMENTE SEPARADA */
+            /* SEGUNDA FOLHA DA IMPRESSÃO: TAB 1 (ORDER LIST) */
             #tab1 {
                 order: 2 !important;
                 page-break-before: always !important;
@@ -301,8 +303,8 @@
                 page-break-after: avoid !important;
                 break-after: avoid !important;
                 width: 100% !important;
-                position: relative !important;
                 display: block !important;
+                position: static !important;
             }
 
             .tab1-page-block { padding: 0 !important; border: none !important; box-shadow: none !important; width: 100% !important; transform: none !important; position: static !important; }
@@ -997,7 +999,7 @@
         function executePrint(mode) {
             closePrintModal();
             
-            // 1. Atualizar o document.title para o nome do arquivo no momento exato de salvar (ex: WO123456silvertrend)
+            // Buscar o primeiro WO digitado para o nome do arquivo ao salvar
             let firstWO = '';
             for (let sys = 1; sys <= 18; sys++) {
                 const woInput = document.getElementById(`sys_wo_s${sys}`);
@@ -1021,7 +1023,6 @@
                 document.title = companyFull;
             }
 
-            // 2. Definir modo P&B ou Colorido
             if (mode === 'bw') {
                 document.body.classList.remove('print-mode-color');
                 document.body.classList.add('print-mode-bw');
