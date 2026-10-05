@@ -172,7 +172,7 @@
         .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
         .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
 
-        /* ==================== REGRAS DE IMPRESSÃO DEFINITIVAS ==================== */
+        /* ==================== REGRAS DE IMPRESSÃO DEFINITIVAS - CADEADO NO RETRATO E PAISAGEM PERFEITA ==================== */
         @page { size: letter portrait; margin: 0.15in; }
 
         @media print {
@@ -195,7 +195,7 @@
             .tab-content { display: block !important; position: static !important; }
             .sheet-page { padding: 0 !important; border: none !important; box-shadow: none !important; margin: 0 !important; background: #ffffff !important; }
 
-            /* 🔒 CADEADO DEFINITIVO: FOLHA 1 (REQUISITION SHEET - RETRATO 100% INTACTA) */
+            /* 🔒 CADEADO: FOLHA 1 (REQUISITION SHEET - RETRATO 100% PERFEITA E TRANCADA) */
             #tab2 {
                 order: 1 !important;
                 page-break-before: avoid !important;
@@ -218,15 +218,15 @@
             #tab2 .sheet-summary-table th { padding: 6px 4px !important; font-size: 9.5pt !important; font-weight: 900 !important; background-color: #0f172a !important; color: #ffffff !important; border: 1.5px solid #000000 !important; }
             #tab2 .sheet-summary-table td { padding: 5px 4px !important; font-size: 10pt !important; height: 28px !important; color: #000000 !important; font-weight: 800 !important; border: 1.5px solid #000000 !important; }
 
-            /* 📐 FOLHA 2 E 3: ORDER LIST (PAISAGEM EXPANDIDA - ESCALA MAIOR 0.96 E POSIÇÃO AJUSTADA) */
+            /* 📐 FOLHA 2 E 3: ORDER LIST (PAISAGEM ENQUADRADA COM MARGEM DIREITA E TOPO PERFEITOS) */
             #tab1 {
                 order: 2 !important;
                 page-break-before: always !important;
                 break-before: page !important;
-                width: 10.4in !important;
-                height: 7.6in !important;
+                width: 9.8in !important;
+                height: 7.2in !important;
                 display: block !important;
-                transform: scale(0.96) rotate(-90deg) translate(-10.2in, -0.90in);
+                transform: scale(0.90) rotate(-90deg) translate(-9.1in, -0.10in);
                 transform-origin: top left;
                 margin: 0 auto !important;
             }
