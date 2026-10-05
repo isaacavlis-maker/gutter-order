@@ -67,7 +67,7 @@
         }
 
         .company-select-nav option { background-color: #0f172a; color: #ffffff; }
-        .nav-actions { display: flex; gap: 10px; }
+        .nav-actions { display: flex; gap: 10px; align-items: center; }
 
         .btn {
             display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
@@ -172,7 +172,7 @@
         .brand-credit { margin-top: 18px; text-align: right; font-family: 'Fira Code', 'Courier New', monospace; font-size: 13px; font-weight: 700; color: #475569; }
         .print-blank-line { display: none; border-bottom: 1px solid #0f172a; width: 120px; height: 16px; margin-left: 6px; }
 
-        /* ==================== REGRAS DE IMPRESSÃO DEFINITIVAS - CADEADO NO RETRATO E PAISAGEM PERFEITA ==================== */
+        /* ==================== REGRAS DE IMPRESSÃO DEFINITIVAS ==================== */
         @page { size: letter portrait; margin: 0.15in; }
 
         @media print {
@@ -218,15 +218,15 @@
             #tab2 .sheet-summary-table th { padding: 6px 4px !important; font-size: 9.5pt !important; font-weight: 900 !important; background-color: #0f172a !important; color: #ffffff !important; border: 1.5px solid #000000 !important; }
             #tab2 .sheet-summary-table td { padding: 5px 4px !important; font-size: 10pt !important; height: 28px !important; color: #000000 !important; font-weight: 800 !important; border: 1.5px solid #000000 !important; }
 
-            /* 📐 FOLHA 2 E 3: ORDER LIST (PAISAGEM EXPANDIDA - ENQUADRAMENTO E ESCALA AUMENTADA) */
+            /* 📐 FOLHA 2 E 3: ORDER LIST (PAISAGEM - CENTRADA E ESPAÇADA NO TOPO) */
             #tab1 {
                 order: 2 !important;
                 page-break-before: always !important;
                 break-before: page !important;
-                width: 10.2in !important;
-                height: 7.6in !important;
+                width: 9.8in !important;
+                height: 7.2in !important;
                 display: block !important;
-                transform: scale(0.94) rotate(-90deg) translate(-10.1in, -0.25in);
+                transform: scale(0.85) rotate(-90deg) translate(-9.8in, -0.65in);
                 transform-origin: top left;
                 margin: 0 auto !important;
             }
@@ -617,3 +617,387 @@
                 wo1Html += `<td><input type="text" placeholder="#" id="sys_wo_s${sys}" class="cell-input" style="font-weight:700; color:#0f172a;" onchange="checkWorkOrderDuplicate(this)" oninput="syncAll()" onfocus="this.select()" onkeydown="handleKeyDown(event, -1, ${sys}, 1)"></td>`;
             }
             wo1Html += `<td colspan="4" style="background-color:#f8fafc; font-size:10px; color:#64748b; font-weight:600;">Work Order Numbers</td>`;
+            trWo1.innerHTML = wo1Html;
+            tbody1.appendChild(trWo1);
+
+            const trWo2 = document.createElement('tr');
+            trWo2.className = 'wo-row';
+            let wo2Html = `<td class="item-name" style="font-weight:700; color:#1e293b;">System / WO #</td>`;
+            for (let sys = 10; sys <= 18; sys++) {
+                wo2Html += `<td><input type="text" placeholder="#" id="sys_wo_s${sys}" class="cell-input" style="font-weight:700; color:#0f172a;" onchange="checkWorkOrderDuplicate(this)" oninput="syncAll()" onfocus="this.select()" onkeydown="handleKeyDown(event, -1, ${sys}, 2)"></td>`;
+            }
+            wo2Html += `<td style="background-color:#f8fafc; font-size:10px; color:#64748b; font-weight:600;">Subtotal (P2)</td>`;
+            trWo2.innerHTML = wo2Html;
+            tbody2.appendChild(trWo2);
+
+            items.forEach((item, itemIdx) => {
+                const tr1 = document.createElement('tr');
+                let colItemHtml = item.hasDropdown ? `<td style="padding:0; background-color:#ffffff;"><select id="${item.id}_spec" class="full-cell-select" onchange="syncAll()">${item.options.map(o => `<option value="${o}">${o}</option>`).join('')}</select></td>` : `<td class="item-name">${item.name}</td>`;
+                let html1 = colItemHtml;
+
+                for (let sys = 1; sys <= 9; sys++) {
+                    html1 += `<td><input type="number" min="0" value="" id="${item.id}_s${sys}" class="cell-input" data-item-idx="${itemIdx}" data-sys="${sys}" data-page="1" oninput="onCellInput('${item.id}', ${sys})" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, ${sys}, 1)"></td>`;
+                }
+
+                html1 += `
+                    <td><input type="number" min="0" id="${item.id}_total" class="cell-input cell-readonly" value="" placeholder="" oninput="onTotalManualInput('${item.id}')" onfocus="this.select()"></td>
+                    <td><input type="number" min="0" id="${item.id}_extra" class="cell-input cell-readonly" value="" placeholder="" oninput="onExtraManualInput('${item.id}')" onfocus="this.select()"></td>
+                    <td><input type="text" id="${item.id}_given" class="cell-input cell-given" value="" readonly></td>
+                    <td><input type="number" min="0" value="" placeholder="" id="${item.id}_return" class="cell-input cell-return" oninput="syncSheet2()" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, 'return', 1)"></td>
+                `;
+
+                tr1.innerHTML = html1;
+                tbody1.appendChild(tr1);
+
+                const tr2 = document.createElement('tr');
+                let html2 = `<td class="item-name">${item.name}</td>`;
+
+                for (let sys = 10; sys <= 18; sys++) {
+                    html2 += `<td><input type="number" min="0" value="" id="${item.id}_s${sys}" class="cell-input" data-item-idx="${itemIdx}" data-sys="${sys}" data-page="2" oninput="onCellInput('${item.id}', ${sys})" onfocus="this.select()" onkeydown="handleKeyDown(event, ${itemIdx}, ${sys}, 2)"></td>`;
+                }
+
+                html2 += `<td><input type="text" id="${item.id}_subtotal_p2" class="cell-input cell-readonly" value="" readonly></td>`;
+                tr2.innerHTML = html2;
+                tbody2.appendChild(tr2);
+            });
+        }
+
+        function onCellInput(itemId, sys) {
+            if (itemId === 'elbow_a' || itemId === 'elbow_b') {
+                const el = document.getElementById(`${itemId}_s${sys}`);
+                if (el) el.dataset.manual = 'true';
+            }
+
+            const totalEl = document.getElementById(`${itemId}_total`);
+            if (totalEl && totalEl.dataset.customTotal === 'true') {
+                delete totalEl.dataset.customTotal;
+            }
+
+            calculateRow(itemId);
+        }
+
+        function onTotalManualInput(itemId) {
+            const totalEl = document.getElementById(`${itemId}_total`);
+            if (totalEl) totalEl.dataset.customTotal = 'true';
+            calculateRow(itemId);
+        }
+
+        function onExtraManualInput(itemId) {
+            const extraEl = document.getElementById(`${itemId}_extra`);
+            if (extraEl) extraEl.dataset.customExtra = 'true';
+            calculateRow(itemId);
+        }
+
+        function calculateRow(itemId) {
+            const totalEl = document.getElementById(`${itemId}_total`);
+            let total = 0;
+
+            if (totalEl && totalEl.dataset.customTotal === 'true') {
+                total = parseNum(totalEl.value);
+            } else {
+                let subtotalP1 = 0;
+                for (let sys = 1; sys <= 9; sys++) {
+                    subtotalP1 += parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
+                }
+
+                let subtotalP2 = 0;
+                if (hasPage2) {
+                    for (let sys = 10; sys <= 18; sys++) {
+                        subtotalP2 += parseNum(document.getElementById(`${itemId}_s${sys}`)?.value);
+                    }
+                    const subP2El = document.getElementById(`${itemId}_subtotal_p2`);
+                    if (subP2El) subP2El.value = formatVal(subtotalP2);
+                }
+
+                total = subtotalP1 + subtotalP2;
+                if (totalEl) totalEl.value = formatVal(total);
+            }
+
+            const extraEl = document.getElementById(`${itemId}_extra`);
+            let extra = 0;
+            
+            if (itemId === 'splash_block') {
+                extra = 0;
+                if (extraEl) extraEl.value = '';
+            } else if (extraEl && extraEl.dataset.customExtra === 'true') {
+                extra = parseNum(extraEl.value);
+            } else {
+                extra = Math.ceil(total * 0.1);
+                if (extraEl) extraEl.value = formatVal(extra);
+            }
+
+            const given = total + extra;
+            document.getElementById(`${itemId}_given`).value = formatVal(given);
+
+            if (itemId === 'gutter_coil') calculateHangers();
+            if (itemId === 'downspout') calculateElbows();
+            if (['left_cap', 'right_cap', 'out_miter', 'in_miter', 'bay_miter_out', 'bay_miter_in'].includes(itemId)) { calculateCaulk(); }
+
+            syncSheet2();
+        }
+
+        function calculateElbows() {
+            const maxSys = hasPage2 ? 18 : 9;
+            for (let sys = 1; sys <= maxSys; sys++) {
+                const dsVal = parseNum(document.getElementById(`downspout_s${sys}`)?.value);
+                const elbowAInput = document.getElementById(`elbow_a_s${sys}`);
+                if (elbowAInput && elbowAInput.dataset.manual !== 'true') {
+                    elbowAInput.value = formatVal(dsVal * 3);
+                }
+            }
+            calculateRow('elbow_a');
+        }
+
+        function calculateHangers() {
+            const maxSys = hasPage2 ? 18 : 9;
+            for (let sys = 1; sys <= maxSys; sys++) {
+                const coilVal = parseNum(document.getElementById(`gutter_coil_s${sys}`)?.value);
+                const hangersVal = Math.ceil(coilVal / 1.4);
+                const currentHangerInput = document.getElementById(`hangers_s${sys}`);
+                if (currentHangerInput) currentHangerInput.value = formatVal(hangersVal);
+            }
+            calculateRow('hangers');
+        }
+
+        function calculateCaulk() {
+            const maxSys = hasPage2 ? 18 : 9;
+            for (let sys = 1; sys <= maxSys; sys++) {
+                const caps = parseNum(document.getElementById(`left_cap_s${sys}`)?.value) +
+                             parseNum(document.getElementById(`right_cap_s${sys}`)?.value) +
+                             parseNum(document.getElementById(`out_miter_s${sys}`)?.value) +
+                             parseNum(document.getElementById(`in_miter_s${sys}`)?.value) +
+                             parseNum(document.getElementById(`bay_miter_out_s${sys}`)?.value) +
+                             parseNum(document.getElementById(`bay_miter_in_s${sys}`)?.value);
+                const caulkVal = Math.ceil(caps / 3);
+                const currentCaulkInput = document.getElementById(`caulk_s${sys}`);
+                if (currentCaulkInput) currentCaulkInput.value = formatVal(caulkVal);
+            }
+            calculateRow('caulk');
+        }
+
+        function handleKeyDown(event, itemIdx, sys, page) {
+            const key = event.key;
+            if (['Enter', 'ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(key)) {
+                event.preventDefault();
+
+                if (page === 1 && itemIdx === items.length - 1 && sys === 9 && (key === 'Enter' || key === 'ArrowDown')) {
+                    if (!hasPage2) {
+                        if (confirm('Do you want to add more systems? (Page 2: Systems 10 to 18)')) {
+                            hasPage2 = true;
+                            document.getElementById('page2-container').style.display = 'block';
+                            syncAll();
+                            setTimeout(() => {
+                                const targetInput = document.getElementById('sys_wo_s10');
+                                if (targetInput) { targetInput.disabled = false; targetInput.readOnly = false; targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
+                            }, 100);
+                            return;
+                        }
+                    }
+                }
+
+                let nextIdx = itemIdx;
+                let nextSys = sys;
+                let nextPage = page;
+
+                if (sys === 'return') {
+                    if (key === 'Enter' || key === 'ArrowDown') { nextIdx = itemIdx + 1; if (nextIdx >= items.length) nextIdx = 0; }
+                    else if (key === 'ArrowUp') { nextIdx = itemIdx - 1; if (nextIdx < 0) nextIdx = items.length - 1; }
+                    else if (key === 'ArrowLeft') { nextSys = 9; }
+
+                    let targetId = (nextSys === 'return') ? `${items[nextIdx].id}_return` : `${items[nextIdx].id}_s${nextSys}`;
+                    const targetInput = document.getElementById(targetId);
+                    if (targetInput) { targetInput.disabled = false; targetInput.readOnly = false; targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
+                    return;
+                }
+
+                if (key === 'Enter' || key === 'ArrowDown') {
+                    if (itemIdx === -1) { nextIdx = 0; }
+                    else { 
+                        nextIdx = itemIdx + 1; 
+                        if (nextIdx >= items.length) { 
+                            nextIdx = 0; 
+                            nextSys = sys + 1; 
+                            if (nextSys > 9 && page === 1 && hasPage2) { nextSys = 10; nextPage = 2; }
+                        } 
+                    }
+                } else if (key === 'ArrowUp') {
+                    if (itemIdx === 0) { nextIdx = -1; }
+                    else if (itemIdx > 0) { nextIdx = itemIdx - 1; }
+                } else if (key === 'ArrowRight') {
+                    if (sys === 9 && page === 1) {
+                        const targetInput = document.getElementById(`${items[itemIdx].id}_return`);
+                        if (targetInput) { targetInput.disabled = false; targetInput.readOnly = false; targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
+                        return;
+                    }
+                    nextSys = sys + 1;
+                    if (nextSys > 9 && page === 1 && hasPage2) { nextSys = 10; nextPage = 2; }
+                } else if (key === 'ArrowLeft') { 
+                    nextSys = sys - 1; 
+                    if (nextSys < 10 && page === 2) { nextSys = 9; nextPage = 1; }
+                }
+
+                if (nextPage === 1) { if (nextSys < 1) nextSys = 1; if (nextSys > 9) nextSys = 9; }
+                if (nextPage === 2) { if (nextSys < 10) nextSys = 10; if (nextSys > 18) nextSys = 18; }
+
+                let targetId = (nextIdx === -1) ? `sys_wo_s${nextSys}` : `${items[nextIdx].id}_s${nextSys}`;
+                const targetInput = document.getElementById(targetId);
+                if (targetInput) { targetInput.disabled = false; targetInput.readOnly = false; targetInput.focus(); if (typeof targetInput.select === 'function') targetInput.select(); }
+            }
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if(tabId === 'tab1') document.getElementById('btn-tab1').classList.add('active');
+            if(tabId === 'tab2') document.getElementById('btn-tab2').classList.add('active');
+            syncAll();
+        }
+
+        function setupDatePrintFormatting(dateInputId, wrapperId, lineId, textDisplayId) {
+            const val = document.getElementById(dateInputId)?.value;
+            const wrapperEl = document.getElementById(wrapperId);
+            const lineEl = document.getElementById(lineId);
+            
+            if (wrapperEl && lineEl) {
+                if (!val) { wrapperEl.classList.add('empty-date-hide'); lineEl.classList.add('print-blank-line-show'); }
+                else { wrapperEl.classList.remove('empty-date-hide'); lineEl.classList.remove('print-blank-line-show'); }
+            }
+            if (textDisplayId) {
+                const textEl = document.getElementById(textDisplayId);
+                if (textEl) textEl.innerText = val ? val : '';
+            }
+        }
+
+        function syncSheet2() {
+            document.getElementById('s2_installer').innerText = document.getElementById('installer').value || '---';
+            document.getElementById('s2_color').innerText = document.getElementById('color').value || '---';
+            document.getElementById('s2_size').innerText = document.getElementById('size').value || '---';
+            document.getElementById('s2_trailer').innerText = document.getElementById('trailer').value || '---';
+            document.getElementById('s2_dispatched').innerText = document.getElementById('dispatched_date').value || '---';
+            
+            const retDateVal = document.getElementById('return_date').value;
+            document.getElementById('s2_return').innerText = retDateVal || '---';
+            
+            setupDatePrintFormatting('return_date', 'return_date_wrapper', 'return_date_blank_line');
+            setupDatePrintFormatting('doc_date', 'doc_date_wrapper', 'doc_date_blank_line', 'p1_date_val');
+            
+            const p1DateVal = document.getElementById('doc_date').value;
+            const p1DateValEl = document.getElementById('p1_date_val');
+            const p1DateLineEl = document.getElementById('p1_date_line');
+            if (!p1DateVal) {
+                if (p1DateValEl) p1DateValEl.style.display = 'none';
+                if (p1DateLineEl) p1DateLineEl.classList.add('print-blank-line-show');
+            } else {
+                if (p1DateValEl) { p1DateValEl.style.display = 'inline'; p1DateValEl.innerText = p1DateVal; }
+                if (p1DateLineEl) p1DateLineEl.classList.remove('print-blank-line-show');
+            }
+
+            setupDatePrintFormatting('dispatched_date', 'dispatched_date_wrapper', 'dispatched_date_blank_line');
+
+            const dateVal = document.getElementById('doc_date').value || '--/--/----';
+            document.getElementById('sheet2-date-display').innerText = 'Date: ' + dateVal;
+
+            const obsVal = document.getElementById('observations')?.value || '';
+            document.getElementById('s2_observations').innerText = obsVal || 'No observations entered.';
+
+            const tbody2 = document.getElementById('sheet2-rows');
+            tbody2.innerHTML = '';
+
+            items.forEach((item) => {
+                const total = document.getElementById(`${item.id}_total`)?.value || '';
+                const extra = document.getElementById(`${item.id}_extra`)?.value || '';
+                const given = document.getElementById(`${item.id}_given`)?.value || '';
+
+                let displayName = item.name;
+                if (item.hasDropdown) { displayName = document.getElementById(`${item.id}_spec`)?.value || item.name; }
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="font-weight:600; text-align:left; padding-left:14px;">${displayName}</td>
+                    <td>${total}</td>
+                    <td>${extra}</td>
+                    <td style="font-weight:700; background-color:#ffffff; color:#0f172a;">${given}</td>
+                    <td style="padding:0;">
+                        <input type="text" id="disp_${item.id}" class="cell-input" style="text-align:center; font-weight:700; color:#000000;">
+                    </td>
+                `;
+                tbody2.appendChild(tr);
+            });
+        }
+
+        function openPrintModal() { document.getElementById('printModal').style.display = 'flex'; }
+        function closePrintModal() { document.getElementById('printModal').style.display = 'none'; }
+
+        function executePrint(mode) {
+            closePrintModal();
+            
+            const companyFull = document.getElementById('app_company_select').value;
+            const shortBrandName = companyFull.replace(' Order System', ' Order List');
+            const docDateVal = document.getElementById('doc_date')?.value || '';
+
+            let pdfFileName = shortBrandName;
+            if (docDateVal) {
+                pdfFileName = `${shortBrandName} - ${docDateVal}`;
+            }
+            
+            document.title = pdfFileName;
+
+            if (mode === 'bw') {
+                document.body.classList.remove('print-mode-color');
+                document.body.classList.add('print-mode-bw');
+            } else {
+                document.body.classList.remove('print-mode-bw');
+                document.body.classList.add('print-mode-color');
+            }
+
+            setTimeout(() => { window.print(); }, 150);
+        }
+
+        function syncAll() { items.forEach(item => calculateRow(item.id)); syncSheet2(); updateCompanyBrand(); }
+
+        function resetForm() {
+            if(confirm('Are you sure you want to clear all data in the form?')) {
+                hasPage2 = false;
+                document.getElementById('page2-container').style.display = 'none';
+
+                document.querySelectorAll('input').forEach(input => { 
+                    input.value = ''; 
+                    delete input.dataset.customTotal; 
+                    delete input.dataset.customExtra;
+                    delete input.dataset.manual;
+                    input.readOnly = false;
+                    input.disabled = false;
+                });
+
+                const obs = document.getElementById('observations');
+                if (obs) { 
+                    obs.value = ''; 
+                    obs.disabled = false; 
+                    obs.readOnly = false;
+                }
+                
+                setupDropdowns(true);
+                document.getElementById('size').value = '';
+                
+                if (isHighlighted) toggleHighlight();
+                
+                updateCompanyBrand();
+
+                setTimeout(() => {
+                    const firstInput = document.getElementById('sys_wo_s1');
+                    if (firstInput) {
+                        firstInput.focus();
+                        if (typeof firstInput.select === 'function') firstInput.select();
+                    }
+                }, 50);
+            }
+        }
+
+        setupDropdowns(true);
+        initTable();
+        updateCompanyBrand();
+        syncAll();
+    </script>
+</body>
+</html>
